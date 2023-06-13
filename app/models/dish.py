@@ -14,3 +14,13 @@ class Dish(db.Model):
     price = db.Column(db.Integer, nullable = False)
 
     #relationships
+    restaurant = db.relationship("Restaurant", back_populates = "dish")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'restaurant_id': self.restaurant_id,
+            'name': self.name,
+            'description': self.description,
+            'price': self.price
+        }
