@@ -2,6 +2,7 @@ from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .restaurants import seed_restaurants, undo_restaurants
 from .reviews import seed_reviews, undo_reviews
+from .dishes import seed_dishes, undo_dishes
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
