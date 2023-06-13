@@ -15,6 +15,7 @@ class Dish(db.Model):
 
     #relationships
     restaurant = db.relationship("Restaurant", back_populates = "dish")
+    order_dish = db.relationship("OrderDish", back_populates = " dish", cascade = "all, delete")
 
     def to_dict(self):
         return {

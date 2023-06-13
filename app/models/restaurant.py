@@ -19,9 +19,9 @@ class Restaurant(db.Model):
 
     #relationships
     user = db.relationship("User", back_populates = "restaurant")
-    review = db.relationship("Review", back_populates = "restaurant")
-    dish = db.relationship("Dish", back_populates = "restaurant")
-    order = db.relationship("Order", back_populates = "restaurant")
+    review = db.relationship("Review", back_populates = "restaurant", cascade = "all, delete")
+    dish = db.relationship("Dish", back_populates = "restaurant", cascade = "all, delete")
+    order = db.relationship("Order", back_populates = "restaurant", cascade = "all, delete")
 
 
     def to_dict(self):
