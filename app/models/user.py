@@ -17,6 +17,8 @@ class User(db.Model, UserMixin):
     restaurant_owner = db.Column(db.Boolean)
 
     #relationships
+    restaurant = db.relationship("Restaurant", back_populates = "user")
+
 
 
     @property
@@ -34,5 +36,7 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'phone_number': self.phone_number,
+            'restaurant_owner': self.restaurant_owner
         }
