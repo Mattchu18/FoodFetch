@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
 
     #relationships
     restaurant = db.relationship("Restaurant", back_populates = "user")
-
+    review = db.relationship("Review", back_populates = "user")
 
 
     @property
