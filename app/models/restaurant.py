@@ -21,6 +21,8 @@ class Restaurant(db.Model):
     user = db.relationship("User", back_populates = "restaurant")
     review = db.relationship("Review", back_populates = "restaurant")
     dish = db.relationship("Dish", back_populates = "restaurant")
+    order = db.relationship("Order", back_populates = "restaurant")
+
 
     def to_dict(self):
         return {
