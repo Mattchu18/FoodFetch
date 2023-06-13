@@ -2,7 +2,7 @@ from app.models.restaurant import db, Restaurant, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime, time
 
-def seed_restaurant():
+def seed_restaurants():
     restaurant_data = [
         {
         'user_id': 1,
@@ -50,7 +50,7 @@ def seed_restaurant():
     print("Restaurants successfully seeded!")
 
 
-def under_restaurant():
+def undo_restaurants():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.restaurants RESTART IDENTITY CASCADE;")
     else:
