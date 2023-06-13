@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from .order_dish import OrderDish
 
 class Dish(db.Model):
     __tablename__ = "dishes"
@@ -15,7 +16,7 @@ class Dish(db.Model):
 
     #relationships
     restaurant = db.relationship("Restaurant", back_populates = "dish")
-    order_dish = db.relationship("OrderDish", back_populates = " dish", cascade = "all, delete")
+    order_dish = db.relationship(OrderDish, back_populates = "dish", cascade = "all, delete")
 
     def to_dict(self):
         return {

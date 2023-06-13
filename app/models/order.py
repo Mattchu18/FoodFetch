@@ -12,7 +12,7 @@ class Order(db.Model):
     restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), nullable = False)
     delivery_address = db.Column(db.String(200), nullable = False, default ="pickup")
     total_amount = db.Column(db.Integer, nullable = False)
-    pick_up = db.Column(db.DateTime(), nullable = False, default = datetime.now() + timedelta(minutes=30))
+    pick_up = db.Column(db.String(100), nullable = False, default=(datetime.now() + timedelta(minutes=30)).isoformat())
 
     #relationships
     user = db.relationship("User", back_populates = "order")

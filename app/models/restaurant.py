@@ -12,10 +12,10 @@ class Restaurant(db.Model):
     name = db.Column(db.String(200), nullable = False)
     address = db.Column(db.String(200), nullable = False)
     phone_number = db.Column(db.String(10), nullable = False)
-    cuisine_type = db.Column(db.String(10), nullable = False)
-    opening_time = db.Column(db.DateTime(), nullable = True)
-    closing_time = db.Column(db.DateTime(), nullable = True)
-    created_at = db.Column(db.DateTime(), default = datetime.now)
+    cuisine_type = db.Column(db.String(50), nullable = False)
+    opening_time = db.Column(db.String(100), nullable = True)
+    closing_time = db.Column(db.String(100), nullable = True)
+    created_at = db.Column(db.String(100), default = datetime.now)
 
     #relationships
     user = db.relationship("User", back_populates = "restaurant")

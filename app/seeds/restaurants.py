@@ -10,8 +10,8 @@ def seed_restaurants():
             'address': "1 McDonald Way",
             'phone_number': "1200000001",
             'cuisine_type': "American",
-            'opening_time': time(hour=8, minute=0),
-            'closing_time': time(hour=22, minute=0)
+            'opening_time': time(hour=8, minute=0).isoformat(),
+            'closing_time': time(hour=22, minute=0).isoformat()
         },
         {
             'user_id': 1,
@@ -19,8 +19,8 @@ def seed_restaurants():
             'address': "2 Jollibee Way",
             'phone_number': "1200000002",
             'cuisine_type': "Filipino",
-            'opening_time': time(hour=8, minute=0),
-            'closing_time': time(hour=22, minute=0)
+            'opening_time': time(hour=8, minute=0).isoformat(),
+            'closing_time': time(hour=22, minute=0).isoformat()
         },
         {
             'user_id': 1,
@@ -28,8 +28,8 @@ def seed_restaurants():
             'address': "3 Panda Way",
             'phone_number': "1200000003",
             'cuisine_type': "Chinese",
-            'opening_time': time(hour=8, minute=0),
-            'closing_time': time(hour=22, minute=0)
+            'opening_time': time(hour=8, minute=0).isoformat(),
+            'closing_time': time(hour=22, minute=0).isoformat()
         },
     ]
 
