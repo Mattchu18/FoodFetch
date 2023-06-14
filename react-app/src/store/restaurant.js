@@ -54,6 +54,17 @@ export const thunkAllRestaurants = () => async (dispatch) => {
 }
 
 
+export const thunkUserRestaurants = () => async (dispatch) => {
+    const response = await fetch('/api/restaurants/user')
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(getUserRestaurants(data))
+
+    }
+
+}
+
+
 const initialState = { currentUserRestaurants: {}, singleRestaurant: {}, allRestaurants:{} }
 const restaurantReducer = ( state = initialState, action ) => {
     switch (action.type) {
@@ -74,6 +85,16 @@ const restaurantReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 allRestaurants: newState
+            }
+        }
+        case GET_USER_RESTAURANTS: {
+            const newState = {}
+            const userRestaurants = action.restaurants
+            userRestaurants.forEach(restaurant => {
+                newState[restaurant.id] = restaurant
+            })
+            return {
+                ...state, currentUserRestaurants: newState
             }
         }
         default: return state

@@ -59,15 +59,15 @@ def get_user_restaurants():
     '''
     Gets all user restaurants
     '''
-    all_restaurants_obj = Restaurant.query.filter(Restaurant.user_id == current_user.id)
-    all_restaurants = [restaurant.to_dict() for restaurant in all_restaurants_obj]
-    return all_restaurants
+    user_restaurants_obj = Restaurant.query.filter(Restaurant.user_id == current_user.id)
+    user_restaurants = [restaurant.to_dict() for restaurant in user_restaurants_obj]
+    return user_restaurants
 
 
 @restaurant_routes.route("/<int:id>")
 def get_one_restaurant(id):
     '''
-    Gets one user restaurant
+    Gets one restaurant
     '''
     one_restaurant = Restaurant.query.get(id)
     if not one_restaurant:
