@@ -13,8 +13,8 @@ class Restaurant(db.Model):
     address = db.Column(db.String(200), nullable = False)
     phone_number = db.Column(db.String(10), nullable = False)
     cuisine_type = db.Column(db.String(50), nullable = False)
-    opening_time = db.Column(db.String(100), nullable = True)
-    closing_time = db.Column(db.String(100), nullable = True)
+    opening_time = db.Column(db.Time(), nullable = True)
+    closing_time = db.Column(db.Time(), nullable = True)
     created_at = db.Column(db.String(100), default = datetime.now)
 
     #relationships
@@ -31,7 +31,7 @@ class Restaurant(db.Model):
             'name': self.name,
             'phone_number': self.phone_number,
             'cuisine_type': self.cuisine_type,
-            'opening_time': self.opening_time,
-            'closing_time': self.closing_time,
+            'opening_time': self.opening_time.strftime("%H:%M:%S"),
+            'closing_time': self.closing_time.strftime("%H:%M:%S"),
             'created_at': self.created_at
         }

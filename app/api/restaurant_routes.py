@@ -5,6 +5,7 @@ from flask_login import login_required, current_user
 from app.models import User
 from app.models.db import db
 from app.forms.review_form import ReviewForm
+from app.forms.restaurant_form import RestaurantForm
 # import restaurant form later
 restaurant_routes = Blueprint('restaurants', __name__, url_prefix='')
 
@@ -77,4 +78,19 @@ def post_restaurant():
     '''
     Post a restaurant
     '''
-    return
+    form = RestaurantForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        new_restaurant = Restaurant(
+            user_id = current_user.id,
+            name = form.data['name'],
+            address = form.data['address'],
+            phone_number = form.data['phone_number'],
+            cuisine_type = form.data['cuisine_type'],
+            opening_time = form.data['opening_time'],
+            closing_time = form.data['closing_time']
+        )
+
+    db.session.add(new_restaurant)
+    db.session.commit()
+    return new_restaurant.to_dict()
