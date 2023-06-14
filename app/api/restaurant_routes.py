@@ -23,7 +23,7 @@ def post_review(id):
     all_reviews_obj = Review.query.filter(Review.user_id == current_user.id).all()
     for review in all_reviews_obj:
         if review.restaurant_id == id:
-            return {"message": "User already reviewed this restaurant."}
+            return {"message": f"User {current_user.id} already reviewed this restaurant."}
     form = ReviewForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
