@@ -16,8 +16,10 @@ def post_review(id):
     Post a review for a restaurant
     '''
 
+# ****************************************************************************************
     # can only review a restaurant they have an order history with
     # if order.restaurant_id == id
+# ****************************************************************************************
 
 
     all_reviews_obj = Review.query.filter(Review.user_id == current_user.id).all()
