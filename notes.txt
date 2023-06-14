@@ -1,3 +1,26 @@
+include this in every migration file:
+    '''
+
+    import os
+    environment = os.getenv("FLASK_ENV")
+    SCHEMA = os.environ.get("SCHEMA")
+
+    '''
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE restaurants SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE dishes SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE orders SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE order_dishes SET SCHEMA {SCHEMA};")
+
+
+*************************************************************************
+
+replace the env.py file with:
+    '''
+
 
 from __future__ import with_statement
 
