@@ -1,7 +1,9 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+from app.models.restaurant import Restaurant
+from app.models.review import Review
+from app.models.order import Order
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -17,7 +19,9 @@ class User(db.Model, UserMixin):
     restaurant_owner = db.Column(db.Boolean)
 
     #relationships
-
+    restaurant = db.relationship("Restaurant", back_populates = "user")
+    review = db.relationship("Review", back_populates = "user")
+    order = db.relationship("Order", back_populates = "user")
 
     @property
     def password(self):
