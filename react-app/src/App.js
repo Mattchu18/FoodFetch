@@ -4,11 +4,11 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import GetUserReviews from "./components/Reviews/UserReviews"
+import CreateReview from "./components/Reviews/CreateReview";
 
 
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import ReviewForm from "./components/Reviews/ReviewForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function App() {
           </Route>
           <Route exact path="/reviews" component={GetUserReviews}/>
           {/* <Route exact path="/restaurants/:restaurantId" component={}/> */}
-          <Route exact path="/reviewForm" component={ReviewForm}/>
+          {/* <Route exact path="/restaurants/:restaurantId/reviews/new" component={CreateReview}/> */}
         </Switch>
       )}
     </>

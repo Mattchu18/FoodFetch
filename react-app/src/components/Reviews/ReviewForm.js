@@ -11,7 +11,7 @@ const ReviewForm = ({ review, formType, disabled }) => {
     const [review_text, setReview_text] = useState(review?.review_text)
     const [rating, setRating] = useState(review?.rating)
     const [activeRating, setActiveRating] = useState(rating)
-    const [validationErrors, setValidationErrors] = useState()
+    const [validationErrors, setValidationErrors] = useState('')
     const { closeModal } = useModal()
 
     useEffect(() => {
@@ -63,24 +63,18 @@ const ReviewForm = ({ review, formType, disabled }) => {
             rating
         }
 
-        if (review.review_text.length < 5) {
-            errors.review_text = "Review text needs to be at least 5 characters"
-        }
-        if (!review.rating) {
-            errors.rating = "Rating must be from 1-5 stars"
-        }
-
+        if (review_text.length < 5) errors.review_text = "Review text needs to be at least 5 characters"
+        if (!rating) errors.rating = "Rating must be from 1-5 stars"
+        setValidationErrors(errors)
 
         if (formType === "Create Review" && !Object.keys(errors).length) {
             await dispatch(thunkCreateReview(review))
                 .then(closeModal)
 
-            history.push(`/restaurants/${review.restaurant_id}`)
+            history.push(`/`)
         }
 
-
-        if (errors) setValidationErrors(errors)
-
+        if (!!Object.keys(errors).length) return
     }
 
     return (
@@ -88,6 +82,7 @@ const ReviewForm = ({ review, formType, disabled }) => {
             <div>
                 <h1>Add a Public Review</h1>
             </div>
+            {validationErrors.rating ? (<p className="errors" >{validationErrors.rating}</p>) : null}
             <div>
                 {arr} Stars
             </div>
@@ -96,7 +91,7 @@ const ReviewForm = ({ review, formType, disabled }) => {
                     className="textInfo"
                     type="text"
                     value={review_text}
-                    placeholder="What did you think? Any feedback is helpful."
+                    placeholder="Helpful reviews mention specific items and describe their quality and taste."
                     onChange={e => setReview_text(e.target.value)}
                 />
             </div>
