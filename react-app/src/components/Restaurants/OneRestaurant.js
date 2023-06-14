@@ -18,7 +18,7 @@ const OneRestaurant = () => {
         sum += review.rating
     })
     const averageRating = parseInt((sum / restaurantReviews.length).toFixed(1))
-    console.log("this is average rating====>", averageRating)
+    console.log("this is average rating====>", restaurantReviews)
     /*
     //maybe push to a 404 page in the future
     if (!restaurant) {
@@ -32,7 +32,6 @@ const OneRestaurant = () => {
 
 
     if (!restaurant) return null
-
 
     return (
         <div>
@@ -66,9 +65,16 @@ const OneRestaurant = () => {
                 </div>
                 <div>
                     {restaurantReviews.length ? (
-                        restaurantReviews.map(reviews => (
-                            <div>
-
+                        restaurantReviews.map(review => (
+                            <div className="review-container">
+                                <div>
+                                    <p>{review.username}</p>
+                                </div>
+                                <div>
+                                    <p>{review.rating} stars</p>
+                                    <p>{review.created_at}</p>
+                                    <p>{review.review_text}</p>
+                                </div>
                             </div>
                         ))
                     ) : null}
