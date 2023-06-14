@@ -20,8 +20,6 @@ def post_review(id):
     # can only review a restaurant they have an order history with
     # if order.restaurant_id == id
 # ****************************************************************************************
-
-
     all_reviews_obj = Review.query.filter(Review.user_id == current_user.id).all()
     for review in all_reviews_obj:
         if review.restaurant_id == id:
@@ -39,3 +37,12 @@ def post_review(id):
     db.session.add(new_review)
     db.session.commit()
     return new_review.to_dict()
+
+@restaurant_routes.route("/")
+def get_all_restaurants():
+    '''
+    Gets all restaurants
+    '''
+    all_restaurants_obj = Restaurant.query.all()
+    all_restaurants = [restaurant.to_dict() for restaurant in all_restaurants_obj]
+    return all_restaurants
