@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 47d19305c6f7
+Revision ID: f20f3575377a
 Revises:
-Create Date: 2023-06-13 15:34:26.885893
+Create Date: 2023-06-13 23:25:27.962660
 
 """
 from alembic import op
@@ -11,8 +11,9 @@ import sqlalchemy as sa
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
+
 # revision identifiers, used by Alembic.
-revision = '47d19305c6f7'
+revision = 'f20f3575377a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,7 +27,7 @@ def upgrade():
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('phone_number', sa.String(length=10), nullable=False),
-    sa.Column('restaurant_owner', sa.Boolean(), nullable=True),
+    sa.Column('restaurant_owner', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -38,8 +39,8 @@ def upgrade():
     sa.Column('address', sa.String(length=200), nullable=False),
     sa.Column('phone_number', sa.String(length=10), nullable=False),
     sa.Column('cuisine_type', sa.String(length=50), nullable=False),
-    sa.Column('opening_time', sa.String(length=100), nullable=True),
-    sa.Column('closing_time', sa.String(length=100), nullable=True),
+    sa.Column('opening_time', sa.Time(), nullable=True),
+    sa.Column('closing_time', sa.Time(), nullable=True),
     sa.Column('created_at', sa.String(length=100), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
