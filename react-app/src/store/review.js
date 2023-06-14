@@ -1,5 +1,6 @@
 const GET_USER_REVIEWS = "review/userReviews"
 const GET_ALL_REVIEWS = "review/allReviews"
+const CREATE_REVIEW = "review/createReview"
 
 
 const getAllReviews = (reviews) => ({
@@ -12,6 +13,10 @@ const getUserReviews = (reviews) => ({
     reviews
 })
 
+const createReview = (review) => ({
+    type: CREATE_REVIEW,
+    review
+})
 
 export const thunkAllReviews = () => async (dispatch) => {
     const response = await fetch('/api/reviews')
@@ -27,6 +32,19 @@ export const thunkUserReviews = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json()
         dispatch(getUserReviews(data))
+    }
+}
+
+
+export const thunkCreateReview = (review) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${review.restaurant_id}/reviews`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(review)
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(createReview(data))
     }
 }
 
@@ -54,6 +72,16 @@ const reviewsReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 currentUserReviews: newState
+            }
+        }
+        case CREATE_REVIEW: {
+            const newState = {}
+            const newReview = action.review
+            newState[newReview.id] = newReview
+            return {
+                ...state,
+                singleReview: newState,
+                allReviews: { ...state.allReviews, ...newState}
             }
         }
         default: return state
