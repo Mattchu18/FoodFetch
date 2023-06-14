@@ -1,5 +1,5 @@
-const GET_USER_REVIEWS = "review/userReviews"
 const GET_ALL_REVIEWS = "review/allReviews"
+const GET_USER_REVIEWS = "review/userReviews"
 const CREATE_REVIEW = "review/createReview"
 const DELETE_REVIEW = "review/deleteReview"
 const EDIT_REVIEW = "review/editReview"
@@ -85,7 +85,7 @@ export const thunkEditReview = (review) => async (dispatch) => {
 }
 
 
-const initialState = { currentUserReviews: {}, singleReview: {}, allReviews: {}}
+const initialState = { currentUserReviews: {}, singleReview: {}, allReviews: {} }
 const reviewsReducer = ( state = initialState, action ) => {
     switch (action.type) {
         case GET_ALL_REVIEWS: {

@@ -3,8 +3,9 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
-import GetUserReviews from "./components/Reviews/UserReviews"
+import UserReviews from "./components/Reviews/UserReviews"
 import CreateReview from "./components/Reviews/CreateReview";
+import OneRestaurant from "./components/Restaurants/OneRestaurant";
 
 
 import { authenticate } from "./store/session";
@@ -28,7 +29,9 @@ function App() {
           <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path="/reviews" component={GetUserReviews}/>
+          <Route exact path="/reviews" component={UserReviews}/>
+          <Route exact path="/restaurants/:restaurantId" component={OneRestaurant}/>
+
           {/* <Route exact path="/restaurants/:restaurantId" component={}/> */}
           {/* <Route exact path="/restaurants/:restaurantId/reviews/new" component={CreateReview}/> */}
         </Switch>

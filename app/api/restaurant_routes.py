@@ -65,7 +65,6 @@ def get_user_restaurants():
 
 
 @restaurant_routes.route("/<int:id>")
-@login_required
 def get_one_restaurant(id):
     '''
     Gets one user restaurant

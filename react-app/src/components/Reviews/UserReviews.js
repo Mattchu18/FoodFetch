@@ -6,7 +6,7 @@ import DeleteReview from "./DeleteReview";
 import EditReview from "./EditReview";
 
 
-const GetUserReviews = () => {
+const UserReviews = () => {
     const dispatch = useDispatch()
     const reviewsObj = useSelector(state => state.review.currentUserReviews)
     const reviews = Object.values(reviewsObj)
@@ -57,4 +57,4 @@ const GetUserReviews = () => {
 
 
 
-export default GetUserReviews;
+export default UserReviews;
