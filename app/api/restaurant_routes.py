@@ -49,6 +49,7 @@ def get_all_restaurants():
 
 
 @restaurant_routes.route("/user")
+@login_required
 def get_user_restaurants():
     '''
     Gets all user restaurants
@@ -56,3 +57,24 @@ def get_user_restaurants():
     all_restaurants_obj = Restaurant.query.filter(Restaurant.user_id == current_user.id)
     all_restaurants = [restaurant.to_dict() for restaurant in all_restaurants_obj]
     return all_restaurants
+
+
+@restaurant_routes.route("/<int:id>")
+@login_required
+def get_one_restaurant(id):
+    '''
+    Gets one user restaurant
+    '''
+    one_restaurant = Restaurant.query.get(id)
+    if not one_restaurant:
+        return {"message": f"Restaurant {id} does not exist"}
+    return one_restaurant.to_dict()
+
+
+@restaurant_routes.route("/", methods=["POST"])
+@login_required
+def post_restaurant():
+    '''
+    Post a restaurant
+    '''
+    return
