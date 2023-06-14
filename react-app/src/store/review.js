@@ -1,6 +1,7 @@
 const GET_USER_REVIEWS = "review/userReviews"
 const GET_ALL_REVIEWS = "review/allReviews"
 const CREATE_REVIEW = "review/createReview"
+const DELETE_REVIEW = "review/deleteReview"
 
 
 const getAllReviews = (reviews) => ({
@@ -17,6 +18,12 @@ const createReview = (review) => ({
     type: CREATE_REVIEW,
     review
 })
+
+const deleteReview = (review) => ({
+    type: DELETE_REVIEW,
+    review
+})
+
 
 export const thunkAllReviews = () => async (dispatch) => {
     const response = await fetch('/api/reviews')
@@ -48,6 +55,16 @@ export const thunkCreateReview = (review) => async (dispatch) => {
     }
 }
 
+
+export const thunkDeleteReview = (review) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${review.id}/delete`, {
+        method: "DELETE"
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(deleteReview(data))
+    }
+}
 
 const initialState = { currentUserReviews: {}, singleReview: {}, allReviews: {}}
 const reviewsReducer = ( state = initialState, action ) => {
@@ -82,6 +99,18 @@ const reviewsReducer = ( state = initialState, action ) => {
                 ...state,
                 singleReview: newState,
                 allReviews: { ...state.allReviews, ...newState}
+            }
+        }
+        case DELETE_REVIEW: {
+            const newState = { ...state.currentUserReviews }
+            const newSingleState = { ...state.singleReview}
+            const reviewId = action.review.reviewId
+            delete newState[reviewId]
+            delete newSingleState[reviewId]
+            return {
+                currentUserReviews: newState,
+                singleReview: newSingleState,
+                allReviews: { ...state.allReviews }
             }
         }
         default: return state
