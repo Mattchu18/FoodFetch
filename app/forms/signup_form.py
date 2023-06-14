@@ -26,4 +26,4 @@ class SignUpForm(FlaskForm):
     email = StringField('email', validators=[DataRequired(), user_exists])
     password = StringField('password', validators=[DataRequired()])
     phone_number = StringField('phone_number', validators=[DataRequired()])
-    restaurant_owner = BooleanField()
+    restaurant_owner = BooleanField(validators=[DataRequired()])
