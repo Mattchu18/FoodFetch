@@ -46,3 +46,13 @@ def get_all_restaurants():
     all_restaurants_obj = Restaurant.query.all()
     all_restaurants = [restaurant.to_dict() for restaurant in all_restaurants_obj]
     return all_restaurants
+
+
+@restaurant_routes.route("/user")
+def get_user_restaurants():
+    '''
+    Gets all user restaurants
+    '''
+    all_restaurants_obj = Restaurant.query.filter(Restaurant.user_id == current_user.id)
+    all_restaurants = [restaurant.to_dict() for restaurant in all_restaurants_obj]
+    return all_restaurants
