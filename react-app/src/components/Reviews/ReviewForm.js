@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { thunkCreateReview } from "../../store/review";
+import { thunkCreateReview, thunkEditReview } from "../../store/review";
 import { useModal } from "../../context/Modal";
 
 const ReviewForm = ({ review, formType, disabled }) => {
@@ -70,8 +70,11 @@ const ReviewForm = ({ review, formType, disabled }) => {
         if (formType === "Create Review" && !Object.keys(errors).length) {
             await dispatch(thunkCreateReview(review))
                 .then(closeModal)
+        }
 
-            history.push(`/`)
+        if (formType === "Edit Review" && !Object.keys(errors).length) {
+            await dispatch(thunkEditReview(review))
+            .then(closeModal)
         }
 
         if (!!Object.keys(errors).length) return

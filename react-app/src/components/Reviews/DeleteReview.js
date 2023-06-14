@@ -10,7 +10,7 @@ const DeleteReview = ({ review }) => {
     const { closeModal } = useModal()
 
     const handleDelete = () => {
-        dispatch(thunkDeleteReview)
+        dispatch(thunkDeleteReview(review))
             .then(closeModal)
         dispatch(thunkUserReviews())
         console.log("DELETED!!")
