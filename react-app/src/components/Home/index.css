@@ -1,0 +1,67 @@
+#home-center {
+    display: flex;
+    justify-content: center;
+    min-width: 100%;
+    height: 100vh;
+}
+
+#home-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1280px;
+    align-items: center;
+    height: 100%;
+}
+
+#cuisine-container {
+    display: flex;
+    height: fit-content;
+    max-width: 100%;
+    justify-content: center;
+}
+
+
+#cuisine-types {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 86px;
+}
+
+#cuisine-types>.icon {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.cuisine-text>p {
+    font-size: 12px;
+    margin: 0;
+}
+
+#promo-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.promo-header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: fit-content;
+    justify-content: space-between;
+}
+
+.promo-header>h2 {
+    margin: 0;
+}
+
+.promo-featured-container {
+    border: 1px solid red;
+    height: 250px
+}
