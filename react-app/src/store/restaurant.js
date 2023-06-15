@@ -53,7 +53,6 @@ export const thunkAllRestaurants = () => async (dispatch) => {
     }
 }
 
-
 export const thunkUserRestaurants = () => async (dispatch) => {
     const response = await fetch('/api/restaurants/user')
     if (response.ok) {
@@ -61,7 +60,18 @@ export const thunkUserRestaurants = () => async (dispatch) => {
         dispatch(getUserRestaurants(data))
 
     }
+}
 
+export const thunkCreateRestaurant = (restaurant) => async (dispatch) => {
+    const response = await fetch('/api/restaurants', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(restaurant)
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(createRestaurant(data))
+    }
 }
 
 
@@ -73,7 +83,8 @@ const restaurantReducer = ( state = initialState, action ) => {
             const newRestaurant = action.restaurant
             newState[newRestaurant.id] = newRestaurant
             return {
-                ...state, singleRestaurant: newState
+                ...state,
+                singleRestaurant: newState
             }
         }
         case GET_ALL_RESTAURANTS: {
@@ -94,7 +105,18 @@ const restaurantReducer = ( state = initialState, action ) => {
                 newState[restaurant.id] = restaurant
             })
             return {
-                ...state, currentUserRestaurants: newState
+                ...state,
+                currentUserRestaurants: newState
+            }
+        }
+        case CREATE_RESTAURANT: {
+            const newState = {}
+            const newRestaurant = action.restaurant
+            newState[newRestaurant.id] = newRestaurant
+            return {
+                ...state,
+                singleRestaurant: newState,
+                allRestaurants: { ...state.allRestaurants, ...newState }
             }
         }
         default: return state
