@@ -50,7 +50,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
     return (
         <form onSubmit={handleSubmit} >
             <div>
-                <h1>Create your restaurant!</h1>
+                {formType === "Create Restaurant" ? (<h1>Create your restaurant!</h1>) : (<h1>Update your restaurant!</h1>)}
             </div>
             <div>
                 <input type="text"

@@ -1,9 +1,11 @@
 import { thunkUserRestaurants } from "../../store/restaurant";
+import EditRestaurant from "./EditRestaurant";
 import { thunkAllReviews } from "../../store/review";
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import OpenModalButton from "../OpenModalButton";
 
 const UserRestaurants = () => {
     const dispatch = useDispatch()
@@ -42,7 +44,10 @@ const UserRestaurants = () => {
                             </div>
 
                             <div>
-                                {/* edit button */}
+                                <OpenModalButton
+                                    buttonText="Edit"
+                                    modalComponent={<EditRestaurant restaurant={restaurant} />}
+                                />
                                 {/* delete button */}
                             </div>
                         </div>
