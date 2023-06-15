@@ -87,6 +87,17 @@ export const thunkEditRestaurant = (restaurant) => async (dispatch) => {
 }
 
 
+export const thunkDeleteRestaurant = (restaurant) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${restaurant.id}/delete`, {
+        method: "DELETE"
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(deleteRestaurant(data))
+    }
+}
+
+
 const initialState = { currentUserRestaurants: {}, singleRestaurant: {}, allRestaurants: {} }
 const restaurantReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -138,6 +149,18 @@ const restaurantReducer = (state = initialState, action) => {
             return {
                 currentUserRestaurants: { ...state.currentUserRestaurants, ...newState },
                 singleRestaurant: newState,
+                allRestaurants: { ...state.allRestaurants }
+            }
+        }
+        case DELETE_RESTAURANT: {
+            const newState = { ...state.currentUserRestaurants }
+            const newSingleState = { ...state.singleRestaurant }
+            const restaurantId = action.restaurant.restaurantId
+            delete newState[restaurantId]
+            delete newSingleState[restaurantId]
+            return {
+                currentUserRestaurants: newState,
+                singleRestaurant: newSingleState,
                 allRestaurants: { ...state.allRestaurants }
             }
         }

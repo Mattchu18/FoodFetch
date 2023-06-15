@@ -1,5 +1,7 @@
 import { thunkUserRestaurants } from "../../store/restaurant";
 import EditRestaurant from "./EditRestaurant";
+import DeleteRestaurant from "./DeleteRestaurant";
+
 import { thunkAllReviews } from "../../store/review";
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
@@ -15,7 +17,7 @@ const UserRestaurants = () => {
 
     useEffect(() => {
         dispatch(thunkUserRestaurants())
-        dispatch(thunkAllReviews())
+        // dispatch(thunkAllReviews())
     }, [dispatch])
 
     return (
@@ -29,6 +31,9 @@ const UserRestaurants = () => {
                         <div>
                             <div>
                                 <h2>{restaurant.name}</h2>
+                            </div>
+                            <div>
+                                <p>{restaurant.address}</p>
                             </div>
                             <div>
                                 <p>Hours of operation</p>
@@ -47,6 +52,13 @@ const UserRestaurants = () => {
                                 <OpenModalButton
                                     buttonText="Edit"
                                     modalComponent={<EditRestaurant restaurant={restaurant} />}
+                                />
+
+                            </div>
+                            <div>
+                                <OpenModalButton
+                                    buttonText="Delete"
+                                    modalComponent={<DeleteRestaurant restaurant={restaurant} />}
                                 />
                                 {/* delete button */}
                             </div>

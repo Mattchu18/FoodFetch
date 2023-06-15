@@ -1,26 +1,26 @@
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { useModal } from "../../context/Modal";
-import { thunkDeleteReview, thunkUserReviews } from '../../store/review'
+import { thunkDeleteRestaurant, thunkUserRestaurants } from '../../store/restaurant'
 
 
-const DeleteReview = ({ review }) => {
-    const dispatch = useDispatch()
+const DeleteRestaurant = ({ restaurant }) => {
     const history = useHistory()
+    const dispatch = useDispatch()
     const { closeModal } = useModal()
 
     const handleDelete = async (e) => {
+        e.preventDefault()
 
-        await dispatch(thunkDeleteReview(review))
-        dispatch(thunkUserReviews())
+        await dispatch(thunkDeleteRestaurant(restaurant))
+        dispatch(thunkUserRestaurants())
         .then(closeModal)
-        console.log("DELETED!!")
     }
 
     return (
         <>
             <div>
-                <h1>Are you sure you want to delete this Review?</h1>
+                <h1>Are you sure you want to delete this Restaurant?</h1>
             </div>
             <div>
                 <button onClick={handleDelete}>Delete</button>
@@ -28,6 +28,7 @@ const DeleteReview = ({ review }) => {
             </div>
         </>
     )
+
 }
 
-export default DeleteReview
+export default DeleteRestaurant

@@ -122,7 +122,7 @@ const reviewsReducer = ( state = initialState, action ) => {
         }
         case DELETE_REVIEW: {
             const newState = { ...state.currentUserReviews }
-            const newSingleState = { ...state.singleReview}
+            const newSingleState = { ...state.singleReview }
             const reviewId = action.review.reviewId
             delete newState[reviewId]
             delete newSingleState[reviewId]
