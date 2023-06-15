@@ -4,6 +4,8 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { thunkAllReviews } from "../../store/review";
+import "./OneRestaurant.css"
+
 
 const OneRestaurant = () => {
     const dispatch = useDispatch()
@@ -34,8 +36,8 @@ const OneRestaurant = () => {
     if (!restaurant) return null
 
     return (
-        <div>
-            <div id="restaurant-details">
+        <div id="restaurant-container">
+            <div className="restaurant-details">
                 <div>
                     <h1>{restaurant.name}</h1>
                     {Number.isInteger(averageRating) ? (<p>{averageRating} Stars and {restaurantReviews.length} ratings</p>) : (<p>Be the first to review!</p>)}

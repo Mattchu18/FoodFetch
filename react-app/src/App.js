@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+import Home from "./components/Home"
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
+import OrderHistory from "./components/OrderHistory/OrderHistory";
 import UserReviews from "./components/Reviews/UserReviews"
 import CreateReview from "./components/Reviews/CreateReview";
 import OneRestaurant from "./components/Restaurants/OneRestaurant";
@@ -10,7 +12,7 @@ import UserRestaurants from "./components/Restaurants/UserRestaurants";
 import RestaurantForm from "./components/Restaurants/RestaurantForm"
 import CreateRestaurant from "./components/Restaurants/CreateRestaurant"
 
-import { authenticate } from "./store/session";
+import { authenticate, signUp } from "./store/session";
 import Navigation from "./components/Navigation";
 
 function App() {
@@ -25,12 +27,10 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route exact path="/signup">
-            <SignupFormPage />
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={LoginFormPage}/>
+          <Route exact path="/signup"component={SignupFormPage}/>
+          <Route exact path="/orders"component={OrderHistory}/>
           <Route exact path="/reviews" component={UserReviews}/>
           <Route exact path="/restaurants/user" component={UserRestaurants}/>
           <Route exact path="/restaurants/new" component={CreateRestaurant}/>
