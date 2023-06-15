@@ -26,16 +26,15 @@ const createRestaurant = (restaurant) => ({
     restaurant
 })
 
-const deleteRestaurant = (restaurant) => ({
-    type: DELETE_RESTAURANT,
-    restaurant
-})
-
 const editRestaurant = (restaurant) => ({
     type: EDIT_RESTAURANT,
     restaurant
 })
 
+const deleteRestaurant = (restaurant) => ({
+    type: DELETE_RESTAURANT,
+    restaurant
+})
 
 export const thunkOneRestaurant = (restaurantId) => async (dispatch) => {
     const response = await fetch(`/api/restaurants/${restaurantId}`)
@@ -75,8 +74,21 @@ export const thunkCreateRestaurant = (restaurant) => async (dispatch) => {
 }
 
 
-const initialState = { currentUserRestaurants: {}, singleRestaurant: {}, allRestaurants:{} }
-const restaurantReducer = ( state = initialState, action ) => {
+export const thunkEditRestaurant = (restaurant) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${restaurant.id}/edit`, {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(restaurant)
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(editRestaurant(data))
+    }
+}
+
+
+const initialState = { currentUserRestaurants: {}, singleRestaurant: {}, allRestaurants: {} }
+const restaurantReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ONE_RESTAURANT: {
             const newState = {}
@@ -117,6 +129,16 @@ const restaurantReducer = ( state = initialState, action ) => {
                 ...state,
                 singleRestaurant: newState,
                 allRestaurants: { ...state.allRestaurants, ...newState }
+            }
+        }
+        case EDIT_RESTAURANT: {
+            const newState = {}
+            const newRestaurant = action.restaurant
+            newState[newRestaurant.id] = newRestaurant
+            return {
+                currentUserRestaurants: { ...state.currentUserRestaurants, ...newState },
+                singleRestaurant: newState,
+                allRestaurants: { ...state.allRestaurants }
             }
         }
         default: return state
