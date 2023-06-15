@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from app.models.restaurant import Restaurant
 from app.models.review import Review
+from app.models.dish import Dish
 from flask_login import login_required, current_user
 from app.models import User
 from app.models.db import db
@@ -136,3 +137,19 @@ def delete_restaurant(id):
     db.session.delete(selected_restaurant)
     db.session.commit()
     return {"message": f"Restaurant {id} deleted"}
+
+
+@restaurant_routes.route("/<int:id>/dishes")
+def get_restaurant_dishes(id):
+    '''
+    Gets dishes for restaurant
+    '''
+    selected_restaurant = Restaurant.query.get(id)
+    if not selected_restaurant:
+        return {"message": f"Restaurant {id} does not exist"}
+
+    all_restaurant_dishes_obj = Dish.query.filter(Dish.restaurant_id == id)
+    all_restaurant_dishes = [dish.to_dict() for dish in all_restaurant_dishes_obj]
+    if len(all_restaurant_dishes) == 0:
+        return {"message": f"Restaurant {id} does not have any dishes"}
+    return all_restaurant_dishes
