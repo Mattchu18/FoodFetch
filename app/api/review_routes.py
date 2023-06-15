@@ -68,7 +68,9 @@ def delete_review(id):
     if not selected_review:
         return {"message": f"Review {id} does not exist"}
 
-    elif current_user.id == selected_review.user_id:
-        db.session.delete(selected_review)
-        db.session.commit()
-        return {"message": f"Review {id} deleted"}
+    elif current_user.id != selected_review.user_id:
+        return {"message": f"Review {id} does not belong to you"}
+
+    db.session.delete(selected_review)
+    db.session.commit()
+    return {"message": f"Review {id} deleted"}

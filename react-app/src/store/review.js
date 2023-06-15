@@ -1,6 +1,8 @@
-const GET_USER_REVIEWS = "review/userReviews"
 const GET_ALL_REVIEWS = "review/allReviews"
-
+const GET_USER_REVIEWS = "review/userReviews"
+const CREATE_REVIEW = "review/createReview"
+const DELETE_REVIEW = "review/deleteReview"
+const EDIT_REVIEW = "review/editReview"
 
 const getAllReviews = (reviews) => ({
     type: GET_ALL_REVIEWS,
@@ -12,6 +14,20 @@ const getUserReviews = (reviews) => ({
     reviews
 })
 
+const createReview = (review) => ({
+    type: CREATE_REVIEW,
+    review
+})
+
+const deleteReview = (review) => ({
+    type: DELETE_REVIEW,
+    review
+})
+
+const editReview = (review) => ({
+    type: EDIT_REVIEW,
+    review
+})
 
 export const thunkAllReviews = () => async (dispatch) => {
     const response = await fetch('/api/reviews')
@@ -31,7 +47,45 @@ export const thunkUserReviews = () => async (dispatch) => {
 }
 
 
-const initialState = { currentUserReviews: {}, singleReview: {}, allReviews: {}}
+export const thunkCreateReview = (review) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${review.restaurant_id}/reviews`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(review)
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(createReview(data))
+    }
+}
+
+
+export const thunkDeleteReview = (review) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${review.id}/delete`, {
+        method: "DELETE"
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(deleteReview(data))
+    }
+}
+
+
+export const thunkEditReview = (review) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${review.id}/edit`, {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(review)
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(editReview(data))
+    }
+
+}
+
+
+const initialState = { currentUserReviews: {}, singleReview: {}, allReviews: {} }
 const reviewsReducer = ( state = initialState, action ) => {
     switch (action.type) {
         case GET_ALL_REVIEWS: {
@@ -54,6 +108,38 @@ const reviewsReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 currentUserReviews: newState
+            }
+        }
+        case CREATE_REVIEW: {
+            const newState = {}
+            const newReview = action.review
+            newState[newReview.id] = newReview
+            return {
+                ...state,
+                singleReview: newState,
+                allReviews: { ...state.allReviews, ...newState}
+            }
+        }
+        case DELETE_REVIEW: {
+            const newState = { ...state.currentUserReviews }
+            const newSingleState = { ...state.singleReview }
+            const reviewId = action.review.reviewId
+            delete newState[reviewId]
+            delete newSingleState[reviewId]
+            return {
+                currentUserReviews: newState,
+                singleReview: newSingleState,
+                allReviews: { ...state.allReviews }
+            }
+        }
+        case EDIT_REVIEW: {
+            const newState = {}
+            const newReview = action.review
+            newState[newReview.id] = newReview
+            return {
+                currentUserReviews: { ...state.currentUserReviews, ...newState },
+                singleReview: newState,
+                allReviews: { ...state.allReviews }
             }
         }
         default: return state

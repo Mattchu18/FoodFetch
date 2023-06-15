@@ -42,6 +42,8 @@ def seed_dishes():
             'description': "A sweet taste of the Philippines with our signature Pineapple Quencher juice drink",
             'price': 2
         },
+
+
         {
             'restaurant_id': 3,
             'name': "The Original Orange Chicken",

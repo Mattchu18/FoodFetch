@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { thunkUserReviews } from "../../store/review";
+import OpenModalButton from "../OpenModalButton";
+import DeleteReview from "./DeleteReview";
+import EditReview from "./EditReview";
 
 
-const GetUserReviews = () => {
+const UserReviews = () => {
     const dispatch = useDispatch()
     const reviewsObj = useSelector(state => state.review.currentUserReviews)
     const reviews = Object.values(reviewsObj)
@@ -31,6 +34,19 @@ const GetUserReviews = () => {
                             review review_text: {review.review_text}
                         </div>
                     </div>
+                    <div>
+                        <OpenModalButton
+                            buttonText="Edit"
+                            modalComponent={<EditReview review={review} />}
+                        />
+                    </div>
+                    <div>
+                        <OpenModalButton
+                            buttonText="Delete"
+                            modalComponent={<DeleteReview review={review} />}
+                        />
+                    </div>
+
                     <br />
                 </div>
             ))}
@@ -41,4 +57,4 @@ const GetUserReviews = () => {
 
 
 
-export default GetUserReviews;
+export default UserReviews;
