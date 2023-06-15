@@ -7,9 +7,7 @@ header {
   background-color: aliceblue;
   min-height: 3rem;
   padding: 1rem;
-  position:fixed;
-  top: 0;
-  z-index: 1030;
+
 }
 
 .nav-row {
