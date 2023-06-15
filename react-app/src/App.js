@@ -33,13 +33,9 @@ function App() {
           </Route>
           <Route exact path="/reviews" component={UserReviews}/>
           <Route exact path="/restaurants/user" component={UserRestaurants}/>
-          {/* <Route exact path="/restaurants/new" component={RestaurantForm}/> */}
           <Route exact path="/restaurants/new" component={CreateRestaurant}/>
           <Route exact path="/restaurants/:restaurantId" component={OneRestaurant}/>
 
-
-          {/* <Route exact path="/restaurants/:restaurantId" component={}/> */}
-          {/* <Route exact path="/restaurants/:restaurantId/reviews/new" component={CreateReview}/> */}
         </Switch>
       )}
     </>
