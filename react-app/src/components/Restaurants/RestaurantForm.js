@@ -8,7 +8,7 @@ import { useModal } from "../../context/Modal";
 const RestaurantForm = ({ restaurant, formType, disabled }) => {
     const dispatch = useDispatch()
     const history = useHistory()
-
+    const { closeModal } = useModal()
     const [name, setName] = useState(restaurant?.name)
     const [address, setAddress] = useState(restaurant?.address)
     const [phone_number, setPhone_number] = useState(restaurant?.phone_number)
@@ -41,6 +41,10 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
 
         if (formType === "Create Restaurant" && !Object.keys(errors).length) {
             await dispatch(thunkCreateRestaurant(restaurant))
+        }
+        if (formType === "Edit Restaurant" && !Object.keys(errors).length) {
+            await dispatch(thunkEditRestaurant(restaurant))
+            .then(closeModal)
         }
 
         if (!!Object.keys(errors).length) return
