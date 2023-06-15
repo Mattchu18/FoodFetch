@@ -75,7 +75,7 @@ def get_one_restaurant(id):
     return one_restaurant.to_dict()
 
 
-@restaurant_routes.route("/", methods=["POST"])
+@restaurant_routes.route("/new", methods=["POST"])
 @login_required
 def post_restaurant():
     '''
@@ -94,9 +94,11 @@ def post_restaurant():
             closing_time = form.data['closing_time']
         )
 
-    db.session.add(new_restaurant)
-    db.session.commit()
-    return new_restaurant.to_dict()
+        db.session.add(new_restaurant)
+        db.session.commit()
+        return new_restaurant.to_dict()
+
+    return {"message": "Invalid form data"}
 
 
 @restaurant_routes.route("/<int:id>/edit", methods=["PUT"])

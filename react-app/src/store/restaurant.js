@@ -63,7 +63,7 @@ export const thunkUserRestaurants = () => async (dispatch) => {
 }
 
 export const thunkCreateRestaurant = (restaurant) => async (dispatch) => {
-    const response = await fetch('/api/restaurants', {
+    const response = await fetch('/api/restaurants/new', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(restaurant)

@@ -31,7 +31,7 @@ class Restaurant(db.Model):
             'name': self.name,
             'phone_number': self.phone_number,
             'cuisine_type': self.cuisine_type,
-            'opening_time': self.opening_time.strftime("%H:%M:%S"),
-            'closing_time': self.closing_time.strftime("%H:%M:%S"),
+            'opening_time': self.opening_time.strftime("%H:%M"),
+            'closing_time': self.closing_time.strftime("%H:%M"),
             'created_at': self.created_at
         }
