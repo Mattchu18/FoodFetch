@@ -45,7 +45,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
         }
         if (formType === "Edit Restaurant" && !Object.keys(errors).length) {
             await dispatch(thunkEditRestaurant(restaurant))
-            .then(closeModal)
+                .then(closeModal)
         }
 
         if (!!Object.keys(errors).length) return
@@ -58,55 +58,78 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                 {formType === "Create Restaurant" ? (<h1>Create your restaurant!</h1>) : (<h1>Update your restaurant!</h1>)}
             </div>
             <div>
-                <input type="text"
-                    value={name}
-                    placeholder="Business Name"
-                    onChange={e => setName(e.target.value)}
-                />
-            </div>
-            <div>
-                <input type="text"
-                    value={address}
-                    placeholder="Business Address"
-                    onChange={e => setAddress(e.target.value)}
-                />
-            </div>
-            <div>
-                <input type="text"
-                    value={phone_number}
-                    placeholder="Business Phone"
-                    onChange={e => setPhone_number(e.target.value)}
-                />
-            </div>
-            <div>
-                <select onChange={e => setCuisine_type(e.target.value)}>
-                    <option value="">---Cuisine Type---</option>
-                    <option value="American">American</option>
-                    <option value="Filipino">Filipino</option>
-                    <option value="Chinese">Chinese</option>
-                    <option value="Italian">Italian</option>
-                    <option value="Korean">Korean</option>
-                    <option value="Mediterranean">Mediterranean</option>
-                    <option value="Vietnamese">Vietnamese</option>
-                    <option value="Peruvian">Peruvian</option>
-                    <option value="Nepalese">Nepalese</option>
-                    <option value="Indian">Indian</option>
-                </select>
-            </div>
+                <div>
 
-            <div>
-                <input
-                    type="time"
-                    value={opening_time}
-                    onChange={e => setOpening_time(e.target.value)}
-                />
+                    <h2>What is your business' name?</h2>
+                    <input type="text"
+                        value={name}
+                        placeholder="Business Name"
+                        onChange={e => setName(e.target.value)}
+                    />
+                </div>
             </div>
             <div>
-                <input
-                    type="time"
-                    value={closing_time}
-                    onChange={e => setClosing_time(e.target.value)}
-                />
+
+                <h2>What is your business located?</h2>
+                <div>
+                    <input type="text"
+                        value={address}
+                        placeholder="Business Address"
+                        onChange={e => setAddress(e.target.value)}
+                    />
+                </div>
+            </div>
+            <div>
+
+                <h2>What phone number can customer's contact your business?</h2>
+                <div>
+                    <input type="text"
+                        value={phone_number}
+                        placeholder="Business Phone"
+                        onChange={e => setPhone_number(e.target.value)}
+                    />
+                </div>
+            </div>
+            <div>
+
+                <h2>What is your business' cuisine type?</h2>
+                <div>
+                    <select onChange={e => setCuisine_type(e.target.value)}>
+                        <option value="">---Cuisine Type---</option>
+                        <option value="American">American</option>
+                        <option value="Filipino">Filipino</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Korean">Korean</option>
+                        <option value="Mediterranean">Mediterranean</option>
+                        <option value="Vietnamese">Vietnamese</option>
+                        <option value="Peruvian">Peruvian</option>
+                        <option value="Nepalese">Nepalese</option>
+                        <option value="Indian">Indian</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <h2>Set your business' operating hours</h2>
+                <div>
+                    <div>
+
+                        <span>Opening time</span>
+                        <input
+                            type="time"
+                            value={opening_time}
+                            onChange={e => setOpening_time(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <span>Closing time</span>
+                        <input
+                            type="time"
+                            value={closing_time}
+                            onChange={e => setClosing_time(e.target.value)}
+                        />
+                    </div>
+                </div>
             </div>
             <div>
                 <button type="submit">Submit</button>
