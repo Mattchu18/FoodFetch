@@ -41,6 +41,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
 
         if (formType === "Create Restaurant" && !Object.keys(errors).length) {
             await dispatch(thunkCreateRestaurant(restaurant))
+            history.push("/restaurants/user")
         }
         if (formType === "Edit Restaurant" && !Object.keys(errors).length) {
             await dispatch(thunkEditRestaurant(restaurant))

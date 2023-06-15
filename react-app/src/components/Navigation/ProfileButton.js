@@ -16,6 +16,7 @@ function ProfileButton({ user }) {
     setShowMenu(true);
   };
 
+
   useEffect(() => {
     if (!showMenu) return;
 
@@ -62,6 +63,26 @@ function ProfileButton({ user }) {
                 </div>
               </div>
             </Link>
+            <Link className="menu-links" to="/orders">
+              <div className="menu-links">
+                <i class="fa-solid fa-receipt"></i>
+                <div className="account-link">
+                  <span>Orders</span>
+
+                </div>
+              </div>
+            </Link>
+
+            {user.restaurant_owner === true ? (<Link className="menu-links" to="/restaurants/user">
+              <div className="menu-links">
+                <i class="fa-regular fa-building"></i>
+                <div className="account-link">
+                  <span>Your Businesses</span>
+
+                </div>
+              </div>
+            </Link>) : null}
+
 
             <li>
               <button onClick={handleLogout}>Log Out</button>
