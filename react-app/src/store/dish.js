@@ -42,10 +42,10 @@ const editDish = (dish) => ({
 // }
 
 
-export const thunkAllRestaurantDishes = (restaurant) => async (dispatch) => {
-    const response = await fetch(`/api/restuarants/${restaurant.id}`)
+export const thunkAllRestaurantDishes = (restaurantId) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${restaurantId}/dishes`)
     if (response.ok) {
-        const data = await Response.json()
+        const data = await response.json()
         dispatch(getAllRestaurantDishes(data))
     }
 }

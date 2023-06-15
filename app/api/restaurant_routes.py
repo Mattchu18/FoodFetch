@@ -127,7 +127,7 @@ def edit_restaurant(id):
 @login_required
 def delete_restaurant(id):
     '''
-    Deletes a restuarant
+    Deletes a restaurant
     '''
     selected_restaurant = Restaurant.query.get(id)
     if not selected_restaurant:

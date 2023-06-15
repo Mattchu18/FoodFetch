@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { thunkAllRestaurantDishes } from "../../store/dish";
 import { thunkAllReviews } from "../../store/review";
+import OpenModalButton from "../OpenModalButton";
+
 import "./OneRestaurant.css"
 
 
@@ -15,12 +18,17 @@ const OneRestaurant = () => {
     const reviewsObj = useSelector(state => state.review.allReviews)
     const reviews = Object.values(reviewsObj)
     const restaurantReviews = reviews.filter(review => review.restaurant_id === parseInt(restaurantId))
+    const restaurantDishesObj = useSelector(state => state.dish).allRestaurantDishes
+    const restaurantDishes = Object.values(restaurantDishesObj)
+
+    console.log(restaurantDishes)
+
     let sum = 0
     restaurantReviews.forEach(review => {
         sum += review.rating
     })
     const averageRating = parseInt((sum / restaurantReviews.length).toFixed(1))
-    console.log("this is average rating====>", restaurantReviews)
+
     /*
     //maybe push to a 404 page in the future
     if (!restaurant) {
@@ -29,6 +37,7 @@ const OneRestaurant = () => {
     */
     useEffect(() => {
         dispatch(thunkOneRestaurant(restaurantId))
+        dispatch(thunkAllRestaurantDishes(restaurantId))
         dispatch(thunkAllReviews())
     }, [dispatch])
 
@@ -48,10 +57,28 @@ const OneRestaurant = () => {
             </div>
 
             <div id="featured-items">
-                <div>
+                <div className="featured-header">
                     <h2>Featured Items</h2>
+                    <span>arrows</span>
                 </div>
-                <div>
+                <div id="featured-items-carousel">
+                    {restaurantDishes.length > 0 ?
+                        restaurantDishes.map(dish => (
+
+                            // open a modal that leads to one dish showing
+                            //pass in dish as prop to that component
+                            <div className="featured-dish">
+                                <div>
+                                    PIC
+                                </div>
+                                <span>{dish.name}</span>
+                            </div>
+                            //pass in dish as prop to that component
+                            // open a modal that leads to one dish showing
+
+
+
+                        )) : <span>This restaurant needs to add dishes!</span>}
                     {/* dishes display here */}
                 </div>
             </div>
