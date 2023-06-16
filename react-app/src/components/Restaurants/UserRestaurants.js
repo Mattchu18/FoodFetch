@@ -8,6 +8,7 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import OpenModalButton from "../OpenModalButton";
+import { Link } from "react-router-dom";
 
 const UserRestaurants = () => {
     const dispatch = useDispatch()
@@ -23,7 +24,10 @@ const UserRestaurants = () => {
     return (
         <div>
             <div>
-                <h1>Your Restaurants</h1>
+                <h1>Your Businesses</h1>
+            </div>
+            <div>
+                <Link to="/restaurants/new">Add a new Business</Link>
             </div>
             <div>
                 {userRestaurants?.length ? (<>

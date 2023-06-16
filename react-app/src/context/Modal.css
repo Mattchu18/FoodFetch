@@ -19,6 +19,11 @@
 }
 
 #modal-content {
+  border-radius: 10px;
+  display: flex;
   position: absolute;
   background-color:white;
+  height: fit-content;
+  min-width: 300px;
+  padding: 20px;
 }

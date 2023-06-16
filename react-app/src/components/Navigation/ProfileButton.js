@@ -4,8 +4,10 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { Link, useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
+  const history = useHistory()
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -14,6 +16,7 @@ function ProfileButton({ user }) {
     if (showMenu) return;
     setShowMenu(true);
   };
+
 
   useEffect(() => {
     if (!showMenu) return;
@@ -31,7 +34,9 @@ function ProfileButton({ user }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    dispatch(logout());
+    dispatch(logout())
+    .then(closeMenu)
+    history.push("/")
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -40,13 +45,48 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+        <i class="fa-solid fa-bars"></i>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
+            <Link className="menu-links" to="/">
+              <div className="menu-links">
+                <i class="fa-solid fa-house"></i>
+                <p>Home</p>
+              </div>
+            </Link>
+            {/* link to account */}
+            <Link className="menu-links" to="/">
+              <div className="menu-links">
+                <i class="fa-regular fa-circle-user"></i>
+                <div className="account-link">
+                  <span>Account</span>
+                  <span >{user.username}</span>
+                </div>
+              </div>
+            </Link>
+            <Link className="menu-links" to="/orders">
+              <div className="menu-links">
+                <i class="fa-solid fa-receipt"></i>
+                <div className="account-link">
+                  <span>Orders</span>
+
+                </div>
+              </div>
+            </Link>
+
+            {user.restaurant_owner === true ? (<Link className="menu-links" to="/restaurants/user">
+              <div className="menu-links">
+                <i class="fa-regular fa-building"></i>
+                <div className="account-link">
+                  <span>Your Businesses</span>
+
+                </div>
+              </div>
+            </Link>) : null}
+
+
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>

@@ -1,0 +1,35 @@
+#restaurant-container {
+    border: 2px solid red;
+    max-width: 960px;
+    min-height: 100vh
+}
+
+.restaurant-details {
+    border: 2px solid red;
+}
+
+#featured-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-header {
+    display: flex;
+    justify-content: space-between;
+
+}
+.featured-header h2{
+    margin:0 ;
+}
+
+#featured-items-carousel {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.featured-dish {
+    width: 150px;
+    height: 150px;
+    border: 1px solid red;
+}
