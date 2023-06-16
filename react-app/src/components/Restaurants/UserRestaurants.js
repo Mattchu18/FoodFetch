@@ -33,9 +33,12 @@ const UserRestaurants = () => {
                 {userRestaurants?.length ? (<>
                     {userRestaurants.map(restaurant => (
                         <div>
+                            <Link to={`/restaurants/${restaurant.id}`}>
                             <div>
                                 <h2>{restaurant.name}</h2>
                             </div>
+
+                            </Link>
                             <div>
                                 <p>{restaurant.address}</p>
                             </div>
