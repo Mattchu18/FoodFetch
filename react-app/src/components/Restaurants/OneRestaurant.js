@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { thunkAllRestaurantDishes } from "../../store/dish";
 import { thunkAllReviews } from "../../store/review";
+import OneDish from "../Dishes/OneDish";
 import OpenModalButton from "../OpenModalButton";
 
 import "./OneRestaurant.css"
@@ -71,6 +72,11 @@ const OneRestaurant = () => {
                                 <div>
                                     PIC
                                 </div>
+                                <OpenModalButton
+                                    buttonText="Add"
+                                    modalComponent={<OneDish dish={dish}/>}
+
+                                />
                                 <span>{dish.name}</span>
                             </div>
                             //pass in dish as prop to that component

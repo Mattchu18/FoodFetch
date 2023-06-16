@@ -1,4 +1,4 @@
-// const GET_ONE_DISH = "dish/oneDish"
+const GET_ONE_DISH = "dish/oneDish"
 const GET_ALL_DISHES = "dish/allDishes"
 const GET_ALL_RESTAURANT_DISHES = "dish/allRestaurantDishes"
 const CREATE_DISH = "dish/createDish"
@@ -6,10 +6,10 @@ const DELETE_DISH = "dish/deleteDish"
 const EDIT_DISH = "dish/editDish"
 
 
-// const getOneDish = (dish) => ({
-//     type: GET_ONE_DISH,
-//     dish
-// })
+const getOneDish = (dish) => ({
+    type: GET_ONE_DISH,
+    dish
+})
 
 const getAllDishes = (dishes) => ({
     type: GET_ALL_DISHES,
