@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from app.models.restaurant import Restaurant
 from app.models.dish import Dish
 from app.models.order import Order
+from app.forms.order_form import OrderForm
 from flask_login import login_required, current_user
 from app.models import User
 from app.models.db import db
@@ -40,6 +41,29 @@ def get_one_order(id):
     return one_order.to_dict()
 
 
+@order_routes.route('/<int:id>/edit', methods=["PUT"])
+@login_required
+def edit_order(id):
+    '''
+    Edits an order
+    '''
+    selected_order = Order.query.get(id)
+    print("This is the selected order address====>", selected_order.delivery_address)
+    if not selected_order:
+        return {"message": f"Order {id} does not exist"}
+    elif selected_order.user_id != current_user.id:
+        return {"message": f"Order {id} does not belong to you"}
+    form = OrderForm()
+    selected_order.delivery_address = form.data["delivery_address"]
+    selected_order.total_amount = float(form.data["total_amount"])
+    selected_order.pick_up = Order.pick_up.default.arg
+    selected_order.created_at = Order.created_at.default.arg
+
+    # print("This is the form ========>", form.data["total_amount"])
+    db.session.commit()
+    return selected_order.to_dict()
+
+
 @order_routes.route('/<int:id>/delete', methods=["DELETE"])
 @login_required
 def delete_order(id):
@@ -57,10 +81,10 @@ def delete_order(id):
 
 # still need to make sure user cannot delete an order after a certain time...
     time_difference = datetime.strptime(datetime.now().strftime("%H:%M"), "%H:%M") - datetime.strptime(selected_order["created_at"], "%H:%M")
-    print("This is time_difference.total in seconds====>", time_difference.total_seconds())
+    # print("This is time_difference.total in seconds====>", time_difference.total_seconds())
     if time_difference.total_seconds() > 300:
         return {"message": f"It has been more than 5 minutes since Order {id} was place. You cannot cancel this order"}
-    print("This is timediff=====>",time_difference)
+    # print("This is timediff=====>",time_difference)
     db.session.delete(selected_order_obj)
     db.session.commit()
     return {"message": f"Order {id} cancelled"}

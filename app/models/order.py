@@ -14,6 +14,7 @@ class Order(db.Model):
     total_amount = db.Column(db.Integer, nullable = False)
     pick_up = db.Column(db.Time, nullable = False, default=(datetime.now() + timedelta(minutes=30)).time())
     created_at = db.Column(db.Time, default = (datetime.now()).time())
+
     #relationships
     user = db.relationship("User", back_populates = "order")
     restaurant = db.relationship("Restaurant", back_populates = "order")
