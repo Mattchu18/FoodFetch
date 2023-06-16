@@ -36,7 +36,7 @@
     width: 100%;
 }
 
-.cuisine-text>p {
+.cuisine-text> span {
     font-size: 12px;
     margin: 0;
 }
