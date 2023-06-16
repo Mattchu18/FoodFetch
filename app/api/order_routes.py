@@ -5,6 +5,7 @@ from app.models.order import Order
 from flask_login import login_required, current_user
 from app.models import User
 from app.models.db import db
+from datetime import datetime, timedelta
 
 order_routes = Blueprint('orders', __name__, url_prefix='')
 
@@ -45,9 +46,23 @@ def delete_order(id):
     '''
     Deletes an order
     '''
-    selected_order = Order.query.get(id)
-    if not selected_order:
+    selected_order_obj = Order.query.get(id)
+    if not selected_order_obj:
         return {"message": f"Order {id} does not exist"}
-    elif current_user.id != selected_order.user_id:
+
+    selected_order = selected_order_obj.to_dict()
+    # print("THIS IS SELECTED ORDER ====>", selected_order)
+    if current_user.id != selected_order["user_id"]:
         return {"message": f"Order {id} does not belong to you"}
+
 # still need to make sure user cannot delete an order after a certain time...
+    time_difference = datetime.strptime(datetime.now().strftime("%H:%M"), "%H:%M") - datetime.strptime(selected_order["created_at"], "%H:%M")
+    print("This is time_difference.total in seconds====>", time_difference.total_seconds())
+    if time_difference.total_seconds() > 300:
+        return {"message": f"It has been more than 5 minutes since Order {id} was place. You cannot cancel this order"}
+    print("This is timediff=====>",time_difference)
+    db.session.delete(selected_order_obj)
+    db.session.commit()
+    return {"message": f"Order {id} cancelled"}
+    # print("THIS IS TIME====>", datetime.strptime(selected_order["created_at"], "%H:%M") - datetime.strptime(datetime.now().strftime("%H:%M"), "%H:%M"))
+    # return selected_order["created_at"]
