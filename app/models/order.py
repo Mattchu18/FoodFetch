@@ -12,9 +12,9 @@ class Order(db.Model):
     restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), nullable = False)
     delivery_address = db.Column(db.String(200), nullable = False, default ="pickup")
     total_amount = db.Column(db.Integer, nullable = False)
-    pick_up = db.Column(db.Time, nullable = False, default=(datetime.now() + timedelta(minutes=30)).time())
+    pick_up = db.Column(db.Time, default=(datetime.now() + timedelta(minutes=30)).time())
     created_at = db.Column(db.Time, default = (datetime.now()).time())
-    edited = db.Column(db.Boolean, nullable = False, default = False)
+    edited = db.Column(db.Boolean, default = False)
 
     #relationships
     user = db.relationship("User", back_populates = "order")

@@ -2,11 +2,14 @@ from flask import Blueprint, jsonify, request
 from app.models.restaurant import Restaurant
 from app.models.review import Review
 from app.models.dish import Dish
+from app.models.order import Order
 from flask_login import login_required, current_user
 from app.models import User
 from app.models.db import db
 from app.forms.review_form import ReviewForm
 from app.forms.restaurant_form import RestaurantForm
+from app.forms.order_form import OrderForm
+
 # import restaurant form later
 restaurant_routes = Blueprint('restaurants', __name__, url_prefix='')
 
@@ -153,3 +156,27 @@ def get_restaurant_dishes(id):
     if len(all_restaurant_dishes) == 0:
         return {"message": f"Restaurant {id} does not have any dishes"}
     return all_restaurant_dishes
+
+
+@restaurant_routes.route("/<int:id>/orders", methods=["POST"])
+def post_order(id):
+    '''
+    Create a restaurant order for a user
+    '''
+    form = OrderForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    print("THIS IS FORM ========>", form.data)
+    if form.validate_on_submit():
+        new_order = Order (
+            user_id = current_user.id,
+            restaurant_id = id,
+            delivery_address = form.data["delivery_address"],
+            total_amount = float(form.data["total_amount"]),
+            pick_up = Order.pick_up.default.arg,
+            created_at = Order.created_at.default.arg
+        )
+        print("THIS IS NEW ORDER=============>", new_order)
+        db.session.add(new_order)
+        db.session.commit()
+        return new_order.to_dict()
+    # return {"message": "Invalid data"}

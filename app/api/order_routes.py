@@ -47,26 +47,31 @@ def edit_order(id):
     '''
     Edits an order
     '''
-    selected_order = Order.query.get(id)
-    print("This is the selected order address====>", selected_order.delivery_address)
-    if not selected_order:
+    selected_order_obj = Order.query.get(id)
+    selected_order = selected_order_obj.to_dict()
+    # print("This is the selected order address====>", selected_order_obj["delivery_address"])
+    if not selected_order_obj:
         return {"message": f"Order {id} does not exist"}
-    elif selected_order.user_id != current_user.id:
+    if selected_order_obj.user_id != current_user.id:
         return {"message": f"Order {id} does not belong to you"}
-    elif selected_order.edited == True:
+
+    # print("This is Selected ORder obj ========> ", selected_order_obj.to_dict())
+    # print("This is edited ========> ", selected_order["edited"])
+    if selected_order["edited"] == True:
         return {"message": f"Order {id} has already been edited"}
-    # time_difference = datetime.strptime(datetime.now().strftime("%H:%M"), "%H:%M") - datetime.strptime(selected_order["created_at"], "%H:%M")
-    # if time_difference.total_seconds() > 300:
-    #     return {"message": f"It has been more than 5 minutes since Order {id} was place. You cannot edit this order"}
+
+    time_difference = datetime.strptime(datetime.now().strftime("%H:%M"), "%H:%M") - datetime.strptime(selected_order["created_at"], "%H:%M")
+    if time_difference.total_seconds() > 300:
+        return {"message": f"It has been more than 5 minutes since Order {id} was place. You cannot edit this order"}
     form = OrderForm()
-    selected_order.delivery_address = form.data["delivery_address"]
-    selected_order.total_amount = float(form.data["total_amount"])
-    selected_order.pick_up = Order.pick_up.default.arg
-    selected_order.created_at = Order.created_at.default.arg
-    selected_order.edited = True
+    selected_order_obj.delivery_address = form.data["delivery_address"]
+    selected_order_obj.total_amount = float(form.data["total_amount"])
+    selected_order_obj.pick_up = Order.pick_up.default.arg
+    selected_order_obj.created_at = Order.created_at.default.arg
+    selected_order_obj.edited = True
     # print("This is the form ========>", form.data["total_amount"])
     db.session.commit()
-    return selected_order.to_dict()
+    return selected_order_obj.to_dict()
 
 
 @order_routes.route('/<int:id>/delete', methods=["DELETE"])

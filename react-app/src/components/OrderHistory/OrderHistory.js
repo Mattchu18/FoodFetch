@@ -20,7 +20,6 @@ const OrderHistory = () => {
             <h1>
                 Order History
             </h1>
-
         </div>
 
     )
