@@ -1,0 +1,54 @@
+#order-history-center {
+    display: flex;
+    max-width: 960px;
+    width: 100%;
+    min-height: 100vh;
+    border: 2px solid red;
+    justify-content: center;
+}
+
+#order-history-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+}
+
+.order-heading {
+    /* margin-bottom: 3rem; */
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+}
+.order-heading > h1 {
+    margin:0;
+
+}
+
+#all-user-order-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#order-container {
+    display: flex;
+    flex-direction: row;
+    border: 1px dashed blue;
+    height: 150px;
+}
+
+.order-restaurant-image {
+    height: 100%;
+    width: 175px;
+}
+
+.restaurant-order-details {
+    width: 100%;
+}
+
+#order-container > h2 {
+    margin: 1rem 0 ;
+}

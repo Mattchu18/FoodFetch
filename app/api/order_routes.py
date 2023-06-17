@@ -18,8 +18,15 @@ def get_user_orders():
     Gets all user orders
     '''
     user_orders_obj = Order.query.filter(Order.user_id == current_user.id)
-    user_oders = [order.to_dict() for order in user_orders_obj]
-    return user_oders
+    user_orders = [order.to_dict() for order in user_orders_obj]
+
+    for order in user_orders:
+        time_difference = datetime.strptime(datetime.now().strftime("%H:%M"), "%H:%M") - datetime.strptime(order["created_at"], "%H:%M")
+        if time_difference.total_seconds() < 300:
+            order["time_difference"] = False
+            return user_orders
+        order["time_difference"] = True
+    return user_orders
 
 
 @order_routes.route('/')
@@ -29,6 +36,12 @@ def get_all_orders():
     '''
     all_orders_obj = Order.query.all()
     all_orders = [order.to_dict() for order in all_orders_obj]
+    for order in all_orders:
+        time_difference = datetime.strptime(datetime.now().strftime("%H:%M"), "%H:%M") - datetime.strptime(order["created_at"], "%H:%M")
+        if time_difference.total_seconds() < 300:
+            order["time_difference"] = False
+            return all_orders
+        order["time_difference"] = True
     return all_orders
 
 
