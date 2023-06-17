@@ -5,6 +5,7 @@ import reviewsReducer from './review';
 import restaurantReducer from './restaurant'
 import dishReducer from './dish';
 import orderReducer from './order'
+import orderDishReducer from './order_dish';
 
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   review: reviewsReducer,
   restaurant: restaurantReducer,
   dish: dishReducer,
-  order: orderReducer
+  order: orderReducer,
+  orderDish: orderDishReducer
 });
 
 

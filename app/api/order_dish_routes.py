@@ -9,10 +9,23 @@ order_dish_routes = Blueprint('order_dishes', __name__, url_prefix='')
 
 
 @order_dish_routes.route('/')
-@login_required
 def get_all_order_dishes():
     '''
-    Gets all order dishes
+    Gets all user order dishes
+    '''
+    all_order_dishes_obj = OrderDish.query.all()
+    if not all_order_dishes_obj:
+        return {"message": f"There are no OrderDishes"}
+
+    user_order_dishes = [order_dish.to_dict() for order_dish in all_order_dishes_obj]
+    return user_order_dishes
+
+
+@order_dish_routes.route('/user')
+@login_required
+def get_user_order_dishes():
+    '''
+    Gets all user order dishes
     '''
     users_orders_obj = Order.query.filter(Order.user_id == current_user.id).all()
     if not users_orders_obj:
@@ -21,6 +34,18 @@ def get_all_order_dishes():
     user_order_dishes_obj = OrderDish.query.all()
     user_order_dishes = [order_dish.to_dict() for order_dish in user_order_dishes_obj]
     return user_order_dishes
+
+
+@order_dish_routes.route('/<int:id>')
+@login_required
+def get_one_order_dish(id):
+    '''
+    Gets one order dish
+    '''
+    order_dish_obj = OrderDish.query.get(id)
+    if not order_dish_obj:
+        return {"message": f"OrderDish {id} does not exist"}
+    return order_dish_obj.to_dict()
 
 
 @order_dish_routes.route('/<int:id>/edit', methods=["PUT"])
