@@ -33,12 +33,19 @@ def get_all_orders():
 
 
 @order_routes.route('/<int:id>')
+@login_required
 def get_one_order(id):
     '''
     Gets one order
     '''
-    one_order = Order.query.get(id)
-    return one_order.to_dict()
+    selected_order_obj = Order.query.get(id)
+    if not selected_order_obj:
+        return {"message": f"Order {id} does not exist"}
+    selected_order = selected_order_obj.to_dict()
+    print ("This is one order =======>", selected_order["user_id"])
+    if selected_order["user_id"] != current_user.id:
+        return {"message": f"Order {id} does not belong to you"}
+    return selected_order_obj.to_dict()
 
 
 @order_routes.route('/<int:id>/edit', methods=["PUT"])
