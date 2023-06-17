@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./components/Home"
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
-import OrderHistory from "./components/OrderHistory/OrderHistory";
+import OrderHistory from "./components/Orders/OrderHistory";
 import UserReviews from "./components/Reviews/UserReviews"
 import CreateReview from "./components/Reviews/CreateReview";
 import OneRestaurant from "./components/Restaurants/OneRestaurant";
