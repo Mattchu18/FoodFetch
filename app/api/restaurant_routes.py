@@ -249,6 +249,14 @@ def add_to_cart(id):
             db.session.add(new_order)
             db.session.commit()
 
+            order_dish = OrderDish(
+            order_id = order.id,
+            dish_id = dish.id,
+            quantity = quantity
+            )
+            db.session.add(order_dish)
+            db.session.commit()
+            return order_dish.to_dict()
 
     order_dish = OrderDish(
         order_id = order.id,
