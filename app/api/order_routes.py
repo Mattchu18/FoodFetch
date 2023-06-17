@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from app.models.restaurant import Restaurant
 from app.models.dish import Dish
 from app.models.order import Order
+from app.models.order_dish import OrderDish
 from app.forms.order_form import OrderForm
 from flask_login import login_required, current_user
 from app.models import User

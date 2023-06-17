@@ -74,7 +74,7 @@ const OneRestaurant = () => {
                                 </div>
                                 <OpenModalButton
                                     buttonText="Add"
-                                    modalComponent={<OneDish dish={dish}/>}
+                                    modalComponent={<OneDish dish={dish} restaurantId={restaurantId}/>}
 
                                 />
                                 <span>{dish.name}</span>

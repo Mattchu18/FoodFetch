@@ -1,6 +1,6 @@
 import { useModal } from "../../context/Modal"
 
-const OneDish = ({ dish }) => {
+const OneDish = ({ dish, restaurantId }) => {
 
 
 
@@ -21,7 +21,7 @@ const OneDish = ({ dish }) => {
                     quantity
                 </div>
                 <div>
-                    add to cart
+                    add to cart, restaurantId: {restaurantId}
                 </div>
             </div>
         </div>
