@@ -1,8 +1,17 @@
 #restaurant-container {
     border: 2px solid red;
-    max-width: 960px;
+    max-width: 930px;
     width: 960px;
     min-height: 100vh
+}
+
+#restaurant-img-header {
+
+        width: 100%;
+        border: 2px solid green;
+        height: 175px;
+        background-color: lightgreen;
+        border-radius: 15px;
 }
 
 .restaurant-details {

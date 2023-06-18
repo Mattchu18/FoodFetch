@@ -52,13 +52,18 @@ const OneRestaurant = () => {
     if (!restaurantDishes) return null
     return (
         <div id="restaurant-container">
+            <div id="restaurant-img-header">
+                Restaurant img header
+            </div>
             <div className="restaurant-details">
                 <div>
                     <h1>{restaurant.name}</h1>
-                    {Number.isInteger(averageRating) ? (<p>{averageRating} Stars and {restaurantReviews.length} ratings</p>) : (<p>Be the first to review!</p>)}
+                    {Number.isInteger(averageRating) ? (
+                    <h5>{averageRating} <i class="fa-solid fa-star"></i>  {restaurantReviews.length} ratings</h5>) : (<p>Be the first to review!</p>)}
+
                 </div>
                 <div>
-                    <p> Today's hours: {restaurant.opening_time} - {restaurant.closing_time}</p>
+                    <h5>  <i class="fa-regular fa-clock"></i> {restaurant.opening_time} - {restaurant.closing_time}</h5>
                 </div>
             </div>
 
