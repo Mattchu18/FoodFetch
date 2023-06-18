@@ -83,12 +83,15 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
 
                     <div>
                         {validationErrors.address ? (<p className="errors">{validationErrors.address}</p>) : null}
+                        {formType === "Create Restaurant" ?
+                            (<input type="text"
+                                value={address}
+                                placeholder="Business Address"
+                                onChange={e => setAddress(e.target.value)}
+                            />) : null
+                        }
 
-                        <input type="text"
-                            value={address}
-                            placeholder="Business Address"
-                            onChange={e => setAddress(e.target.value)}
-                        />
+
                     </div>
                 </div>
                 <div className="input-select">
@@ -112,8 +115,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                     </div> */}
                     <div className="select-cuisine">
                         {validationErrors.cuisine_type ? (<p className="errors">{validationErrors.cuisine_type}</p>) : null}
-
-                        <select onChange={e => setCuisine_type(e.target.value)}>
+                        {formType === "Create Restaurant" ? (<select onChange={e => setCuisine_type(e.target.value)} value={cuisine_type}>
                             <option value="">---Cuisine Type---</option>
                             <option value="American">American</option>
                             <option value="Filipino">Filipino</option>
@@ -125,7 +127,8 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                             <option value="Peruvian">Peruvian</option>
                             <option value="Nepalese">Nepalese</option>
                             <option value="Indian">Indian</option>
-                        </select>
+                        </select>) : null}
+
                     </div>
 
                 </div>

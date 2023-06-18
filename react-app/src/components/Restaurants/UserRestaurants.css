@@ -1,0 +1,14 @@
+#user-business-page {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    max-width: 960px;
+    width: 100%;
+}
+
+.center {
+    display: flex;
+    /* justify-content: center; */
+    width: 100%;
+    flex-direction: column;
+}
