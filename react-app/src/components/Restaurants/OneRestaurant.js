@@ -59,7 +59,7 @@ const OneRestaurant = () => {
                 <div>
                     <h1>{restaurant.name}</h1>
                     {Number.isInteger(averageRating) ? (
-                    <h5>{averageRating} <i class="fa-solid fa-star"></i>  {restaurantReviews.length} ratings</h5>) : (<p>Be the first to review!</p>)}
+                        <h5>{restaurant.cuisine_type} • {averageRating} <i class="fa-solid fa-star"></i>  {restaurantReviews.length}+ ratings</h5>) : (<p>Be the first to review!</p>)}
 
                 </div>
                 <div>
@@ -69,7 +69,7 @@ const OneRestaurant = () => {
 
             <div id="featured-items">
                 <div className="featured-header">
-                    <h2>Featured Items</h2>
+                    <h3>Featured Items</h3>
                     <span>arrows</span>
                 </div>
                 <div id="featured-items-carousel">
@@ -79,7 +79,7 @@ const OneRestaurant = () => {
                             // open a modal that leads to one dish showing
                             //pass in dish as prop to that component
                             <div className="featured-dish">
-                                <div>
+                                <div className="featured-dish-img">
                                     PIC
                                 </div>
                                 <OpenModalButton
@@ -87,7 +87,11 @@ const OneRestaurant = () => {
                                     modalComponent={<OneDish dish={dish} restaurantId={restaurantId} />}
 
                                 />
-                                <span>{dish.name}</span>
+                                <div className="featured-dish-name-price">
+
+                                    <h4>{dish.name}</h4>
+                                    <span>${dish.price}</span>
+                                </div>
                             </div>
                             //pass in dish as prop to that component
                             // open a modal that leads to one dish showing
@@ -99,14 +103,16 @@ const OneRestaurant = () => {
                 </div>
             </div>
 
-            <br />
 
             <div id="restaurant-reviews">
                 <div>
-                    <h2>What people are saying</h2>
+                    <h3>What people are saying</h3>
                 </div>
                 <div>
-                    {Number.isInteger(averageRating) ? (<p>{averageRating} Stars and {restaurantReviews.length} ratings</p>) : (<p>Be the first to review!</p>)}
+                    {Number.isInteger(averageRating) ? (
+                        <div>
+                            <strong>{averageRating} <i class="fa-solid fa-star"></i></strong> <span>{restaurantReviews.length}+ ratings</span>
+                        </div>) : (<h4>Be the first to review!</h4>)}
                 </div>
 
                 {!reviewed && currUser ? (<div>
@@ -117,20 +123,20 @@ const OneRestaurant = () => {
 
 
 
-                 <div className="review-container">
+                <div className="review-container">
                     {restaurantReviews.length ? (
                         restaurantReviews.map(review => (
-                           <div>
+                            <div>
                                 <div>
                                     <p>{review.username}</p>
                                 </div>
                                 <div>
-                                    <p>{review.rating} stars</p>
+                                    <p>{review.rating} <i class="fa-solid fa-star"></i></p>
                                     <p>{review.created_at}</p>
                                     <p>{review.review_text}</p>
                                 </div>
-                                {review.user_id === currUser?.id ? (<OpenModalButton buttonText="Delete Review" modalComponent={<DeleteReview review={review}/> }/>): null}
-                                {review.user_id === currUser?.id ? (<OpenModalButton buttonText="Edit Review" modalComponent={<EditReview review={review}/> }/>): null}
+                                {review.user_id === currUser?.id ? (<OpenModalButton buttonText="Delete Review" modalComponent={<DeleteReview review={review} />} />) : null}
+                                {review.user_id === currUser?.id ? (<OpenModalButton buttonText="Edit Review" modalComponent={<EditReview review={review} />} />) : null}
                             </div>
                         ))
                     ) : null}
