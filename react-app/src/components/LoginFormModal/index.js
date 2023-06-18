@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import "./LoginForm.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import "./LoginForm.css";
 
 function LoginFormModal() {
   const history = useHistory()
@@ -24,8 +24,15 @@ function LoginFormModal() {
     }
   };
 
+  const autoLogin = e => {
+    setEmail('demo@aa.io')
+    setPassword('password')
+    return dispatch(login({ email, password }))
+      .then(closeModal)
+  }
+
   return (
-    <>
+    <div>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <ul>
@@ -51,9 +58,13 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <div className='loginButtons'>
+          {errors.password && <p>{errors.password}</p>}
+          <button type="submit" disabled={!email || !password}>Log In</button>
+          <button onClick={autoLogin}>Login in as Demo User</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

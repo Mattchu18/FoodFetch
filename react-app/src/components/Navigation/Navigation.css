@@ -30,7 +30,7 @@ header {
 
 .home-button>a {
   width: 100%;
-  color: #FF3008;
+  color: #ff3008;
   font-size: 30px;
 
 }
@@ -159,7 +159,7 @@ font-weight: bold;
 }
 
 .dropdown-btn > button{
-  background-color: red;
+  background-color: #ff3008;
   line-height: 40px;
   display: inline-block;
   padding: 0 25px;
@@ -167,4 +167,5 @@ font-weight: bold;
   color: #fff;
   font-family: roboto,arial,helvetica neue,sans-serif;
   border-radius: 5px;
-  border: none;}
+  border: none;
+}
