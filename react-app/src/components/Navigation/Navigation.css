@@ -3,10 +3,35 @@ header {
   align-items: center;
   justify-content: center;
   min-width: 100vw;
-  border: 2px solid blue;
-  background-color: aliceblue;
-  min-height: 3rem;
-  padding: 1rem;
+  border: 1px solid lightgrey;
+
+  height: 64px;
+}
+
+.home-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  top: 15px;
+}
+
+.home-button>a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.home-button>a>img {
+  width: 90%;
+}
+
+.home-button>a {
+  width: 100%;
+  color: #FF3008;
+  font-size: 30px;
 
 }
 
@@ -15,17 +40,41 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 97%;
+  width: 1150px;
 }
 
 .nav-left {
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+
+button.bars {
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.x-button-div {
+  display: flex;
+  justify-content: flex-end;
+  width: 95%;
+  margin-top: 10px;
+  height: 24px;
+
+}
+
+.x-button-div > button {
+  border: none;
+  background-color: transparent;
+  font-size: larger;
+  cursor: pointer;
 }
 
 .profile-dropdown {
   display: flex;
-  position: fixed;
+  position: absolute;
   flex-direction: column;
   height: 100vh;
   padding: 0;
@@ -33,19 +82,41 @@ header {
   top: -15px;
   left: 0px;
   align-items: center;
-  background-color: aqua;
+  background-color: white;
+  z-index: 50;
+  /* border:3px solid orange; */
+  box-shadow: 0 10px 10px rgba(8, 8, 8, 0.2);
 }
 
+
+
 .menu-links {
-  border: 1px solid red;
+  border-bottom: 1px solid lightgrey;
   display: flex;
   flex-direction: row;
-  min-width: 100%;
+  width: 100%;
   height: 60px;
   justify-content: flex-start;
   align-items: center;
   column-gap: 20px;
   text-decoration: none;
+  text-indent: 20px;
+}
+
+.menu-link-div {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+
+.menu-link-div > i, .menu-link-div > span {
+color: black;
+font-weight: bold;
+}
+
+.menu-links:hover {
+  background-color: rgba(231, 231, 231, 0.329);
+  ;
 }
 
 .account-link {
@@ -76,3 +147,24 @@ header {
 .cart {
   border: 2px dashed red;
 }
+
+.login-signup-div{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.dropdown-btn{
+  margin: 15px 0;
+}
+
+.dropdown-btn > button{
+  background-color: red;
+  line-height: 40px;
+  display: inline-block;
+  padding: 0 25px;
+  cursor: pointer;
+  color: #fff;
+  font-family: roboto,arial,helvetica neue,sans-serif;
+  border-radius: 5px;
+  border: none;}

@@ -52,8 +52,14 @@ const OneRestaurant = () => {
     if (!restaurantDishes) return null
     return (
         <div id="restaurant-container">
-            <div id="restaurant-img-header">
-                Restaurant img header
+            <div id="restaurant-img-header"
+                style={{
+                    backgroundImage: ` url(${restaurant?.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    color: "white",
+                    padding: "20px"
+                }}>
             </div>
             <div className="restaurant-details">
                 <div>
