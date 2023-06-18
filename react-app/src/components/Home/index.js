@@ -69,7 +69,7 @@ const Home = () => {
                             <div className="top-restaurant-container">
                                 <Link to={`/restaurants/${restaurant.id}`}>
                                     <div className="top-restaurant-pic">
-                                        PIC
+                                        <img src="https://studentlegallounge.humboldt.edu/sites/default/files/styles/panopoly_image_original/public/image-coming-soon.jpg?itok=e-RY5zkr"/>
                                     </div>
                                     <div className="top-restaurant-name-rating">
                                         <span>{restaurant.name}</span>

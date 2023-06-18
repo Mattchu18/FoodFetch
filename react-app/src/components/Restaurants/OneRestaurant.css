@@ -1,6 +1,7 @@
 #restaurant-container {
     border: 2px solid red;
     max-width: 960px;
+    width: 960px;
     min-height: 100vh
 }
 
@@ -11,6 +12,8 @@
 #featured-items {
     display: flex;
     flex-direction: column;
+    height: 150px;
+
 }
 
 .featured-header {
@@ -32,4 +35,10 @@
     width: 150px;
     height: 150px;
     border: 1px solid red;
+}
+
+
+.review-container {
+
+    max-width: 600px;
 }

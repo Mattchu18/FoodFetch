@@ -156,7 +156,7 @@ def get_restaurant_dishes(id):
     all_restaurant_dishes_obj = Dish.query.filter(Dish.restaurant_id == id)
     all_restaurant_dishes = [dish.to_dict() for dish in all_restaurant_dishes_obj]
     if len(all_restaurant_dishes) == 0:
-        return {"message": f"Restaurant {id} does not have any dishes"}
+        return all_restaurant_dishes
     return all_restaurant_dishes
 
 

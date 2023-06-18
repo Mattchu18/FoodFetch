@@ -36,7 +36,7 @@
     width: 100%;
 }
 
-.cuisine-text> span {
+.cuisine-text>span {
     font-size: 12px;
     margin: 0;
 }
@@ -78,7 +78,7 @@
     width: 100%;
 }
 
-.top-restaurant-container > a{
+.top-restaurant-container>a {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -92,8 +92,14 @@
     height: 100%;
 }
 
+.top-restaurant-pic > img {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+}
+
 .top-restaurant-name-rating {
     display: flex;
     flex-direction: column;
-    height:auto;
+    height: auto;
 }
