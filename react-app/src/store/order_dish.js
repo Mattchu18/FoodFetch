@@ -21,7 +21,7 @@ const createOrderDish = (orderDish) => ({
     orderDish
 })
 
-const editOrderDish = (orderDish) = ({
+const editOrderDish = (orderDish) => ({
     type:EDIT_ORDER_DISH,
     orderDish
 })
@@ -40,7 +40,7 @@ export const thunkOneOrderDish = (orderDishId) => async (dispatch) => {
     }
 }
 
-export const thunkUserOrders = () => async (dispatch) => {
+export const thunkUserOrderDishes = () => async (dispatch) => {
     const response = await fetch(`/api/order_dishes/user`)
     if (response.ok) {
         const data = await response.json()
@@ -48,11 +48,11 @@ export const thunkUserOrders = () => async (dispatch) => {
     }
 }
 
-export const thunkCreateOrderDish = (restaurantId) => async (dispatch) => {
-    const response = await fetch(`/api/restaurants/${restaurantId}/cart/add`, {
+export const thunkCreateOrderDish = (dish) => async (dispatch) => {
+    const response = await fetch(`/api/dishes/${dish.id}/cart/add`, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(order)
+        body: JSON.stringify(dish)
     })
     if (response.ok) {
         const data = await response.json()
@@ -60,11 +60,11 @@ export const thunkCreateOrderDish = (restaurantId) => async (dispatch) => {
     }
 }
 
-export const thunkEditOrderDish = (orderDishId) => async (dispatch) => {
-    const response = await fetch(`/api/order_dishes/${orderDishId}/edit`, {
+export const thunkEditOrderDish = (orderDish) => async (dispatch) => {
+    const response = await fetch(`/api/order_dishes/${orderDish.id}/edit`, {
         method: "PUT",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(order)
+        body: JSON.stringify(orderDish)
     })
     if (response.ok) {
         const data = await response.json()
@@ -111,7 +111,7 @@ const orderDishReducer = (state = initialState, action) => {
             const newState = {}
             const userOrderDishes = action.orderDishes
             userOrderDishes.forEach(orderDish => {
-                newState[orderDish.id] = order
+                newState[orderDish.id] = orderDish
             })
             return {
                 ...state,
