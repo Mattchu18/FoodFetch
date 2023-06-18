@@ -97,7 +97,9 @@ def post_restaurant():
             phone_number = form.data['phone_number'],
             cuisine_type = form.data['cuisine_type'],
             opening_time = form.data['opening_time'],
-            closing_time = form.data['closing_time']
+            closing_time = form.data['closing_time'],
+            image = form.data['image'],
+            header_image = form.data['header_image']
         )
 
         db.session.add(new_restaurant)
@@ -124,6 +126,8 @@ def edit_restaurant(id):
     selected_restaurant.phone_number = form.data["phone_number"]
     selected_restaurant.opening_time = form.data["opening_time"]
     selected_restaurant.closing_time = form.data["closing_time"]
+    selected_restaurant.image = form.data["image"]
+    selected_restaurant.header_image = form.data["header_image"]
     db.session.commit()
     return selected_restaurant.to_dict()
 

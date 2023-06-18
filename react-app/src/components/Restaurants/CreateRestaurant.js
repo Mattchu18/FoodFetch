@@ -19,6 +19,8 @@ const CreateRestaurant = () => {
         "cuisine_type": "",
         "opening_time": "",
         "closing_time": "",
+        "image": "",
+        "header_image": ""
         // "user_id": user.id
     }
 

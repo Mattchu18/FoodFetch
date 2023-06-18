@@ -15,6 +15,8 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
     const [cuisine_type, setCuisine_type] = useState(restaurant?.cuisine_type)
     const [opening_time, setOpening_time] = useState(restaurant?.opening_time)
     const [closing_time, setClosing_time] = useState(restaurant?.closing_time)
+    const [image, setImage] = useState(restaurant?.image || "")
+    const [header_image, setHeader_image] = useState(restaurant?.header_image || "")
     const [validationErrors, setValidationErrors] = useState("")
 
     const handleSubmit = async (e) => {
@@ -28,7 +30,9 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
             phone_number,
             cuisine_type,
             opening_time,
-            closing_time
+            closing_time,
+            image,
+            header_image
         }
 
         if (!name) errors.name = "Name is required"
@@ -128,6 +132,25 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                             value={closing_time}
                             onChange={e => setClosing_time(e.target.value)}
                         />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2>Set your business' image and banner</h2>
+                <div>
+                    <div>
+                        <span>Business Image</span>
+                        <input
+                        type="text"
+                        value={image}
+                        onChange={e => setImage(e.target.value)}/>
+                    </div>
+                    <div>
+                        <span>Business Banner</span>
+                        <input
+                        type="text"
+                        value={header_image}
+                        onChange={e => setHeader_image(e.target.value)}/>
                     </div>
                 </div>
             </div>

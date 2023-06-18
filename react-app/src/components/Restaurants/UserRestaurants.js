@@ -14,7 +14,7 @@ const UserRestaurants = () => {
     const dispatch = useDispatch()
     const userRestaurantsObj = useSelector(state => state.restaurant.currentUserRestaurants)
     const userRestaurants = Object.values(userRestaurantsObj)
-    // console.log("This is in UserRestaurants======>", userRestaurants)
+    console.log("This is in UserRestaurants======>", userRestaurants)
 
     useEffect(() => {
         dispatch(thunkUserRestaurants())

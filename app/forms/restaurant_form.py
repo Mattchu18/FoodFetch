@@ -9,3 +9,5 @@ class RestaurantForm(FlaskForm):
     cuisine_type = SelectField("Cuisine Type", choices=["American", "Filipino", "Chinese", "Italian", "Korean", "Mediterranean", "Vietnamese", "Peruvian", "Nepalese", "Indian"])
     opening_time = TimeField("Opening Time", validators=[DataRequired()], format="%H:%M")
     closing_time = TimeField("Closing Time", validators=[DataRequired()], format="%H:%M")
+    image = StringField("Image")
+    header_image = StringField("Header Image")

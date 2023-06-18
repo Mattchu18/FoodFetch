@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 237c51c2cd49
+Revision ID: c66f4d58cb01
 Revises: 
-Create Date: 2023-06-16 11:12:49.395601
+Create Date: 2023-06-18 00:13:06.881610
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '237c51c2cd49'
+revision = 'c66f4d58cb01'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -39,6 +39,8 @@ def upgrade():
     sa.Column('opening_time', sa.Time(), nullable=True),
     sa.Column('closing_time', sa.Time(), nullable=True),
     sa.Column('created_at', sa.String(length=100), nullable=True),
+    sa.Column('image', sa.String(length=1000), nullable=True),
+    sa.Column('header_image', sa.String(length=1000), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -57,9 +59,9 @@ def upgrade():
     sa.Column('restaurant_id', sa.Integer(), nullable=False),
     sa.Column('delivery_address', sa.String(length=200), nullable=False),
     sa.Column('total_amount', sa.Integer(), nullable=False),
-    sa.Column('pick_up', sa.Time(), nullable=False),
+    sa.Column('pick_up', sa.Time(), nullable=True),
     sa.Column('created_at', sa.Time(), nullable=True),
-    sa.Column('edited', sa.Boolean(), nullable=False),
+    sa.Column('edited', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
