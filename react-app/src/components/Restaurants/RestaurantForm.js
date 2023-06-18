@@ -162,8 +162,8 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                     </div>
                 </div>
                 <div>
-                    <h2>Set your business' image and banner</h2>
                     <div>
+                    <h3>Business image</h3>
                         <div>
                             {/* <span>Business Image</span> */}
                             <input
@@ -173,6 +173,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
 
                                 onChange={e => setImage(e.target.value)} />
                         </div>
+                        <h3>Business banner</h3>
                         <div>
                             {/* <span>Business Banner</span> */}
                             <input

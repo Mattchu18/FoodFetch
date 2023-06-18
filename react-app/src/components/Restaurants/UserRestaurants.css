@@ -12,3 +12,67 @@
     width: 100%;
     flex-direction: column;
 }
+
+.business-manage-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #666;
+    justify-content: space-between;
+    border-radius: 5px;
+    margin-bottom: 16px;
+    padding: 15px;
+}
+
+.business-link {
+    width: 150px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.business-link>a {
+    width: 100%;
+}
+
+.business-link>a {
+    text-decoration: none;
+}
+
+.business-link>a>h2 {
+    margin: 0;
+    color: white;
+}
+
+
+.business-details {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+
+.details {
+    width: 170px;
+}
+
+.details.address {
+    width: 190px;
+    ;
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 16px 0;
+}
+
+.icons>button {
+    border: none;
+    background-color: transparent;
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
+}
