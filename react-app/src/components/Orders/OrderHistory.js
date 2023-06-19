@@ -25,7 +25,7 @@ const OrderHistory = () => {
             order["restaurantName"] = restaurant.name
             order["restaurantAddress"] = restaurant.address
             order["restaurantImage"] = restaurant.image
-                 // console.log("this is orders!!", order)
+            console.log("this is orders!!", order)
 
             // userOrdersArr.push(order)
         })
@@ -50,7 +50,7 @@ const OrderHistory = () => {
                     {userOrders.map(order => (
                         <div id="order-container">
                             <div className="order-restaurant-image">
-                                <img src={order.restaurantImage}/>
+                                <img src={order.restaurantImage} />
                             </div>
                             <div className="restaurant-order-details">
 
@@ -74,11 +74,17 @@ const OrderHistory = () => {
                                     <span>Pickup time {order.pick_up}</span>
                                 </div>
                             </div>
-                            <OpenModalButton
-                                disabled={order.time_difference || order.edited}
-                                buttonText="Cancel Order"
-                                modalComponent={<DeleteOrder order={order} />}
-                            />
+                            <div className="order-history-btn">
+                                <div>
+                                    <span>${order.total_amount}</span>
+                                    <button>View Order</button>
+                                </div>
+                                <OpenModalButton
+                                    disabled={order.time_difference || order.edited}
+                                    buttonText="Cancel Order"
+                                    modalComponent={<DeleteOrder order={order} />}
+                                />
+                            </div>
                         </div>
                     ))}
 

@@ -68,7 +68,7 @@ const Home = () => {
                             <div className="top-restaurant-container">
                                 <Link to={`/restaurants/${restaurant.id}`}>
                                     <div className="top-restaurant-pic">
-                                        <img src={restaurant.image} />
+                                        <img src={restaurant.header_image} />
                                     </div>
                                     <div className="top-restaurant-name-rating">
                                         <span>{restaurant.name}</span>
@@ -95,7 +95,7 @@ const Home = () => {
                             <div className="top-restaurant-container">
                                 <Link to={`/restaurants/${restaurant.id}`}>
                                     <div className="top-restaurant-pic">
-                                        <img src={restaurant.image} />
+                                        <img src={restaurant.header_image} />
                                     </div>
                                     <div className="top-restaurant-name-rating">
                                         <span>{restaurant.name}</span>
