@@ -35,6 +35,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
             header_image
         }
 
+        console.log(typeof phone_number)
         if (!name) errors.name = "Name is required"
         if (!address) errors.address = "Address is required"
         if (!phone_number) errors.phone_number = "Phone number is required"
@@ -101,9 +102,12 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                     <div className="input-phone">
                         {validationErrors.phone_number ? (<p className="errors">{validationErrors.phone_number}</p>) : null}
 
-                        <input type="text"
+                        <input type="tel"
+                            maxLength="12"
+                            minLength="12"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                             value={phone_number}
-                            placeholder="Business Phone"
+                            placeholder="ex: 123-456-7890"
                             onChange={e => setPhone_number(e.target.value)}
                         />
                     </div>
@@ -163,7 +167,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                 </div>
                 <div>
                     <div>
-                    <h3>Business image</h3>
+                        <h3>Business image</h3>
                         <div>
                             {/* <span>Business Image</span> */}
                             <input
