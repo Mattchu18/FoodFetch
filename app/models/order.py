@@ -11,9 +11,11 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable = False)
     restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), nullable = False)
     delivery_address = db.Column(db.String(200), nullable = False, default ="pickup")
-    total_amount = db.Column(db.Integer, nullable = False)
-    pick_up = db.Column(db.Time, nullable = False, default=(datetime.now() + timedelta(minutes=30)).time())
+    total_amount = db.Column(db.Integer, nullable = False, default = 0)
+    pick_up = db.Column(db.Time, default=(datetime.now() + timedelta(minutes=30)).time())
     created_at = db.Column(db.Time, default = (datetime.now()).time())
+    edited = db.Column(db.Boolean, default = False)
+
     #relationships
     user = db.relationship("User", back_populates = "order")
     restaurant = db.relationship("Restaurant", back_populates = "order")
@@ -27,5 +29,6 @@ class Order(db.Model):
             'delivery_address': self.delivery_address,
             'total_amount': self.total_amount,
             'pick_up': self.pick_up.strftime("%H:%M"),
-            'created_at': self.created_at.strftime("%H:%M")
+            'created_at': self.created_at.strftime("%H:%M"),
+            'edited': self.edited
         }

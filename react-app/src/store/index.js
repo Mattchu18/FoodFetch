@@ -4,13 +4,17 @@ import session from './session'
 import reviewsReducer from './review';
 import restaurantReducer from './restaurant'
 import dishReducer from './dish';
+import orderReducer from './order'
+import orderDishReducer from './order_dish';
 
 
 const rootReducer = combineReducers({
   session,
   review: reviewsReducer,
   restaurant: restaurantReducer,
-  dish: dishReducer
+  dish: dishReducer,
+  order: orderReducer,
+  orderDish: orderDishReducer
 });
 
 

@@ -44,67 +44,73 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button className="bars" onClick={openMenu}>
         <i class="fa-solid fa-bars"></i>
       </button>
       <ul className={ulClassName} ref={ulRef}>
+        <div className="x-button-div">
+        <button  onClick={closeMenu}>X</button>
+        </div>
         {user ? (
           <>
             <Link className="menu-links" to="/">
-              <div className="menu-links">
+              <div className="menu-link-div">
                 <i class="fa-solid fa-house"></i>
-                <p>Home</p>
+                <span>Home</span>
               </div>
             </Link>
             {/* link to account */}
             <Link className="menu-links" to="/">
-              <div className="menu-links">
+              <div className="menu-link-div">
                 <i class="fa-regular fa-circle-user"></i>
-                <div className="account-link">
+
                   <span>Account</span>
-                  <span >{user.username}</span>
-                </div>
+
+
               </div>
             </Link>
             <Link className="menu-links" to="/orders">
-              <div className="menu-links">
+              <div className="menu-link-div">
                 <i class="fa-solid fa-receipt"></i>
-                <div className="account-link">
                   <span>Orders</span>
 
-                </div>
               </div>
             </Link>
 
             {user.restaurant_owner === true ? (<Link className="menu-links" to="/restaurants/user">
-              <div className="menu-links">
+              <div className="menu-link-div">
                 <i class="fa-regular fa-building"></i>
-                <div className="account-link">
+
                   <span>Your Businesses</span>
 
-                </div>
+
               </div>
             </Link>) : null}
 
 
-            <li>
+            <span className="dropdown-btn">
               <button onClick={handleLogout}>Log Out</button>
-            </li>
+            </span>
           </>
         ) : (
-          <>
-            <OpenModalButton
-              buttonText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
+          <div className="login-signup-div">
+          <div className="dropdown-btn">
 
             <OpenModalButton
+              buttonText="Log In"
+              onButtonClick={closeMenu}
+              modalComponent={<LoginFormModal />}
+              />
+              </div>
+
+              <div className="dropdown-btn">
+            <OpenModalButton
               buttonText="Sign Up"
-              onItemClick={closeMenu}
+              onButtonClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
-          </>
+            </div>
+          </div>
         )}
       </ul>
     </>

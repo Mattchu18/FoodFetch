@@ -8,11 +8,12 @@ const CreateReview = ({ restaurantId }) => {
         restaurant_id: restaurantId
     }
 
+    console.log("THis is restaurant Id====", restaurantId)
     return (
         <>
             <ReviewForm
                 review={review}
-                formType={"Create review"}
+                formType={"Create Review"}
         />
         </>
 

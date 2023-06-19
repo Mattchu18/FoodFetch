@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { useModal } from "../../context/Modal";
-import { thunkDeleteReview, thunkUserReviews } from '../../store/review'
+import { thunkDeleteReview, thunkUserReviews, thunkAllReviews } from '../../store/review'
 
 
 const DeleteReview = ({ review }) => {
@@ -10,9 +10,9 @@ const DeleteReview = ({ review }) => {
     const { closeModal } = useModal()
 
     const handleDelete = async (e) => {
-
         await dispatch(thunkDeleteReview(review))
         dispatch(thunkUserReviews())
+        dispatch(thunkAllReviews())
         .then(closeModal)
         console.log("DELETED!!")
     }

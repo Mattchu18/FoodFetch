@@ -2,11 +2,16 @@ from flask import Blueprint, jsonify, request
 from app.models.restaurant import Restaurant
 from app.models.review import Review
 from app.models.dish import Dish
+from app.models.order import Order
+from app.models.order_dish import OrderDish
 from flask_login import login_required, current_user
 from app.models import User
 from app.models.db import db
 from app.forms.review_form import ReviewForm
 from app.forms.restaurant_form import RestaurantForm
+from app.forms.order_form import OrderForm
+from datetime import datetime, timedelta, date
+
 # import restaurant form later
 restaurant_routes = Blueprint('restaurants', __name__, url_prefix='')
 
@@ -92,7 +97,9 @@ def post_restaurant():
             phone_number = form.data['phone_number'],
             cuisine_type = form.data['cuisine_type'],
             opening_time = form.data['opening_time'],
-            closing_time = form.data['closing_time']
+            closing_time = form.data['closing_time'],
+            image = form.data['image'],
+            header_image = form.data['header_image']
         )
 
         db.session.add(new_restaurant)
@@ -119,6 +126,8 @@ def edit_restaurant(id):
     selected_restaurant.phone_number = form.data["phone_number"]
     selected_restaurant.opening_time = form.data["opening_time"]
     selected_restaurant.closing_time = form.data["closing_time"]
+    selected_restaurant.image = form.data["image"]
+    selected_restaurant.header_image = form.data["header_image"]
     db.session.commit()
     return selected_restaurant.to_dict()
 
@@ -151,5 +160,114 @@ def get_restaurant_dishes(id):
     all_restaurant_dishes_obj = Dish.query.filter(Dish.restaurant_id == id)
     all_restaurant_dishes = [dish.to_dict() for dish in all_restaurant_dishes_obj]
     if len(all_restaurant_dishes) == 0:
-        return {"message": f"Restaurant {id} does not have any dishes"}
+        return all_restaurant_dishes
     return all_restaurant_dishes
+
+
+# @restaurant_routes.route("/<int:id>/orders", methods=["POST"])
+# def post_order(id):
+#     '''
+#     Create a restaurant order for a user
+#     '''
+#     form = OrderForm()
+#     form["csrf_token"].data = request.cookies["csrf_token"]
+#     print("THIS IS FORM ========>", form.data)
+#     if form.validate_on_submit():
+#         new_order = Order (
+#             user_id = current_user.id,
+#             restaurant_id = id,
+#             delivery_address = form.data["delivery_address"],
+#             total_amount = float(form.data["total_amount"]),
+#             pick_up = Order.pick_up.default.arg,
+#             created_at = Order.created_at.default.arg
+#         )
+#         print("THIS IS NEW ORDER=============>", new_order)
+#         db.session.add(new_order)
+#         db.session.commit()
+#         return new_order.to_dict()
+#     # return {"message": "Invalid data"}
+
+
+@restaurant_routes.route("/<int:id>/orders", methods=["POST"])
+def post_order(id):
+    '''
+    Create a restaurant order for a user
+    '''
+    form = OrderForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    # print("THIS IS FORM ========>", form.data)
+    if form.validate_on_submit():
+        new_order = Order (
+            user_id = current_user.id,
+            restaurant_id = id,
+            delivery_address = form.data["delivery_address"],
+            total_amount = float(form.data["total_amount"]),
+            pick_up = Order.pick_up.default.arg,
+            created_at = Order.created_at.default.arg
+        )
+        print("THIS IS NEW ORDER=============>", new_order)
+        db.session.add(new_order)
+        db.session.commit()
+        return new_order.to_dict()
+    # return {"message": "Invalid data"}
+
+
+
+# @restaurant_routes.route('/<int:id>/cart/add', methods=["POST"])
+# @login_required
+# def add_to_cart(id):
+#     '''
+#     Adds dish to cart
+#     if order total is 0 and over 5 mins old itll make new order
+#     adding to cart will add to order_dish
+
+#     '''
+#     dish_id = request.json.get("dish_id")
+#     quantity = request.json.get("quantity")
+
+#     dish = Dish.query.get(dish_id)
+#     if not dish:
+#         return {"message": f"Dish {dish_id} does not exist"}
+
+#     user_orders = Order.query.filter(Order.user_id == current_user.id).all()
+#     if not user_orders:
+#         new_order = Order(
+#                 user_id = current_user.id,
+#                 restaurant_id = id
+#                 )
+#         db.session.add(new_order)
+#         db.session.commit()
+
+#     user_orders = Order.query.filter(Order.user_id == current_user.id).all()
+#     for order in user_orders:
+#         time_difference = datetime.strptime(datetime.now().strftime("%H:%M"), "%H:%M") - datetime.strptime(order.to_dict()["created_at"], "%H:%M")
+#         if time_difference.total_seconds() > 5 and order.total_amount == 0 or not order:
+#         # if not order or (datetime.now().time() > order.created_at and (datetime.now() - datetime.combine(date.today(), order.created_at)).total_seconds() > 300):
+#             db.session.delete(order)
+#             db.session.commit()
+
+#             new_order = Order(
+#                 user_id = current_user.id,
+#                 restaurant_id = id
+#                 )
+#             db.session.add(new_order)
+#             db.session.commit()
+
+#             order_dish = OrderDish(
+#             order_id = order.id,
+#             dish_id = dish.id,
+#             quantity = quantity
+#             )
+#             db.session.add(order_dish)
+#             db.session.commit()
+#             return order_dish.to_dict()
+
+#     order_dish = OrderDish(
+#         order_id = order.id,
+#         dish_id = dish.id,
+#         quantity = quantity
+#         )
+#     db.session.add(order_dish)
+#     db.session.commit()
+
+#     return order_dish.to_dict()

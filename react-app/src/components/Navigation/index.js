@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import homeButtonImage from "../../imgs/homeButtonImage.png"
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -18,8 +19,8 @@ function Navigation({ isLoaded }) {
 							</div>
 						)}
 					</nav>
-					<div>
-						<NavLink exact to="/">Home</NavLink>
+					<div className='home-button'>
+						<NavLink exact to="/"><img src={homeButtonImage}/> <span style={{ fontFamily: 'Bebas Neue', fontWeight: 'bold' }}>FOODFETCH</span></NavLink>
 					</div>
 				</div>
 				<div className='nav-right'>

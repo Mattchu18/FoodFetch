@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { thunkCreateReview, thunkEditReview } from "../../store/review";
+import { thunkCreateReview, thunkEditReview,thunkUserReviews, thunkAllReviews } from "../../store/review";
 import { useModal } from "../../context/Modal";
 
 const ReviewForm = ({ review, formType, disabled }) => {
@@ -69,11 +69,15 @@ const ReviewForm = ({ review, formType, disabled }) => {
 
         if (formType === "Create Review" && !Object.keys(errors).length) {
             await dispatch(thunkCreateReview(review))
+            dispatch(thunkUserReviews())
+            dispatch(thunkAllReviews())
                 .then(closeModal)
         }
 
         if (formType === "Edit Review" && !Object.keys(errors).length) {
             await dispatch(thunkEditReview(review))
+            dispatch(thunkUserReviews())
+            dispatch(thunkAllReviews())
             .then(closeModal)
         }
 
@@ -90,6 +94,8 @@ const ReviewForm = ({ review, formType, disabled }) => {
                 {arr} Stars
             </div>
             <div>
+
+            {validationErrors.review_text ? (<p className="errors" >{validationErrors.review_text}</p>) : null}
                 <textarea
                     className="textInfo"
                     type="text"

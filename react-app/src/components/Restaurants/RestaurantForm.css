@@ -1,0 +1,101 @@
+#create-restaurant-form {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    max-width: 960px;
+    width: 100%;
+    /* border: 1px solid red; */
+}
+
+
+.question-header {
+    display: flex;
+    flex: row;
+}
+
+.question-header>h2 {
+    margin: 0;
+}
+
+.business-hours-input {
+    display: flex;
+    gap: 10px;
+}
+
+.input-select {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.input-phone {
+    width: 45%;
+}
+
+input, select {
+    width: 100%;
+    padding: 9px 0;
+    margin-bottom: 32px;
+    border: none;
+    border-bottom: 1px solid #d1d1d1;
+    background-color: field;
+    font-weight: 500;
+    font-size: 16px;
+    color: #666;
+    outline: 0px;
+}
+
+/* select{
+    padding: 9px 0;
+    margin-bottom: 32px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #666;
+} */
+
+.select-cuisine {
+
+    width: 45%;
+}
+.select-cuisine > select {
+    width: 100%;
+}
+
+.btn {
+    background-color: #57b846;
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 25px;
+    cursor: pointer;
+    color: #fff;
+    font-family: roboto,arial,helvetica neue,sans-serif;
+    border-radius: 5px;
+    border: none;
+}
+
+#mini-preview {
+    display: flex;
+    justify-content: flex-start;
+    height: 300px;
+    width: 100%;
+    border: 1px solid green;
+    background-color: lightpink;
+}
+
+.business-preview {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 30%;
+}
+
+.business-preview > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.errors {
+    color: red;
+}

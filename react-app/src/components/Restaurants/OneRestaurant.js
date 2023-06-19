@@ -4,10 +4,12 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { thunkAllRestaurantDishes } from "../../store/dish";
-import { thunkAllReviews } from "../../store/review";
+import { thunkAllReviews, thunkUserReviews } from "../../store/review";
 import OneDish from "../Dishes/OneDish";
 import OpenModalButton from "../OpenModalButton";
-
+import CreateReview from "../Reviews/CreateReview";
+import DeleteReview from "../Reviews/DeleteReview"
+import EditReview from "../Reviews/EditReview"
 import "./OneRestaurant.css"
 
 
@@ -18,11 +20,12 @@ const OneRestaurant = () => {
     const restaurant = useSelector(state => state.restaurant.singleRestaurant[restaurantId])
     const reviewsObj = useSelector(state => state.review.allReviews)
     const reviews = Object.values(reviewsObj)
+    const currUser = useSelector(state => state.session.user)
     const restaurantReviews = reviews.filter(review => review.restaurant_id === parseInt(restaurantId))
-    const restaurantDishesObj = useSelector(state => state.dish).allRestaurantDishes
+    const restaurantDishesObj = useSelector(state => state.dish.allRestaurantDishes)
     const restaurantDishes = Object.values(restaurantDishesObj)
 
-    console.log(restaurantDishes)
+    console.log("THIS IS RESTAURANTOBJ====>", restaurantDishesObj)
 
     let sum = 0
     restaurantReviews.forEach(review => {
@@ -30,6 +33,7 @@ const OneRestaurant = () => {
     })
     const averageRating = parseInt((sum / restaurantReviews.length).toFixed(1))
 
+    const reviewed = restaurantReviews.find(review => review.user_id === currUser?.id)
     /*
     //maybe push to a 404 page in the future
     if (!restaurant) {
@@ -40,26 +44,38 @@ const OneRestaurant = () => {
         dispatch(thunkOneRestaurant(restaurantId))
         dispatch(thunkAllRestaurantDishes(restaurantId))
         dispatch(thunkAllReviews())
+        dispatch(thunkUserReviews())
     }, [dispatch])
 
 
     if (!restaurant) return null
-
+    if (!restaurantDishes) return null
     return (
         <div id="restaurant-container">
+            <div id="restaurant-img-header"
+                style={{
+                    backgroundImage: ` url(${restaurant?.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    color: "white",
+                    padding: "20px"
+                }}>
+            </div>
             <div className="restaurant-details">
                 <div>
                     <h1>{restaurant.name}</h1>
-                    {Number.isInteger(averageRating) ? (<p>{averageRating} Stars and {restaurantReviews.length} ratings</p>) : (<p>Be the first to review!</p>)}
+                    {Number.isInteger(averageRating) ? (
+                        <h5>{restaurant.cuisine_type} • {averageRating} <i class="fa-solid fa-star"></i>  {restaurantReviews.length}+ ratings</h5>) : (<p>Be the first to review!</p>)}
+
                 </div>
                 <div>
-                    <p> Today's hours: {restaurant.opening_time} - {restaurant.closing_time}</p>
+                    <h5>  <i class="fa-regular fa-clock"></i> {restaurant.opening_time} - {restaurant.closing_time}</h5>
                 </div>
             </div>
 
             <div id="featured-items">
                 <div className="featured-header">
-                    <h2>Featured Items</h2>
+                    <h3>Featured Items</h3>
                     <span>arrows</span>
                 </div>
                 <div id="featured-items-carousel">
@@ -69,47 +85,64 @@ const OneRestaurant = () => {
                             // open a modal that leads to one dish showing
                             //pass in dish as prop to that component
                             <div className="featured-dish">
-                                <div>
+                                <div className="featured-dish-img">
                                     PIC
                                 </div>
                                 <OpenModalButton
                                     buttonText="Add"
-                                    modalComponent={<OneDish dish={dish}/>}
+                                    modalComponent={<OneDish dish={dish} restaurantId={restaurantId} />}
 
                                 />
-                                <span>{dish.name}</span>
+                                <div className="featured-dish-name-price">
+
+                                    <h4>{dish.name}</h4>
+                                    <span>${dish.price}</span>
+                                </div>
                             </div>
                             //pass in dish as prop to that component
                             // open a modal that leads to one dish showing
 
 
 
-                        )) : <span>This restaurant needs to add dishes!</span>}
+                        )) : <span>Dishes coming soon!</span>}
                     {/* dishes display here */}
                 </div>
             </div>
 
-            <br />
 
             <div id="restaurant-reviews">
                 <div>
-                    <h2>What people are saying</h2>
+                    <h3>What people are saying</h3>
                 </div>
                 <div>
-                    {Number.isInteger(averageRating) ? (<p>{averageRating} Stars and {restaurantReviews.length} ratings</p>) : (<p>Be the first to review!</p>)}
+                    {Number.isInteger(averageRating) ? (
+                        <div>
+                            <strong>{averageRating} <i class="fa-solid fa-star"></i></strong> <span>{restaurantReviews.length}+ ratings</span>
+                        </div>) : (<h4>Be the first to review!</h4>)}
                 </div>
-                <div>
+
+                {!reviewed && currUser ? (<div>
+                    <OpenModalButton
+                        buttonText={"Submit a review!"}
+                        modalComponent={<CreateReview restaurantId={restaurantId} />} />
+                </div>) : null}
+
+
+
+                <div className="review-container">
                     {restaurantReviews.length ? (
                         restaurantReviews.map(review => (
-                            <div className="review-container">
+                            <div>
                                 <div>
                                     <p>{review.username}</p>
                                 </div>
                                 <div>
-                                    <p>{review.rating} stars</p>
+                                    <p>{review.rating} <i class="fa-solid fa-star"></i></p>
                                     <p>{review.created_at}</p>
                                     <p>{review.review_text}</p>
                                 </div>
+                                {review.user_id === currUser?.id ? (<OpenModalButton buttonText="Delete Review" modalComponent={<DeleteReview review={review} />} />) : null}
+                                {review.user_id === currUser?.id ? (<OpenModalButton buttonText="Edit Review" modalComponent={<EditReview review={review} />} />) : null}
                             </div>
                         ))
                     ) : null}
