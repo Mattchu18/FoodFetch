@@ -22,8 +22,9 @@
     justify-content: space-between;
     margin-bottom: 3rem;
 }
-.order-heading > h1 {
-    margin:0;
+
+.order-heading>h1 {
+    margin: 0;
 
 }
 
@@ -43,12 +44,22 @@
 .order-restaurant-image {
     height: 100%;
     width: 175px;
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+
+.order-restaurant-image>img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
 }
 
 .restaurant-order-details {
     width: 100%;
 }
 
-#order-container > h2 {
-    margin: 1rem 0 ;
+#order-container>h2 {
+    margin: 1rem 0;
 }

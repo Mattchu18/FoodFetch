@@ -24,7 +24,8 @@ const OrderHistory = () => {
         filteredRestaurants.forEach(restaurant => {
             order["restaurantName"] = restaurant.name
             order["restaurantAddress"] = restaurant.address
-            // console.log("this is orders!!", order)
+            order["restaurantImage"] = restaurant.image
+                 // console.log("this is orders!!", order)
 
             // userOrdersArr.push(order)
         })
@@ -49,34 +50,34 @@ const OrderHistory = () => {
                     {userOrders.map(order => (
                         <div id="order-container">
                             <div className="order-restaurant-image">
-                                <span>PIC</span>
+                                <img src={order.restaurantImage}/>
                             </div>
                             <div className="restaurant-order-details">
 
-                            <div>
-                                <span>Order #{order.id}</span>
-                            </div>
+                                <div>
+                                    <span>Order #{order.id}</span>
+                                </div>
 
-                            <h2>{order.restaurantName}</h2>
+                                <h2>{order.restaurantName}</h2>
 
-                            <div>
-                                <span>
-                                    Order placed at {order.created_at}
-                                </span>
-                            </div>
+                                <div>
+                                    <span>
+                                        Order placed at {order.created_at}
+                                    </span>
+                                </div>
 
-                            <div>
-                                <span>Pickup </span>
-                                <span>{order.restaurantAddress}</span>
-                            </div>
-                            <div>
-                                <span>Pickup time {order.pick_up}</span>
-                            </div>
+                                <div>
+                                    <span>Pickup </span>
+                                    <span>{order.restaurantAddress}</span>
+                                </div>
+                                <div>
+                                    <span>Pickup time {order.pick_up}</span>
+                                </div>
                             </div>
                             <OpenModalButton
-                            disabled={order.time_difference || order.edited}
-                            buttonText="Cancel Order"
-                            modalComponent={<DeleteOrder order={order}/>}
+                                disabled={order.time_difference || order.edited}
+                                buttonText="Cancel Order"
+                                modalComponent={<DeleteOrder order={order} />}
                             />
                         </div>
                     ))}

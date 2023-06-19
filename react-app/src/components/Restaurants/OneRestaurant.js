@@ -54,12 +54,15 @@ const OneRestaurant = () => {
         <div id="restaurant-container">
             <div id="restaurant-img-header"
                 style={{
-                    backgroundImage: ` url(${restaurant?.image})`,
+                    backgroundImage: ` url(${restaurant?.header_image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     color: "white",
-                    padding: "20px"
+                    // padding: "20px"
                 }}>
+                    <div className="restaurant-image">
+                        <img src={restaurant.image}/>
+                    </div>
             </div>
             <div className="restaurant-details">
                 <div>
