@@ -34,7 +34,6 @@ const Home = () => {
     })
 
 
-    console.log("this is topratedarr ===========>", topRatedArr)
     useEffect(() => {
         dispatch(thunkAllRestaurants())
         dispatch(thunkAllReviews())
@@ -69,12 +68,11 @@ const Home = () => {
                             <div className="top-restaurant-container">
                                 <Link to={`/restaurants/${restaurant.id}`}>
                                     <div className="top-restaurant-pic">
-                                       {console.log("THIS MY CONSOLELOG====> ",restaurant.image)}
-                                        <img src={restaurant.image}/>
+                                        <img src={restaurant.image} />
                                     </div>
                                     <div className="top-restaurant-name-rating">
                                         <span>{restaurant.name}</span>
-                                        <br/>
+                                        <br />
                                         <span>{restaurant.averageRating} <i class="fa-solid fa-star"></i> ({restaurant.reviewCount})</span>
                                     </div>
                                 </Link>
@@ -83,6 +81,31 @@ const Home = () => {
 
                     </div>
 
+                </div>
+
+                <div id="promo-container">
+                    <div className="promo-header">
+                        <h2>All Restaurants</h2>
+                        <span> arrows</span>
+                    </div>
+
+
+                    <div className="promo-featured-container">
+                        {allRestaurants.map(restaurant => (
+                            <div className="top-restaurant-container">
+                                <Link to={`/restaurants/${restaurant.id}`}>
+                                    <div className="top-restaurant-pic">
+                                        <img src={restaurant.image} />
+                                    </div>
+                                    <div className="top-restaurant-name-rating">
+                                        <span>{restaurant.name}</span>
+                                        <br />
+                                        <span>{restaurant.averageRating} <i class="fa-solid fa-star"></i> ({restaurant.reviewCount})</span>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
