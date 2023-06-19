@@ -60,9 +60,9 @@ const OneRestaurant = () => {
                     color: "white",
                     // padding: "20px"
                 }}>
-                    <div className="restaurant-image">
-                        <img src={restaurant.image}/>
-                    </div>
+                <div className="restaurant-image">
+                    <img src={restaurant.image} />
+                </div>
             </div>
             <div className="restaurant-details">
                 <div>
@@ -135,17 +135,28 @@ const OneRestaurant = () => {
                 <div className="review-container">
                     {restaurantReviews.length ? (
                         restaurantReviews.map(review => (
-                            <div>
-                                <div>
+                            <div className="review--container">
+                                <div className="review-user-details">
                                     <p>{review.username}</p>
-                                </div>
-                                <div>
+                                    <div className="review-rating-created">
                                     <p>{review.rating} <i class="fa-solid fa-star"></i></p>
                                     <p>{review.created_at}</p>
+                                        </div>
+                                </div>
+                                <div className="review_text">
                                     <p>{review.review_text}</p>
                                 </div>
-                                {review.user_id === currUser?.id ? (<OpenModalButton buttonText="Delete Review" modalComponent={<DeleteReview review={review} />} />) : null}
-                                {review.user_id === currUser?.id ? (<OpenModalButton buttonText="Edit Review" modalComponent={<EditReview review={review} />} />) : null}
+                                <div className="review-btns-container">
+                                    {review.user_id === currUser?.id ?
+                                        (<div className="user-review-btn">
+                                            <OpenModalButton buttonText="Delete Review" modalComponent={<DeleteReview review={review} />} />
+                                        </div>
+                                        ) : null}
+                                    {review.user_id === currUser?.id ?
+                                        (<div className="user-review-btn">
+                                            <OpenModalButton buttonText="Edit Review" modalComponent={<EditReview review={review} />} />
+                                        </div>) : null}
+                                </div>
                             </div>
                         ))
                     ) : null}

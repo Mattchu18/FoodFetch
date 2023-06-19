@@ -40,7 +40,14 @@ const editDish = (dish) => ({
 // export const thunkOneDish = (dishId) => {
 
 // }
+export const thunkAllDishes = () => async (dispatch) => {
+    const response = await fetch('/api/dishes/all')
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(getAllDishes(data))
+    }
 
+}
 
 export const thunkAllRestaurantDishes = (restaurantId) => async (dispatch) => {
     const response = await fetch(`/api/restaurants/${restaurantId}/dishes`)
@@ -51,9 +58,20 @@ export const thunkAllRestaurantDishes = (restaurantId) => async (dispatch) => {
 }
 
 
-const initialState = { allRestaurantDishes: {} }
+const initialState = { allDishes: {}, allRestaurantDishes: {} }
 const dishReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_ALL_DISHES: {
+            const newState = {}
+            const allDishes = action.dishes
+            allDishes.forEach(dish => {
+                newState[dish.id] = dish
+            })
+            return {
+                ...state,
+                allDishes: newState
+            }
+        }
         case GET_ALL_RESTAURANT_DISHES: {
             const newState = {}
             const allRestaurantDishes = action.dishes
