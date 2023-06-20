@@ -10,13 +10,16 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+	const [phone_number, setPhone_number] = useState("");
+	const [restaurant_owner, setRestaurant_owner] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
+			const data = await dispatch(signUp(username, email, phone_number,
+				restaurant_owner, password));
 			if (data) {
 				setErrors(data);
 			} else {
@@ -57,6 +60,28 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
+					Phone Number
+					<input type="tel"
+						maxLength="12"
+						minLength="12"
+						pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+						value={phone_number}
+						placeholder="ex: 123-456-7890"
+						onChange={e => setPhone_number(e.target.value)}
+					/>
+				</label>
+				<label>
+					Are you a Restaurant Owner?
+					<input
+						type="checkbox"
+						id="owner"
+						value={true}
+						onChange={(e) => setRestaurant_owner(e.target.value)}
+					>
+
+					</input>
+				</label>
+				<label>
 					Password
 					<input
 						type="password"
@@ -76,7 +101,7 @@ function SignupFormModal() {
 				</label>
 				<div className="signup-btn">
 
-				<button type="submit">Sign Up</button>
+					<button type="submit">Sign Up</button>
 				</div>
 			</form>
 		</div>

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import { thunkAllRestaurantDishes } from "../../store/dish";
 import { thunkAllReviews, thunkUserReviews } from "../../store/review";
 import OneDish from "../Dishes/OneDish";
@@ -40,6 +42,14 @@ const OneRestaurant = () => {
         history.push("/")
     }
     */
+    const responsive = {
+
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items:5
+        }
+    }
+
     useEffect(() => {
         dispatch(thunkOneRestaurant(restaurantId))
         dispatch(thunkAllRestaurantDishes(restaurantId))
@@ -48,18 +58,23 @@ const OneRestaurant = () => {
     }, [dispatch])
 
 
+
+
     if (!restaurant) return null
     if (!restaurantDishes) return null
     return (
         <div id="restaurant-container">
             <div id="restaurant-img-header"
                 style={{
-                    backgroundImage: ` url(${restaurant?.image})`,
+                    backgroundImage: ` url(${restaurant?.header_image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     color: "white",
-                    padding: "20px"
+                    // padding: "20px"
                 }}>
+                <div className="restaurant-image">
+                    <img src={restaurant.image} />
+                </div>
             </div>
             <div className="restaurant-details">
                 <div>
@@ -78,35 +93,50 @@ const OneRestaurant = () => {
                     <h3>Featured Items</h3>
                     <span>arrows</span>
                 </div>
-                <div id="featured-items-carousel">
-                    {restaurantDishes.length > 0 ?
-                        restaurantDishes.map(dish => (
+                {/* <div id="featured-items-carousel"> */}
+                    <Carousel swipeable={false}
+                        draggable={false}
+                        showDots={false}
+                        responsive={responsive}
+                        ssr={true} // means to render carousel on server-side.
+                        infinite={true}
+                        autoPlay={false}
+                        autoPlaySpeed={1000}
+                        keyBoardControl={true}
+                        customTransition="transform 400ms ease-in-out"
+                        transitionDuration={1000}
+                        slidesToSlide={1}
+                        containerClass="carousel-container"
+                        removeArrowOnDeviceType={["tablet", "mobile"]}
+                        dotListClass="custom-dot-list-style"
+                        itemClass="carousel-item-padding-40-px">
+                        {restaurantDishes.length > 0 ?
+                            restaurantDishes.map(dish => (
+                                <div className="featured-dish">
 
-                            // open a modal that leads to one dish showing
-                            //pass in dish as prop to that component
-                            <div className="featured-dish">
-                                <div className="featured-dish-img">
-                                    PIC
+
+
+                                    <div className="featured-dish-img">
+                                        <img src={dish.dish_image} />
+                                    </div>
+
+                                    <OpenModalButton
+                                        buttonText="Add"
+                                        modalComponent={<OneDish dish={dish} restaurantId={restaurantId} />}
+
+                                    />
+                                    <div className="featured-dish-name-price">
+
+                                        <h4>{dish.name}</h4>
+                                        <span>${dish.price}</span>
+                                    </div>
                                 </div>
-                                <OpenModalButton
-                                    buttonText="Add"
-                                    modalComponent={<OneDish dish={dish} restaurantId={restaurantId} />}
 
-                                />
-                                <div className="featured-dish-name-price">
+                            )) : <span>Dishes coming soon!</span>}
+                    </Carousel>
 
-                                    <h4>{dish.name}</h4>
-                                    <span>${dish.price}</span>
-                                </div>
-                            </div>
-                            //pass in dish as prop to that component
-                            // open a modal that leads to one dish showing
-
-
-
-                        )) : <span>Dishes coming soon!</span>}
                     {/* dishes display here */}
-                </div>
+                {/* </div> */}
             </div>
 
 
@@ -132,17 +162,70 @@ const OneRestaurant = () => {
                 <div className="review-container">
                     {restaurantReviews.length ? (
                         restaurantReviews.map(review => (
-                            <div>
-                                <div>
+                            <div className="review--container">
+                                <div className="review-user-details">
                                     <p>{review.username}</p>
+                                    <div className="review-rating-created">
+                                        {review.rating == 5 ? (<span>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                        </span>) : null}
+
+                                        {review.rating == 4 ? (<span>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        </span>) : null}
+
+                                        {review.rating == 3 ? (<span>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+
+                                        </span>) : null}
+
+                                        {review.rating == 2 ? (<span>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+
+                                        </span>) : null}
+
+                                        {review.rating == 1 ? (<span>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+
+                                        </span>) : null}
+
+                                        <p>{review.created_at}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p>{review.rating} <i class="fa-solid fa-star"></i></p>
-                                    <p>{review.created_at}</p>
+                                <div className="review_text">
                                     <p>{review.review_text}</p>
                                 </div>
-                                {review.user_id === currUser?.id ? (<OpenModalButton buttonText="Delete Review" modalComponent={<DeleteReview review={review} />} />) : null}
-                                {review.user_id === currUser?.id ? (<OpenModalButton buttonText="Edit Review" modalComponent={<EditReview review={review} />} />) : null}
+                                <div className="review-btns-container">
+                                    {review.user_id === currUser?.id ?
+                                        (<div className="user-review-btn">
+                                            <OpenModalButton buttonText="Delete Review" modalComponent={<DeleteReview review={review} />} />
+                                        </div>
+                                        ) : null}
+                                    {review.user_id === currUser?.id ?
+                                        (<div className="user-review-btn">
+                                            <OpenModalButton buttonText="Edit Review" modalComponent={<EditReview review={review} />} />
+                                        </div>) : null}
+                                </div>
                             </div>
                         ))
                     ) : null}

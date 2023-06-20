@@ -65,7 +65,8 @@ function ProfileButton({ user }) {
                 <i class="fa-regular fa-circle-user"></i>
 
                   <span>Account</span>
-
+                  <br/>
+                  <span>{user.username}</span>
 
               </div>
             </Link>

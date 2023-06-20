@@ -22,33 +22,90 @@
     justify-content: space-between;
     margin-bottom: 3rem;
 }
-.order-heading > h1 {
-    margin:0;
+
+.order-heading>h1 {
+    margin: 0;
 
 }
 
 #all-user-order-container {
     display: flex;
     flex-direction: column;
-
+    gap: 10px;
+    /* background-color: lightgrey; */
 }
 
 #order-container {
     display: flex;
     flex-direction: row;
-    border: 1px dashed blue;
+    border: 1px solid lightgrey;
     height: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px lightgrey;
 }
 
 .order-restaurant-image {
+    height: 145px;
+    width: 145px;
+    /* border-radius: 50%; */
+    overflow: hidden;
+    /* position: absolute; */
+    /* transform: translateX(-10%); */
+    /* top: 175px;
+    left: 20px; */
+    box-shadow: 1px 1px 3px grey;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+
+.order-restaurant-image>img {
     height: 100%;
-    width: 175px;
+    width: 100%;
+    transform: scale(1.05)
 }
 
 .restaurant-order-details {
-    width: 100%;
+    width: 600px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
-#order-container > h2 {
-    margin: 1rem 0 ;
+.restaurant-order-details > a {
+    text-decoration: none;
+    width: fit-content;
+}
+
+#order-container>h2 {
+    margin: 1rem 0;
+}
+
+
+.order-history-btn {
+    display: flex;
+    max-width: 150px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.order-history-btn>button {
+    background-color: #ff3008;
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 25px;
+    cursor: pointer;
+    color: #fff;
+    font-family: roboto, arial, helvetica neue, sans-serif;
+    border-radius: 5px;
+    border: none;
+}
+
+
+button:disabled,
+button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
 }

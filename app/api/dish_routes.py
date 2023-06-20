@@ -22,6 +22,17 @@ def get_one_dish(id):
     return one_dish.to_dict()
 
 
+@dish_routes.route('/all')
+def get_all_dishes():
+    '''
+    Gets all dishes
+    '''
+    all_dishes_obj = Dish.query.all()
+    all_dishes = [dish.to_dict() for dish in all_dishes_obj]
+
+    print("this is ALL_DISHES=======> ", all_dishes)
+    return all_dishes
+
 @dish_routes.route('/<int:id>/cart/add', methods=["POST"])
 @login_required
 def add_to_cart(id):

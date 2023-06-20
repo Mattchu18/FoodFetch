@@ -38,6 +38,8 @@ function App() {
           <Route exact path="/restaurants/:restaurantId" component={OneRestaurant}/>
           <Route exact path="/cart" component={Cart}/>
 
+
+
         </Switch>
       )}
     </>

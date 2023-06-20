@@ -38,7 +38,7 @@ const UserRestaurants = () => {
                         {userRestaurants.map(restaurant => (
                             <div className="business-manage-card"
                                 style={{
-                                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${restaurant?.image})`,
+                                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${restaurant?.header_image})`,
                                     backgroundSize: "cover",
                                     backgroundPosition: "center",
                                     color: "white",
