@@ -72,7 +72,22 @@ h5 {
 .featured-dish {
     width: 150px;
     height: 250px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+}
+
+.featured-dish-img {
+    height: 150px;
+    width: 150px;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+    box-shadow: 1px 1px 3px lightgrey;
+    overflow: hidden;
+}
+
+.featured-dish-img>img {
+    height: 100%;
+    width: 100%;
+    transform: scale(1.05)
 }
 
 .featured-dish-name-price {
@@ -103,13 +118,7 @@ h5 {
     cursor: pointer;
 }
 
-.featured-dish-img {
-    height: 150px;
-    width: 150px;
-    border: 1px solid lightgrey;
-    border-radius: 15px;
-    box-shadow: 1px 1px 3px lightgrey;
-}
+
 
 #restaurant-reviews {
     display: flex;

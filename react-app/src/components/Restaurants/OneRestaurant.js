@@ -89,7 +89,7 @@ const OneRestaurant = () => {
                             //pass in dish as prop to that component
                             <div className="featured-dish">
                                 <div className="featured-dish-img">
-                                    PIC
+                                    <img src={dish.dish_image}/>
                                 </div>
 
                                 <OpenModalButton
