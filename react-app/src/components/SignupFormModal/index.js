@@ -21,28 +21,30 @@ function SignupFormModal() {
 			const data = await dispatch(signUp(username, email, phone_number,
 				restaurant_owner, password));
 			if (data) {
+
+				console.log("this is data for errors! =====>", data)
 				setErrors(data);
 			} else {
 				closeModal();
 			}
 		} else {
 			setErrors([
-				"Confirm Password field must be the same as the Password field",
+				"password: Confirm Password field must be the same as the Password field",
 			]);
 		}
 	};
 
 	return (
-		<div>
+		<div id="sign-up-modal">
 			<h1>Sign Up</h1>
 			<form onSubmit={handleSubmit}>
 				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
+					{errors?.map((error, idx) => (
+						<p className="errors" key={idx}>{error?.split(":")[1]?.trim()}</p>
 					))}
 				</ul>
 				<label>
-					Email
+					Email <span className="required">* required</span>
 					<input
 						type="text"
 						value={email}
@@ -51,7 +53,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Username
+					Username <span className="required">* required</span>
 					<input
 						type="text"
 						value={username}
@@ -60,7 +62,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Phone Number
+					Phone Number <span className="required">* required</span>
 					<input type="tel"
 						maxLength="12"
 						minLength="12"
@@ -70,19 +72,17 @@ function SignupFormModal() {
 						onChange={e => setPhone_number(e.target.value)}
 					/>
 				</label>
-				<label>
-					Are you a Restaurant Owner?
+				<div className="owner"><span>Are you a Restaurant Owner?  (optional)</span>
 					<input
 						type="checkbox"
-						id="owner"
 						value={true}
 						onChange={(e) => setRestaurant_owner(e.target.value)}
 					>
-
 					</input>
-				</label>
+				</div>
+
 				<label>
-					Password
+					Password <span className="required">* required</span>
 					<input
 						type="password"
 						value={password}
@@ -91,7 +91,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Confirm Password
+					Confirm Password <span className="required">* required</span>
 					<input
 						type="password"
 						value={confirmPassword}

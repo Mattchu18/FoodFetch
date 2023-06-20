@@ -1,3 +1,10 @@
+#sign-up-modal {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 100%;
+}
+
 .signup-btn {
     width: 100%;
     display: flex;
@@ -14,4 +21,24 @@
     font-family: roboto,arial,helvetica neue,sans-serif;
     border-radius: 5px;
     border: none;
+}
+
+.owner {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
+.owner > span {
+    display: flex;
+    width: fit-content;
+}
+.owner > input{
+    width: fit-content;
+    width: 24px;
+}
+
+
+.required {
+    color: red;
 }

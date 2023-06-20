@@ -36,10 +36,6 @@
     transform: scale(1.05)
 }
 
-.restaurant-details {
-    /* border: 2px solid red; */
-}
-
 h5 {
     color: grey;
 }
@@ -70,7 +66,7 @@ h5 {
 }
 
 
-  .carousel-container .react-multiple-carousel__arrow {
+.carousel-container .react-multiple-carousel__arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-20%);
@@ -79,18 +75,18 @@ h5 {
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
 
-  .carousel-container .react-multiple-carousel__arrow:hover {
+.carousel-container .react-multiple-carousel__arrow:hover {
     background-color: #2b2b2bec;
-  }
+}
 
 .carousel-container .react-multiple-carousel__arrow--left {
-  left: 0px;
+    left: 0px;
 }
 
 .carousel-container .react-multiple-carousel__arrow--right {
-  right: 0px;
+    right: 0px;
 }
 
 .featured-dish {
@@ -187,8 +183,8 @@ strong>i {
 }
 
 
-.review-user-details > p{
-margin: 0;
+.review-user-details>p {
+    margin: 0;
 
 }
 
@@ -202,24 +198,23 @@ margin: 0;
     margin-top: 10px;
 }
 
-.review-rating-created > span,
-.review-rating-created > p{
+.review-rating-created>span,
+.review-rating-created>p {
     color: rgb(74, 74, 74);
 }
 
 
-.review-rating-created > p {
+.review-rating-created>p {
     margin: 0;
 }
 
 .review_text {
-    overflow: scroll;
+    overflow-y: scroll;
     word-wrap: break-word;
-
 }
 
 
-.review_text > p{
+.review_text>p {
     margin-top: 5px;
 }
 

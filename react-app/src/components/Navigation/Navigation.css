@@ -78,7 +78,7 @@ button.bars {
   display: flex;
   position: absolute;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   padding: 0;
   width: 325px;
   top: -15px;

@@ -14,6 +14,9 @@ import "./UserRestaurants.css"
 
 const UserRestaurants = () => {
     const dispatch = useDispatch()
+    const user = useSelector(state => state.session.user)
+
+    console.log("this is user====> ", user)
     const userRestaurantsObj = useSelector(state => state.restaurant.currentUserRestaurants)
     const userRestaurants = Object.values(userRestaurantsObj)
     console.log("This is in UserRestaurants======>", userRestaurants)
@@ -23,6 +26,8 @@ const UserRestaurants = () => {
         // dispatch(thunkAllReviews())
     }, [dispatch])
 
+if (user?.restaurant_owner === false || !user) return "Please log in as a Restaurant Owner to view this feature"
+    // if (!userRestaurants.length) return "Please log in as a Restaurant Owner to view this feature"
     return (
         <div id="user-business-page">
             <div className="center">

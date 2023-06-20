@@ -15,6 +15,8 @@ import './OrderHistory.css'
 
 const OrderHistory = () => {
     const dispatch = useDispatch()
+    const user = useSelector(state => state.session.user)
+
     const userOrdersObj = useSelector(state => state.order.currentUserOrders)
     const userOrders = Object.values(userOrdersObj)
 
@@ -51,7 +53,7 @@ const OrderHistory = () => {
     }, [dispatch])
 
 
-
+    if (!user) return "Please log in to view this feature"
     if (!userOrders || !Array.isArray(userOrders)) return null;
     if (!userOrderDishes || !Array.isArray(userOrderDishes)) return null;
     if (!allDishes || !Array.isArray(allDishes)) return null;

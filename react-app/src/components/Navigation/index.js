@@ -14,7 +14,7 @@ function Navigation({ isLoaded }) {
 				<div className='nav-left'>
 					<nav>
 						{isLoaded && (
-							<div>
+							<div className='profile-dropdown-div'>
 								<ProfileButton user={sessionUser} />
 							</div>
 						)}

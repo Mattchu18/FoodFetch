@@ -30,7 +30,7 @@
 }
 
 .input-phone {
-    width: 45%;
+    width: 70%;
 }
 
 input, select {
@@ -56,7 +56,7 @@ input, select {
 
 .select-cuisine {
 
-    width: 45%;
+    width: 25%;
 }
 .select-cuisine > select {
     width: 100%;
