@@ -46,7 +46,7 @@ const OneRestaurant = () => {
 
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
-            items:5
+            items: 5
         }
     }
 
@@ -94,48 +94,48 @@ const OneRestaurant = () => {
                     <span>arrows</span>
                 </div>
                 {/* <div id="featured-items-carousel"> */}
-                    <Carousel swipeable={false}
-                        draggable={false}
-                        showDots={false}
-                        responsive={responsive}
-                        ssr={true} // means to render carousel on server-side.
-                        infinite={true}
-                        autoPlay={false}
-                        autoPlaySpeed={1000}
-                        keyBoardControl={true}
-                        customTransition="transform 400ms ease-in-out"
-                        transitionDuration={1000}
-                        slidesToSlide={1}
-                        containerClass="carousel-container"
-                        removeArrowOnDeviceType={["tablet", "mobile"]}
-                        dotListClass="custom-dot-list-style"
-                        itemClass="carousel-item-padding-40-px">
-                        {restaurantDishes.length > 0 ?
-                            restaurantDishes.map(dish => (
-                                <div className="featured-dish">
+                <Carousel swipeable={false}
+                    draggable={false}
+                    showDots={false}
+                    responsive={responsive}
+                    ssr={true} // means to render carousel on server-side.
+                    infinite={true}
+                    autoPlay={false}
+                    autoPlaySpeed={1000}
+                    keyBoardControl={true}
+                    customTransition="transform 400ms ease-in-out"
+                    transitionDuration={1000}
+                    slidesToSlide={1}
+                    containerClass="carousel-container"
+                    removeArrowOnDeviceType={["tablet", "mobile"]}
+                    dotListClass="custom-dot-list-style"
+                    itemClass="carousel-item-padding-40-px">
+                    {restaurantDishes.length > 0 ?
+                        restaurantDishes.map(dish => (
+                            <div className="featured-dish">
 
 
 
-                                    <div className="featured-dish-img">
-                                        <img src={dish.dish_image} />
-                                    </div>
-
-                                    <OpenModalButton
-                                        buttonText="Add"
-                                        modalComponent={<OneDish dish={dish} restaurantId={restaurantId} />}
-
-                                    />
-                                    <div className="featured-dish-name-price">
-
-                                        <h4>{dish.name}</h4>
-                                        <span>${dish.price}</span>
-                                    </div>
+                                <div className="featured-dish-img">
+                                    <img src={dish.dish_image} />
                                 </div>
 
-                            )) : <span>Dishes coming soon!</span>}
-                    </Carousel>
+                                <OpenModalButton
+                                    buttonText="Add"
+                                    modalComponent={<OneDish dish={dish} restaurantId={restaurantId} />}
 
-                    {/* dishes display here */}
+                                />
+                                <div className="featured-dish-name-price">
+
+                                    <h4>{dish.name}</h4>
+                                    <span>${dish.price}</span>
+                                </div>
+                            </div>
+
+                        )) : <span>Dishes coming soon!</span>}
+                </Carousel>
+
+                {/* dishes display here */}
                 {/* </div> */}
             </div>
 
@@ -144,14 +144,14 @@ const OneRestaurant = () => {
                 <div>
                     <h3>What people are saying</h3>
                 </div>
-                <div>
+                <div className="review-overall-rating">
                     {Number.isInteger(averageRating) ? (
                         <div>
-                            <strong>{averageRating} <i class="fa-solid fa-star"></i></strong> <span>{restaurantReviews.length}+ ratings</span>
+                            <strong>{averageRating} <i class="fa-solid fa-star"></i></strong> <span>{restaurantReviews.length ? (`${restaurantReviews.length}+ ratings`) : ("0 ratings")}</span>
                         </div>) : (<h4>Be the first to review!</h4>)}
                 </div>
 
-                {!reviewed && currUser ? (<div>
+                {!reviewed && currUser ? (<div className="user-review-btn">
                     <OpenModalButton
                         buttonText={"Submit a review!"}
                         modalComponent={<CreateReview restaurantId={restaurantId} />} />
@@ -165,6 +165,7 @@ const OneRestaurant = () => {
                             <div className="review--container">
                                 <div className="review-user-details">
                                     <p>{review.username}</p>
+                                </div>
                                     <div className="review-rating-created">
                                         {review.rating == 5 ? (<span>
                                             <i class="fa-solid fa-star"></i>
@@ -211,7 +212,6 @@ const OneRestaurant = () => {
 
                                         <p>{review.created_at}</p>
                                     </div>
-                                </div>
                                 <div className="review_text">
                                     <p>{review.review_text}</p>
                                 </div>

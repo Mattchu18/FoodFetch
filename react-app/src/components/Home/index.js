@@ -3,6 +3,8 @@ import { thunkAllRestaurants } from "../../store/restaurant"
 import { thunkAllReviews } from "../../store/review"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import "./index.css"
 
 const cuisineTypeArr = ["American", "Filipino", "Chinese", "Italian", "Korean", "Mediterranean", "Vietnamese", "Peruvian", "Nepalese", "Indian"]
@@ -44,6 +46,7 @@ const Home = () => {
         <div id="home-center">
             <div id="home-container">
                 <div id="cuisine-container">
+
                     {cuisineTypeArr.map(cuisine => (
                         <div id="cuisine-types">
                             <div className="icon">

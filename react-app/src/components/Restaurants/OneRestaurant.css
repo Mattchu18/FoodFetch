@@ -149,6 +149,14 @@ h5 {
     flex-direction: column;
 }
 
+.review-overall-rating {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
+
+    ;
+}
+
 strong>i {
     color: goldenrod
 }
@@ -191,6 +199,7 @@ margin: 0;
     font-size: smaller;
     width: 100%;
     gap: 5px;
+    margin-top: 10px;
 }
 
 .review-rating-created > span,
@@ -210,6 +219,9 @@ margin: 0;
 }
 
 
+.review_text > p{
+    margin-top: 5px;
+}
 
 .review-buttons {
     background-color: red;
