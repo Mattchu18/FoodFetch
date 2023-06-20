@@ -90,17 +90,25 @@ h5 {
     left: 90px;
     bottom: 40px;
     border-radius: 10px;
+    box-shadow: 1px 1px 3px lightgrey;
     scale: 120%;
     background-color: white;
-    border: none;
+    border: 1px solid lightgrey;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.featured-dish>button:hover {
+    transform: scale(105%);
+    box-shadow: 2px 2px 6px lightgrey;
+    cursor: pointer;
 }
 
 .featured-dish-img {
     height: 150px;
     width: 150px;
-    border: 1px solid green;
+    border: 1px solid lightgrey;
     border-radius: 15px;
-    background-color: lightgreen;
+    box-shadow: 1px 1px 3px lightgrey;
 }
 
 #restaurant-reviews {
@@ -113,21 +121,30 @@ strong>i {
 }
 
 .review-container {
-    border: 1px solid lightgrey;
+    /* border: 1px solid lightgrey; */
     width: 100%;
     border-radius: 15px;
     display: flex;
     flex-direction: row;
     height: 250px;
+    gap: 10px;
 }
 
 .review--container {
-    border: 1px solid red;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px lightgrey;
     display: flex;
     flex-direction: column;
     padding: 10px;
-    width: 300px
+    width: 315px
 }
+
+
+.review-user-details {
+    width: 100%;
+}
+
 
 .review-user-details > p{
 margin: 0;
@@ -137,7 +154,20 @@ margin: 0;
 .review-rating-created {
     display: flex;
     flex-direction: row;
-    gap:5px
+    justify-content: flex-start;
+    font-size: smaller;
+    width: 100%;
+    gap: 5px;
+}
+
+.review-rating-created > span,
+.review-rating-created > p{
+    color: rgb(74, 74, 74);
+}
+
+
+.review-rating-created > p {
+    margin: 0;
 }
 
 .review_text {
@@ -145,6 +175,8 @@ margin: 0;
     word-wrap: break-word;
 
 }
+
+
 
 .review-buttons {
     background-color: red;

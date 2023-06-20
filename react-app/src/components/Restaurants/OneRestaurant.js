@@ -91,6 +91,7 @@ const OneRestaurant = () => {
                                 <div className="featured-dish-img">
                                     PIC
                                 </div>
+
                                 <OpenModalButton
                                     buttonText="Add"
                                     modalComponent={<OneDish dish={dish} restaurantId={restaurantId} />}
@@ -139,9 +140,51 @@ const OneRestaurant = () => {
                                 <div className="review-user-details">
                                     <p>{review.username}</p>
                                     <div className="review-rating-created">
-                                    <p>{review.rating} <i class="fa-solid fa-star"></i></p>
-                                    <p>{review.created_at}</p>
-                                        </div>
+                                        {review.rating == 5 ? (<span>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                        </span>) : null}
+
+                                        {review.rating == 4 ? (<span>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        </span>) : null}
+
+                                        {review.rating == 3 ? (<span>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+
+                                        </span>) : null}
+
+                                        {review.rating == 2 ? (<span>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+
+                                        </span>) : null}
+
+                                        {review.rating == 1 ? (<span>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+
+                                        </span>) : null}
+
+                                        <p>{review.created_at}</p>
+                                    </div>
                                 </div>
                                 <div className="review_text">
                                     <p>{review.review_text}</p>
