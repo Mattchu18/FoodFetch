@@ -71,9 +71,8 @@ const Home = () => {
                                         <img src={restaurant.header_image} />
                                     </div>
                                     <div className="top-restaurant-name-rating">
-                                        <span>{restaurant.name}</span>
-                                        <br />
-                                        <span>{restaurant.averageRating} <i class="fa-solid fa-star"></i> ({restaurant.reviewCount})</span>
+                                        <strong>{restaurant.name}</strong>
+                                        <p className="grey-text">{restaurant.averageRating} <i class="fa-solid fa-star"/>  ({restaurant.reviewCount}+ reviews)</p>
                                     </div>
                                 </Link>
                             </div>
@@ -98,9 +97,8 @@ const Home = () => {
                                         <img src={restaurant.header_image} />
                                     </div>
                                     <div className="top-restaurant-name-rating">
-                                        <span>{restaurant.name}</span>
-                                        <br />
-                                        <span>{restaurant.averageRating} <i class="fa-solid fa-star"></i> ({restaurant.reviewCount})</span>
+                                        <strong>{restaurant.name}</strong>
+                                        <p className="grey-text">{restaurant.averageRating} <i class="fa-solid fa-star"/>  ({restaurant.reviewCount}+ reviews)</p>
                                     </div>
                                 </Link>
                             </div>
