@@ -27,9 +27,9 @@ def get_user_order_dishes():
     '''
     Gets all user order dishes
     '''
-    users_orders_obj = Order.query.filter(Order.user_id == current_user.id).all()
-    if not users_orders_obj:
-        return {"message": f"User {current_user.id} does not have any orders"}
+    # users_orders_obj = Order.query.filter(Order.user_id == current_user.id).all()
+    # if not users_orders_obj:
+    #     return {"message": f"User {current_user.id} does not have any orders"}
 
     user_order_dishes_obj = OrderDish.query.all()
     user_order_dishes = [order_dish.to_dict() for order_dish in user_order_dishes_obj]

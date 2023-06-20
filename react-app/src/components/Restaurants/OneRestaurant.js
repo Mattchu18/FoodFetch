@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import { thunkAllRestaurantDishes } from "../../store/dish";
 import { thunkAllReviews, thunkUserReviews } from "../../store/review";
 import OneDish from "../Dishes/OneDish";
@@ -40,12 +42,22 @@ const OneRestaurant = () => {
         history.push("/")
     }
     */
+    const responsive = {
+
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items:5
+        }
+    }
+
     useEffect(() => {
         dispatch(thunkOneRestaurant(restaurantId))
         dispatch(thunkAllRestaurantDishes(restaurantId))
         dispatch(thunkAllReviews())
         dispatch(thunkUserReviews())
     }, [dispatch])
+
+
 
 
     if (!restaurant) return null
@@ -81,36 +93,50 @@ const OneRestaurant = () => {
                     <h3>Featured Items</h3>
                     <span>arrows</span>
                 </div>
-                <div id="featured-items-carousel">
-                    {restaurantDishes.length > 0 ?
-                        restaurantDishes.map(dish => (
+                {/* <div id="featured-items-carousel"> */}
+                    <Carousel swipeable={false}
+                        draggable={false}
+                        showDots={false}
+                        responsive={responsive}
+                        ssr={true} // means to render carousel on server-side.
+                        infinite={true}
+                        autoPlay={false}
+                        autoPlaySpeed={1000}
+                        keyBoardControl={true}
+                        customTransition="transform 400ms ease-in-out"
+                        transitionDuration={1000}
+                        slidesToSlide={1}
+                        containerClass="carousel-container"
+                        removeArrowOnDeviceType={["tablet", "mobile"]}
+                        dotListClass="custom-dot-list-style"
+                        itemClass="carousel-item-padding-40-px">
+                        {restaurantDishes.length > 0 ?
+                            restaurantDishes.map(dish => (
+                                <div className="featured-dish">
 
-                            // open a modal that leads to one dish showing
-                            //pass in dish as prop to that component
-                            <div className="featured-dish">
-                                <div className="featured-dish-img">
-                                    <img src={dish.dish_image}/>
+
+
+                                    <div className="featured-dish-img">
+                                        <img src={dish.dish_image} />
+                                    </div>
+
+                                    <OpenModalButton
+                                        buttonText="Add"
+                                        modalComponent={<OneDish dish={dish} restaurantId={restaurantId} />}
+
+                                    />
+                                    <div className="featured-dish-name-price">
+
+                                        <h4>{dish.name}</h4>
+                                        <span>${dish.price}</span>
+                                    </div>
                                 </div>
 
-                                <OpenModalButton
-                                    buttonText="Add"
-                                    modalComponent={<OneDish dish={dish} restaurantId={restaurantId} />}
+                            )) : <span>Dishes coming soon!</span>}
+                    </Carousel>
 
-                                />
-                                <div className="featured-dish-name-price">
-
-                                    <h4>{dish.name}</h4>
-                                    <span>${dish.price}</span>
-                                </div>
-                            </div>
-                            //pass in dish as prop to that component
-                            // open a modal that leads to one dish showing
-
-
-
-                        )) : <span>Dishes coming soon!</span>}
                     {/* dishes display here */}
-                </div>
+                {/* </div> */}
             </div>
 
 

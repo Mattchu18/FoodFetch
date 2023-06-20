@@ -20,15 +20,16 @@ const OrderHistory = () => {
 
     const restaurantsObj = useSelector(state => state.restaurant.allRestaurants)
     const restaurants = Object.values(restaurantsObj)
-    console.log("This is old userOrders=====>", userOrders)
+    // console.log("This is old userOrders=====>", userOrders)
 
     const userOrderDishesObj = useSelector(state => state.orderDish.currentUserOrderDishes)
     const userOrderDishes = Object.values(userOrderDishesObj)
-    console.log("OrderDishes==========>", userOrderDishes)
+    // console.log("OrderDishes==========>", userOrderDishes)
 
     const allDishesObj = useSelector(state => state.dish.allDishes)
     const allDishes = Object.values(allDishesObj)
-    console.log('ALLDISHES========>', allDishes)
+    // console.log('ALLDISHES========>', allDishes)
+
 
 
     userOrders.forEach(order => {
@@ -49,6 +50,11 @@ const OrderHistory = () => {
         dispatch(thunkAllDishes())
     }, [dispatch])
 
+
+
+    if (!userOrders || !Array.isArray(userOrders)) return null;
+    if (!userOrderDishes || !Array.isArray(userOrderDishes)) return null;
+    if (!allDishes || !Array.isArray(allDishes)) return null;
     return (
         <div id="order-history-center">
             <div id="order-history-container">
@@ -94,7 +100,7 @@ const OrderHistory = () => {
                                 <OpenModalButton
                                     buttonText="View Order "
                                     modalComponent={<ViewOrder order={order}
-                                    order_dish={userOrderDishes}/>}
+                                        order_dish={userOrderDishes} />}
                                 />
 
                                 {order.time_difference ? (<span>Orders cannot be altered after 5 minutes</span>) : null}
