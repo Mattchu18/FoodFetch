@@ -71,7 +71,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                         {validationErrors.name ? (<p className="errors">{validationErrors.name}</p>) : null}
                         <input type="text"
                             value={name}
-                            placeholder="Business Name"
+                            placeholder="Business Name  *required"
                             onChange={e => setName(e.target.value)}
 
                         />
@@ -87,7 +87,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                         {formType === "Create Restaurant" ?
                             (<input type="text"
                                 value={address}
-                                placeholder="Business Address"
+                                placeholder="Business Address  *required"
                                 onChange={e => setAddress(e.target.value)}
                             />) : null
                         }
@@ -107,7 +107,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                             minLength="12"
                             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                             value={phone_number}
-                            placeholder="ex: 123-456-7890"
+                            placeholder="ex: 123-456-7890  *required"
                             onChange={e => setPhone_number(e.target.value)}
                         />
                     </div>
@@ -120,7 +120,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                     <div className="select-cuisine">
                         {validationErrors.cuisine_type ? (<p className="errors">{validationErrors.cuisine_type}</p>) : null}
                         {formType === "Create Restaurant" ? (<select onChange={e => setCuisine_type(e.target.value)} value={cuisine_type}>
-                            <option value="">---Cuisine Type---</option>
+                            <option value="">Cuisine  *required</option>
                             <option value="American">American</option>
                             <option value="Filipino">Filipino</option>
                             <option value="Chinese">Chinese</option>
@@ -144,6 +144,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                         <div>
 
                             <h3>Opening time</h3>
+                            <p>* required</p>
                             {validationErrors.opening_time ? (<p className="errors">{validationErrors.opening_time}</p>) : null}
                             <input
                                 type="time"
@@ -154,6 +155,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                         </div>
                         <div>
                             <h3>Closing time</h3>
+                            <p>* required</p>
                             {validationErrors.closing_time ? (<p className="errors">{validationErrors.closing_time}</p>) : null}
 
                             <input
@@ -174,7 +176,6 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                                 type="text"
                                 value={image}
                                 placeholder="Business Image"
-
                                 onChange={e => setImage(e.target.value)} />
                         </div>
                         <h3>Business banner</h3>

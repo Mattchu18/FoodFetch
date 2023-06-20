@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { thunkCreateReview, thunkEditReview,thunkUserReviews, thunkAllReviews } from "../../store/review";
 import { useModal } from "../../context/Modal";
+import "./ReviewForm.css"
 
 const ReviewForm = ({ review, formType, disabled }) => {
     const dispatch = useDispatch()
@@ -62,8 +63,9 @@ const ReviewForm = ({ review, formType, disabled }) => {
             review_text,
             rating
         }
-
+        // console.log("this is review text length====>", review_text.length)
         if (review_text.length < 5) errors.review_text = "Review text needs to be at least 5 characters"
+        if (review_text.length > 1000) errors.review_text = "Review text needs to be under 1000 characters"
         if (!rating) errors.rating = "Rating must be from 1-5 stars"
         setValidationErrors(errors)
 
@@ -90,21 +92,22 @@ const ReviewForm = ({ review, formType, disabled }) => {
                 <h1>Add a Public Review</h1>
             </div>
             {validationErrors.rating ? (<p className="errors" >{validationErrors.rating}</p>) : null}
-            <div>
-                {arr} Stars
+            <div className="review-stars">
+                {arr}
             </div>
-            <div>
+            <div className="text-area-div">
 
             {validationErrors.review_text ? (<p className="errors" >{validationErrors.review_text}</p>) : null}
                 <textarea
                     className="textInfo"
                     type="text"
                     value={review_text}
-                    placeholder="Helpful reviews mention specific items and describe their quality and taste."
+                    max='1000'
+                    placeholder="Helpful reviews mention specific items and describe their quality and taste. (max: 1000 characters)"
                     onChange={e => setReview_text(e.target.value)}
                 />
             </div>
-            <div>
+            <div className="submit-review-btn">
                 <button type="submit" disabled={!review_text || !rating} >Submit your Review</button>
             </div>
 

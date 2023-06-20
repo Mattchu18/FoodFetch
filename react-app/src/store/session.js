@@ -69,33 +69,33 @@ export const logout = () => async (dispatch) => {
 
 export const signUp = (username, email, phone_number,
 	restaurant_owner, password) => async (dispatch) => {
-	const response = await fetch("/api/auth/signup", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			username,
-			email,
-			phone_number,
-			restaurant_owner,
-			password
-		}),
-	});
+		const response = await fetch("/api/auth/signup", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				username,
+				email,
+				phone_number,
+				restaurant_owner,
+				password
+			}),
+		});
 
-	if (response.ok) {
-		const data = await response.json();
-		dispatch(setUser(data));
-		return null;
-	} else if (response.status < 500) {
-		const data = await response.json();
-		if (data.errors) {
-			return data.errors;
+		if (response.ok) {
+			const data = await response.json();
+			dispatch(setUser(data));
+			return null;
+		} else if (response.status < 500) {
+			const data = await response.json();
+			if (data.errors) {
+				return data.errors;
+			}
+		} else {
+			return ["An error occurred. Please try again."];
 		}
-	} else {
-		return ["An error occurred. Please try again."];
-	}
-};
+	};
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {

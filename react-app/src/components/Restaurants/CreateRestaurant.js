@@ -3,9 +3,9 @@ import RestaurantForm from "./RestaurantForm";
 import { useDispatch, useSelector } from "react-redux";
 
 const CreateRestaurant = () => {
-    // const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.session.user)
 
-    // console.log(typeof user.id)
+    console.log("this is user====> ", user)
 
     // useEffect(() => {
 
@@ -24,6 +24,7 @@ const CreateRestaurant = () => {
         // "user_id": user.id
     }
 
+    if (!user) return "Please log in as a Restaurant Owner to view this feature"
     return (
         <RestaurantForm
             restaurant={restaurant}
