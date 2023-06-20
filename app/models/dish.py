@@ -13,6 +13,7 @@ class Dish(db.Model):
     name = db.Column(db.String(200), nullable = False)
     description = db.Column(db.String(1000), nullable = False)
     price = db.Column(db.Integer, nullable = False)
+    dish_image = db.Column(db.String(1000), default = "https://media.discordapp.net/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png?width=538&height=538")
 
     #relationships
     restaurant = db.relationship("Restaurant", back_populates = "dish")
@@ -24,5 +25,6 @@ class Dish(db.Model):
             'restaurant_id': self.restaurant_id,
             'name': self.name,
             'description': self.description,
-            'price': self.price
+            'price': self.price,
+            'dish_image': self.dish_image
         }
