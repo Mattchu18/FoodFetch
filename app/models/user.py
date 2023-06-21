@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    phone_number = db.Column(db.String(10), nullable=False)
+    phone_number = db.Column(db.String(12), nullable=False)
     restaurant_owner = db.Column(db.Boolean, nullable=False, default=False)
 
     #relationships
