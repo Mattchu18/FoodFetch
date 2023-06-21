@@ -947,42 +947,42 @@ def seed_dishes():
 
 
         {
-            'restaurant_id': 20,
+            'restaurant_id': 21,
             'name': "Lee’s Ice Coffee",
             'description': "Lee's Famous Vietnamese Coffee",
             'price': 6.99,
             'dish_image': "https://cdn.discordapp.com/attachments/1119886170579550301/1121199241935728740/9b68c306-e6c5-4d84-b7e3-a3323c77c17c-retina-large-jpeg.webp"
         },
         {
-            'restaurant_id': 20,
+            'restaurant_id': 21,
             'name': "Grilled Chicken / Ga Nuong",
             'description': "Served on 10-inch Baguette.",
             'price': 8.99,
             'dish_image': "https://cdn.discordapp.com/attachments/1119886170579550301/1121199242652958740/97ea8647-df09-4fb0-9be8-f301d852517e-retina-large-jpeg.webp"
         },
         {
-            'restaurant_id': 20,
+            'restaurant_id': 21,
             'name': "BBQ Pork / Xa Xiu",
             'description': "Chinese style. Served on 10-inch Baguette.",
             'price': 8.99,
             'dish_image': "https://cdn.discordapp.com/attachments/1119886170579550301/1121199243038830673/593dd2cc-95b3-4aa0-96fd-1d3a7bc5e3bb-retina-large.webp"
         },
         {
-            'restaurant_id': 20,
+            'restaurant_id': 21,
             'name': "Shrimp & BBQ pork spring rolls",
             'description': "Shrimp & bbq pork",
             'price': 9.99,
             'dish_image': "https://cdn.discordapp.com/attachments/1119886170579550301/1121199243428909096/948fa3b6-aaca-4570-a27d-8ebdf09bc652-retina-large.webp"
         },
         {
-            'restaurant_id': 20,
+            'restaurant_id': 21,
             'name': "Vegetarian / Bi Chay",
             'description': "Fried Tofu, Vermicelli, Bean Curd, Yam, Vegetarian Soy Sauce with Special Dressing. Served on 10-inch Baguette.",
             'price': 16.99,
             'dish_image': "https://cdn.discordapp.com/attachments/1119886170579550301/1121199243856719912/248208f2-7391-4bad-999f-4259c2eb1cd5-retina-large.webp"
         },
         {
-            'restaurant_id': 20,
+            'restaurant_id': 21,
             'name': "Combination / Thit Nguoi",
             'description': "thit nguoi ( pate, headcheese, jambon ). Served on 10-inch Baguette.",
             'price': 8.99,
