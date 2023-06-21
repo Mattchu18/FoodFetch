@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { thunkAllRestaurants } from "../../store/restaurant"
 import { thunkAllReviews } from "../../store/review"
 import { useDispatch, useSelector } from "react-redux"
@@ -7,7 +7,24 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import "./index.css"
 
-const cuisineTypeArr = ["American", "Filipino", "Chinese", "Italian", "Korean", "Mediterranean", "Vietnamese", "Peruvian", "Nepalese", "Indian"]
+import Boba from "../../imgs/cuisine_imgs/boba.png"
+import Burgers from "../../imgs/cuisine_imgs/burgers.png"
+import Chicken from "../../imgs/cuisine_imgs/chicken.png"
+import Chinese from "../../imgs/cuisine_imgs/chinese.png"
+import Coffee from "../../imgs/cuisine_imgs/coffee.png"
+import Filipino from "../../imgs/cuisine_imgs/filipino.png"
+import Mediterranean from "../../imgs/cuisine_imgs/mediterranean.png"
+import Pizza from "../../imgs/cuisine_imgs/pizza.png"
+import Sushi from "../../imgs/cuisine_imgs/sushi.png"
+import Top from "../../imgs/cuisine_imgs/top.png"
+import Vietnamese from "../../imgs/cuisine_imgs/vietnamese.png"
+import Korean from "../../imgs/cuisine_imgs/korean.png"
+
+const cuisineTypeArr = ["Top", "Burgers", "Boba", "Chicken", "Chinese", "Coffee", "Filipino", "Korean", "Mediterranean", "Pizza", "Sushi", "Vietnamese"]
+
+const cuisineImgs = {
+    Boba, Burgers, Chicken, Chinese, Coffee, Filipino, Mediterranean, Pizza, Sushi, Top, Vietnamese, Korean
+}
 
 const Home = () => {
     const dispatch = useDispatch()
@@ -36,6 +53,14 @@ const Home = () => {
     })
 
 
+    const [cuisine, setCuisine] = useState("Top")
+    console.log("This is cuisine!===>", cuisine)
+    const filteredRestaurants = cuisine
+        ? allRestaurants.filter(restaurant => restaurant.cuisine_type === cuisine)
+        : allRestaurants
+
+    console.log("this is all restaurants ======>", allRestaurants)
+
     useEffect(() => {
         dispatch(thunkAllRestaurants())
         dispatch(thunkAllReviews())
@@ -45,20 +70,60 @@ const Home = () => {
     return (
         <div id="home-center">
             <div id="home-container">
-                <div id="cuisine-container">
+                <div id="cuisine-container-col">
 
-                    {cuisineTypeArr.map(cuisine => (
-                        <div id="cuisine-types">
-                            <div className="icon">
-                                <i class="fa-solid fa-burger"></i>
+                    <div id="cuisine-container">
+
+                        {cuisineTypeArr.map(cuisineType => (
+                            <div id="cuisine-types">
+                                <div className="icon">
+                                    {/* <i class="fa-solid fa-burger"></i> */}
+                                    <img src={cuisineImgs[cuisineType]} />
+                                </div>
+                                <div className="cuisine-text">
+                                    <button
+                                        value={cuisineType}
+                                        onClick={(e) => setCuisine(e.target.value)}>
+                                        {cuisineType}
+                                    </button>
+                                </div>
                             </div>
-                            <div className="cuisine-text">
-                                <span>{cuisine}</span>
+                        ))}
+                    </div>
+
+                    {cuisine === "Top"
+                        ? null : (<div id="promo-container">
+                            <div className="promo-header">
+                                <h2>{cuisine}</h2>
                             </div>
-                        </div>
-                    ))}
+                            <p>
+                                {filteredRestaurants.length === 1
+                                    ? `${filteredRestaurants.length} result`
+                                    : `${filteredRestaurants.length} results`}
+                            </p>
+                            <div className="promo-featured-container">
+
+                                {filteredRestaurants.map(restaurant => (
+                                    <div className="top-restaurant-container">
+                                        <Link to={`/restaurants/${restaurant.id}`}>
+                                            <div className="top-restaurant-pic">
+                                                <img src={restaurant.header_image} />
+                                            </div>
+                                            <div className="top-restaurant-name-rating">
+                                                <strong>{restaurant.name}</strong>
+                                                <p className="grey-text">{restaurant.averageRating} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                ))}
+
+                            </div>
+
+                        </div>)}
+
 
                 </div>
+
                 <div id="promo-container">
                     <div className="promo-header">
                         <h2>Top Rated Restaurants</h2>
@@ -75,7 +140,7 @@ const Home = () => {
                                     </div>
                                     <div className="top-restaurant-name-rating">
                                         <strong>{restaurant.name}</strong>
-                                        <p className="grey-text">{restaurant.averageRating} <i class="fa-solid fa-star"/>  ({restaurant.reviewCount}+ reviews)</p>
+                                        <p className="grey-text">{restaurant.averageRating} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
                                     </div>
                                 </Link>
                             </div>
@@ -101,7 +166,7 @@ const Home = () => {
                                     </div>
                                     <div className="top-restaurant-name-rating">
                                         <strong>{restaurant.name}</strong>
-                                        <p className="grey-text">{restaurant.averageRating} <i class="fa-solid fa-star"/>  ({restaurant.reviewCount}+ reviews)</p>
+                                        <p className="grey-text">{restaurant.averageRating} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
                                     </div>
                                 </Link>
                             </div>
