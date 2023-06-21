@@ -70,6 +70,7 @@ def seed_restaurants():
             'image': "https://cdn.discordapp.com/attachments/1119886170579550301/1120535712077455460/6af287e6-3ef9-4a59-8fab-614d6885b4eb.webp",
             "header_image": "https://cdn.discordapp.com/attachments/1119886170579550301/1120535712983425164/1600.webp"
         },
+
         {
             'user_id': 1,
             'name': "Fuumi",
