@@ -721,7 +721,7 @@ def seed_dishes():
             'name': "Baklava Cheesecake",
             'description': "The delicious taste of your favorite baklava in the creamy, decadent form of cheesecake! Allergen: MILK, EGG, TREE NUTS (WALNUTS, ALMOND), SOY, WHEAT *This product is made in a facility that processes tree nuts and utilizes peanut butter",
             'price': 5.99,
-            'dish_image': ""
+            'dish_image': "https://cdn.discordapp.com/attachments/1119886170579550301/1121197270495404062/13a8d206-3d69-4b18-9d82-a5ce1fa13116-6a18a240-27a0-4237-bbd3-21b72253addd-retina-large.webp"
         },
         {
             'restaurant_id': 16,
