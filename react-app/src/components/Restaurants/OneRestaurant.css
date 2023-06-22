@@ -82,10 +82,12 @@ h5 {
 }
 
 .carousel-container .react-multiple-carousel__arrow--left {
+    z-index: 0;
     left: 0px;
 }
 
 .carousel-container .react-multiple-carousel__arrow--right {
+    z-index: 0;
     right: 0px;
 }
 
@@ -139,6 +141,30 @@ h5 {
 }
 
 
+#one-dish-modal {
+    display: flex;
+    flex-direction: column;
+    max-width: 560px;
+    width: calc(100vw - 32px);
+}
+
+.one-dish-header {
+    margin-bottom: 24px
+}
+
+.dish-description {
+    color: #666;
+}
+
+.dish-image {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.dish-image img{
+    max-width: 250px;
+}
 
 #restaurant-reviews {
     display: flex;

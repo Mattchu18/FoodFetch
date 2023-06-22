@@ -91,7 +91,6 @@ const OneRestaurant = () => {
             <div id="featured-items">
                 <div className="featured-header">
                     <h3>Featured Items</h3>
-                    <span>arrows</span>
                 </div>
                 {/* <div id="featured-items-carousel"> */}
                 <Carousel swipeable={false}

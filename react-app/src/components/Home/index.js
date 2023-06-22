@@ -127,7 +127,6 @@ const Home = () => {
                 <div id="promo-container">
                     <div className="promo-header">
                         <h2>Top Rated Restaurants</h2>
-                        <span> arrows</span>
                     </div>
 
 
@@ -153,7 +152,6 @@ const Home = () => {
                 <div id="promo-container">
                     <div className="promo-header">
                         <h2>All Restaurants</h2>
-                        <span> arrows</span>
                     </div>
 
 
