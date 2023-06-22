@@ -36,14 +36,23 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
         }
 
         console.log(typeof phone_number)
+        if (name.length > 200) errors.name = "Name must be less than 200 characters"
+        if (name.length < 2) errors.name = "Name must be more than 2 characters"
         if (!name) errors.name = "Name is required"
         if (name.trim().length ===0) errors.name = "Name cannot only be whitespace"
+        if (address.length > 200) errors.address = "Address must be less than 200 characters"
         if (!address) errors.address = "Address is required"
         if (address.trim().length ===0) errors.address = "Address cannot only be whitespace"
         if (!phone_number) errors.phone_number = "Phone number is required"
         if (!cuisine_type) errors.cuisine_type = "Cuisine type is required"
         if (!opening_time) errors.opening_time = "Opening time is required"
         if (!closing_time) errors.closing_time = "Closing time is required"
+        if(image.length > 1000) errors.image = "Image url must be less than 1000 characters long"
+        // if (image.trim().length ===0) errors.image = "Image url cannot only be whitespace"
+
+        if(header_image.length > 1000) errors.header_image = "Header Image url must be less than 1000 characters long"
+        // if (header_image.trim().length ===0) errors.header_image = "Header Image url cannot only be whitespace"
+
         setValidationErrors(errors)
 
         if (formType === "Create Restaurant" && !Object.keys(errors).length) {
@@ -173,6 +182,8 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                     <div>
                         <h3>Business image</h3>
                         <div>
+                        {validationErrors.image ? (<p className="errors">{validationErrors.image}</p>) : null}
+
                             {/* <span>Business Image</span> */}
                             <input
                                 type="text"
@@ -182,6 +193,8 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                         </div>
                         <h3>Business banner</h3>
                         <div>
+                        {validationErrors.header_image ? (<p className="errors">{validationErrors.header_image}</p>) : null}
+
                             {/* <span>Business Banner</span> */}
                             <input
                                 type="text"

@@ -11,7 +11,7 @@ class Restaurant(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable = False)
     name = db.Column(db.String(200), nullable = False)
     address = db.Column(db.String(200), nullable = False)
-    phone_number = db.Column(db.String(10), nullable = False)
+    phone_number = db.Column(db.String(12), nullable = False)
     cuisine_type = db.Column(db.String(50), nullable = False)
     opening_time = db.Column(db.Time(), nullable = True)
     closing_time = db.Column(db.Time(), nullable = True)
