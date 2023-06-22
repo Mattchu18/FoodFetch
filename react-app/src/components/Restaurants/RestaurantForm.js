@@ -5,6 +5,8 @@ import { thunkCreateRestaurant, thunkEditRestaurant } from "../../store/restaura
 import { useModal } from "../../context/Modal";
 import './RestaurantForm.css'
 
+const endsWith = (url) => !url.endsWith(".jpg") && !url.endsWith(".png") && !url.endsWith(".jpeg") && !url.endsWith(".webp")
+
 const RestaurantForm = ({ restaurant, formType, disabled }) => {
     const dispatch = useDispatch()
     const history = useHistory()
@@ -36,14 +38,24 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
         }
 
         console.log(typeof phone_number)
+        if (name.length > 200) errors.name = "Name must be less than 200 characters"
+        if (name.length < 2) errors.name = "Name must be more than 2 characters"
         if (!name) errors.name = "Name is required"
         if (name.trim().length ===0) errors.name = "Name cannot only be whitespace"
+        if (address.length > 200) errors.address = "Address must be less than 200 characters"
         if (!address) errors.address = "Address is required"
         if (address.trim().length ===0) errors.address = "Address cannot only be whitespace"
         if (!phone_number) errors.phone_number = "Phone number is required"
         if (!cuisine_type) errors.cuisine_type = "Cuisine type is required"
         if (!opening_time) errors.opening_time = "Opening time is required"
         if (!closing_time) errors.closing_time = "Closing time is required"
+        if(image.length > 1000) errors.image = "Image url must be less than 1000 characters long"
+        // if (image.trim().length ===0) errors.image = "Image url cannot only be whitespace"
+        if (image.length && endsWith(image)) errors.image = "Image URL must end in .png, .jpg, or .webp or .jpeg"
+        if(header_image.length > 1000) errors.header_image = "Header Image url must be less than 1000 characters long"
+        if (header_image.length && endsWith(header_image)) errors.header_image = "Header Image URL must end in .png, .jpg, or .webp or .jpeg"
+        // if (header_image.trim().length ===0) errors.header_image = "Header Image url cannot only be whitespace"
+
         setValidationErrors(errors)
 
         if (formType === "Create Restaurant" && !Object.keys(errors).length) {
@@ -123,16 +135,17 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                         {validationErrors.cuisine_type ? (<p className="errors">{validationErrors.cuisine_type}</p>) : null}
                         {formType === "Create Restaurant" ? (<select onChange={e => setCuisine_type(e.target.value)} value={cuisine_type}>
                             <option value="">Cuisine  *required</option>
-                            <option value="American">American</option>
+                            <option value="Burgers">Burgers</option>
                             <option value="Filipino">Filipino</option>
                             <option value="Chinese">Chinese</option>
-                            <option value="Italian">Italian</option>
-                            <option value="Korean">Korean</option>
+                            <option value="Pizza">Pizza</option>
+                            <option value="Boba">Boba</option>
                             <option value="Mediterranean">Mediterranean</option>
                             <option value="Vietnamese">Vietnamese</option>
-                            <option value="Peruvian">Peruvian</option>
-                            <option value="Nepalese">Nepalese</option>
-                            <option value="Indian">Indian</option>
+                            <option value="Sushi">Sushi</option>
+                            <option value="Coffee">Coffee</option>
+                            <option value="Chicken">Chicken</option>
+                            <option value="Korean">Korean</option>
                         </select>) : null}
 
                     </div>
@@ -173,6 +186,8 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                     <div>
                         <h3>Business image</h3>
                         <div>
+                        {validationErrors.image ? (<p className="errors">{validationErrors.image}</p>) : null}
+
                             {/* <span>Business Image</span> */}
                             <input
                                 type="text"
@@ -182,6 +197,8 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                         </div>
                         <h3>Business banner</h3>
                         <div>
+                        {validationErrors.header_image ? (<p className="errors">{validationErrors.header_image}</p>) : null}
+
                             {/* <span>Business Banner</span> */}
                             <input
                                 type="text"
