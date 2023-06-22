@@ -64,6 +64,7 @@ const ReviewForm = ({ review, formType, disabled }) => {
             rating
         }
         // console.log("this is review text length====>", review_text.length)
+        if (review_text.trim().length ===0) errors.review_text = "Review text cannot only be whitespace"
         if (review_text.length < 5) errors.review_text = "Review text needs to be at least 5 characters"
         if (review_text.length > 1000) errors.review_text = "Review text needs to be under 1000 characters"
         if (!rating) errors.rating = "Rating must be from 1-5 stars"
@@ -104,6 +105,7 @@ const ReviewForm = ({ review, formType, disabled }) => {
                     value={review_text}
                     max='1000'
                     placeholder="Helpful reviews mention specific items and describe their quality and taste. (max: 1000 characters)"
+                    required
                     onChange={e => setReview_text(e.target.value)}
                 />
             </div>
