@@ -37,7 +37,9 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
 
         console.log(typeof phone_number)
         if (!name) errors.name = "Name is required"
+        if (name.trim().length ===0) errors.name = "Name cannot only be whitespace"
         if (!address) errors.address = "Address is required"
+        if (address.trim().length ===0) errors.address = "Address cannot only be whitespace"
         if (!phone_number) errors.phone_number = "Phone number is required"
         if (!cuisine_type) errors.cuisine_type = "Cuisine type is required"
         if (!opening_time) errors.opening_time = "Opening time is required"
@@ -175,7 +177,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                             <input
                                 type="text"
                                 value={image}
-                                placeholder="Business Image"
+                                placeholder="Business Image (optional)"
                                 onChange={e => setImage(e.target.value)} />
                         </div>
                         <h3>Business banner</h3>
@@ -184,7 +186,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                             <input
                                 type="text"
                                 value={header_image}
-                                placeholder="Banner Image"
+                                placeholder="Banner Image (optional)"
 
                                 onChange={e => setHeader_image(e.target.value)} />
                         </div>
