@@ -90,6 +90,9 @@ def post_restaurant():
     form = RestaurantForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
+        image = form.data["image"] or "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"
+
+        header_image = form.data["header_image"] or "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"
         new_restaurant = Restaurant(
             user_id = current_user.id,
             name = form.data['name'],
@@ -98,8 +101,8 @@ def post_restaurant():
             cuisine_type = form.data['cuisine_type'],
             opening_time = form.data['opening_time'],
             closing_time = form.data['closing_time'],
-            image = form.data['image'],
-            header_image = form.data['header_image']
+            image = image,
+            header_image = header_image
         )
 
         db.session.add(new_restaurant)
