@@ -17,9 +17,13 @@
     margin: 0;
 }
 
-.business-hours-input {
+.business-hours {
     display: flex;
     gap: 10px;
+}
+
+.business-hours-input {
+    margin-right: 10px;
 }
 
 .input-select {
@@ -98,4 +102,9 @@ input, select {
 
 .errors {
     color: red;
+}
+
+.required-field {
+    display: flex;
+    margin-bottom: 16px;
 }

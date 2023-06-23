@@ -10,24 +10,24 @@ const OneDish = ({ dish, restaurantId }) => {
     const [quantity, setQuantity] = useState('')
 
 
-    useEffect(() =>{
+    useEffect(() => {
         dispatch(thunkUserOrders())
 
-    }, [dispatch] )
+    }, [dispatch])
     function addToCart(item) {
         setCartItems(items => [...items, item])
 
     }
 
-    console.log("this is ordersObj======>", ordersObj)
+    console.log("this is onedish======>", dish)
     return (
-        <div>
-            <div>
-                <h2>{dish.name}</h2>
-                <span>{dish.description}</span>
+        <div id="one-dish-modal">
+            <div className="one-dish-header">
+                <h1>{dish.name}</h1>
+                <span className="dish-description">{dish.description}</span>
             </div>
-            <div>
-                <h2>PIC</h2>
+            <div className="dish-image">
+                <img src={dish.dish_image} />
             </div>
             <div>
                 <div>
@@ -35,7 +35,7 @@ const OneDish = ({ dish, restaurantId }) => {
                 </div>
                 <input type="number" value={quantity} />
 
-                <button onClick={ () => addToCart({"dish_id":dish.id, "quantity":quantity})}>
+                <button onClick={() => addToCart({ "dish_id": dish.id, "quantity": quantity })}>
                     add to cart, restaurantId: {restaurantId}
                 </button>
             </div>

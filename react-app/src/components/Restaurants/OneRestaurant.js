@@ -66,14 +66,16 @@ const OneRestaurant = () => {
         <div id="restaurant-container">
             <div id="restaurant-img-header"
                 style={{
-                    backgroundImage: ` url(${restaurant?.header_image})`,
+                    backgroundImage: ` url(${restaurant?.header_image}), url("https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png") `,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     color: "white",
                     // padding: "20px"
                 }}>
                 <div className="restaurant-image">
-                    <img src={restaurant.image} />
+                    <img src={restaurant.image}
+                        onError={e => { e.currentTarget.src = "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"; }} />
+
                 </div>
             </div>
             <div className="restaurant-details">
@@ -91,7 +93,6 @@ const OneRestaurant = () => {
             <div id="featured-items">
                 <div className="featured-header">
                     <h3>Featured Items</h3>
-                    <span>arrows</span>
                 </div>
                 {/* <div id="featured-items-carousel"> */}
                 <Carousel swipeable={false}
@@ -117,7 +118,9 @@ const OneRestaurant = () => {
 
 
                                 <div className="featured-dish-img">
-                                    <img src={dish.dish_image} />
+                                    <img src={dish.dish_image}
+                                        onError={e => { e.currentTarget.src = "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"; }} />
+
                                 </div>
 
                                 <OpenModalButton
@@ -166,52 +169,52 @@ const OneRestaurant = () => {
                                 <div className="review-user-details">
                                     <p>{review.username}</p>
                                 </div>
-                                    <div className="review-rating-created">
-                                        {review.rating == 5 ? (<span>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </span>) : null}
+                                <div className="review-rating-created">
+                                    {review.rating == 5 ? (<span>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </span>) : null}
 
-                                        {review.rating == 4 ? (<span>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                        </span>) : null}
+                                    {review.rating == 4 ? (<span>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </span>) : null}
 
-                                        {review.rating == 3 ? (<span>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
+                                    {review.rating == 3 ? (<span>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
 
-                                        </span>) : null}
+                                    </span>) : null}
 
-                                        {review.rating == 2 ? (<span>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
+                                    {review.rating == 2 ? (<span>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
 
-                                        </span>) : null}
+                                    </span>) : null}
 
-                                        {review.rating == 1 ? (<span>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
+                                    {review.rating == 1 ? (<span>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
 
-                                        </span>) : null}
+                                    </span>) : null}
 
-                                        <p>{review.created_at}</p>
-                                    </div>
+                                    <p>{review.created_at}</p>
+                                </div>
                                 <div className="review_text">
                                     <p>{review.review_text}</p>
                                 </div>

@@ -107,7 +107,8 @@ const Home = () => {
                                     <div className="top-restaurant-container">
                                         <Link to={`/restaurants/${restaurant.id}`}>
                                             <div className="top-restaurant-pic">
-                                                <img src={restaurant.header_image} />
+                                                <img src={restaurant.header_image}
+                                                onError={e => { e.currentTarget.src = "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"; }}/>
                                             </div>
                                             <div className="top-restaurant-name-rating">
                                                 <strong>{restaurant.name}</strong>
@@ -127,7 +128,6 @@ const Home = () => {
                 <div id="promo-container">
                     <div className="promo-header">
                         <h2>Top Rated Restaurants</h2>
-                        <span> arrows</span>
                     </div>
 
 
@@ -136,8 +136,9 @@ const Home = () => {
                             <div className="top-restaurant-container">
                                 <Link to={`/restaurants/${restaurant.id}`}>
                                     <div className="top-restaurant-pic">
-                                        <img src={restaurant.header_image} />
-                                    </div>
+                                        <img src={restaurant.header_image}
+                                                onError={e => { e.currentTarget.src = "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"; }}/>
+                                                </div>
                                     <div className="top-restaurant-name-rating">
                                         <strong>{restaurant.name}</strong>
                                         <p className="grey-text">{restaurant.averageRating} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
@@ -153,7 +154,6 @@ const Home = () => {
                 <div id="promo-container">
                     <div className="promo-header">
                         <h2>All Restaurants</h2>
-                        <span> arrows</span>
                     </div>
 
 
@@ -162,7 +162,8 @@ const Home = () => {
                             <div className="top-restaurant-container">
                                 <Link to={`/restaurants/${restaurant.id}`}>
                                     <div className="top-restaurant-pic">
-                                        <img src={restaurant.header_image} />
+                                        <img src={restaurant.header_image}
+                                                onError={e => { e.currentTarget.src = "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"; }}/>
                                     </div>
                                     <div className="top-restaurant-name-rating">
                                         <strong>{restaurant.name}</strong>
