@@ -43,7 +43,7 @@ if (user?.restaurant_owner === false || !user) return "Please log in as a Restau
                         {userRestaurants.map(restaurant => (
                             <div className="business-manage-card"
                                 style={{
-                                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${restaurant?.header_image})`,
+                                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${restaurant?.header_image}), url("https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png")`,
                                     backgroundSize: "cover",
                                     backgroundPosition: "center",
                                     color: "white",

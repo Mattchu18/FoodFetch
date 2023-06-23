@@ -70,7 +70,9 @@ const OrderHistory = () => {
                             <Link to={`/restaurants/${order.restaurant_id}`}>
 
                                 <div className="order-restaurant-image">
-                                    <img src={order.restaurantImage} />
+                                    <img src={order.restaurantImage}
+                                        onError={e => { e.currentTarget.src = "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"; }} />
+
                                 </div>
                             </Link>
                             <div className="restaurant-order-details">
