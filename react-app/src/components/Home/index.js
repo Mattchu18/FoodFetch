@@ -75,17 +75,16 @@ const Home = () => {
                     <div id="cuisine-container">
 
                         {cuisineTypeArr.map(cuisineType => (
-                            <div id="cuisine-types">
+                            <div id="cuisine-types"
+                            key={cuisineType}
+                            onClick={() => setCuisine(cuisineType)}>
                                 <div className="icon">
                                     {/* <i class="fa-solid fa-burger"></i> */}
-                                    <img src={cuisineImgs[cuisineType]} />
+                                    <img className="clickable-img"
+                                    src={cuisineImgs[cuisineType]}/>
                                 </div>
                                 <div className="cuisine-text">
-                                    <button
-                                        value={cuisineType}
-                                        onClick={(e) => setCuisine(e.target.value)}>
-                                        {cuisineType}
-                                    </button>
+                                    <span>{cuisineType}</span>
                                 </div>
                             </div>
                         ))}
