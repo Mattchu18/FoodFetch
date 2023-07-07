@@ -44,9 +44,9 @@ const Home = () => {
             console.log("This is sum=====>", sum)
         })
         const averageRating = sum / restaurantReviews.length
-        if (averageRating >= 2) {
-            restaurant["averageRating"] = averageRating
-            restaurant["reviewCount"] = restaurantReviews.length
+        restaurant["averageRating"] = averageRating
+        restaurant["reviewCount"] = restaurantReviews.length
+        if (averageRating >= 4) {
             topRatedArr.push(restaurant)
         }
         // console.log("This is sum2222=====>", sum / restaurantReviews.length)
@@ -111,7 +111,7 @@ const Home = () => {
                                             </div>
                                             <div className="top-restaurant-name-rating">
                                                 <strong>{restaurant.name}</strong>
-                                                <p className="grey-text">{restaurant.averageRating} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
+                                                <p className="grey-text">{isNaN(restaurant.averageRating) ? null : restaurant.averageRating} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
                                             </div>
                                         </Link>
                                     </div>
@@ -140,7 +140,7 @@ const Home = () => {
                                                 </div>
                                     <div className="top-restaurant-name-rating">
                                         <strong>{restaurant.name}</strong>
-                                        <p className="grey-text">{restaurant.averageRating} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
+                                        <p className="grey-text">{isNaN(restaurant.averageRating) ? null : restaurant.averageRating} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
                                     </div>
                                 </Link>
                             </div>
@@ -166,7 +166,7 @@ const Home = () => {
                                     </div>
                                     <div className="top-restaurant-name-rating">
                                         <strong>{restaurant.name}</strong>
-                                        <p className="grey-text">{restaurant.averageRating} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
+                                        <p className="grey-text">{isNaN(restaurant.averageRating) ? null : restaurant.averageRating} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
                                     </div>
                                 </Link>
                             </div>

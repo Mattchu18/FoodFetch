@@ -24,12 +24,12 @@ function Navigation({ isLoaded }) {
 					</div>
 				</div>
 				<div className='nav-right'>
-					<div className='search-bar'>
+					{/* <div className='search-bar'>
 							Search bar
-					</div>
-					<div className='cart'>
+					</div> */}
+					{/* <div className='cart'>
 						Cart
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</header>

@@ -139,7 +139,6 @@ font-weight: bold;
   flex-direction: row;
   min-width: 15rem;
   justify-content: space-between;
-  border: 2px solid blue;
 }
 
 .search-bar {
