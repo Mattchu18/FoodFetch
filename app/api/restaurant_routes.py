@@ -140,14 +140,23 @@ def edit_restaurant(id):
         return {"message": f"Restaurant {id} does not belong to you"}
 
     form = RestaurantForm()
+
+    image = form.data["image"]
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    header_image = form.data["header_image"]
+    header_image.filename = get_unique_filename(header_image.filename)
+    upload2 = upload_file_to_s3(header_image)
+
     selected_restaurant.name = form.data["name"]
     selected_restaurant.phone_number = form.data["phone_number"]
     selected_restaurant.opening_time = form.data["opening_time"]
     selected_restaurant.closing_time = form.data["closing_time"]
-    selected_restaurant.image = form.data["image"]
-    selected_restaurant.header_image = form.data["header_image"]
+    selected_restaurant.image = upload["url"]
+    selected_restaurant.header_image = upload2["url"]
     db.session.commit()
-    return selected_restaurant.to_dict()
+    return {"resPost": selected_restaurant.to_dict()}
 
 
 @restaurant_routes.route("/<int:id>/delete", methods=["DELETE"])
@@ -161,6 +170,11 @@ def delete_restaurant(id):
         return {"message": f"Restaurant {id} does not exist"}
     elif current_user.id != selected_restaurant.user_id:
         return {"message": f"Restaunt {id} does not belong to you"}
+
+    # calls the AWS_helpers to delete the images before deleting restaurant from DB
+    remove_file_from_s3(selected_restaurant.image)
+    remove_file_from_s3(selected_restaurant.header_image)
+
     db.session.delete(selected_restaurant)
     db.session.commit()
     return {"message": f"Restaurant {id} deleted"}

@@ -35,7 +35,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
         formData.append("closing_time", closing_time)
         formData.append("image", image)
         formData.append("header_image", header_image)
-        console.log("this is restaurants formData from frontend!===>",formData)
+        // console.log("this is restaurants formData from frontend!===>",formData)
 
         let errors = {}
 
@@ -78,7 +78,8 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
             history.push("/restaurants/user")
         }
         if (formType === "Edit Restaurant" && !Object.keys(errors).length) {
-            await dispatch(thunkEditRestaurant(restaurant))
+            console.log("HELLO??!")
+            await dispatch(thunkEditRestaurant(formData, restaurant))
                 .then(closeModal)
         }
 
