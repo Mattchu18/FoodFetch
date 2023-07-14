@@ -5,9 +5,6 @@ import { useDispatch, useSelector } from "react-redux"
 
 const ViewOrder = ({ order, order_dish }) => {
 
-    console.log("userOrderDishes==========>", order_dish)
-
-console.log(order)
 
     return (
         <div>

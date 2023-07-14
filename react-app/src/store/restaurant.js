@@ -62,7 +62,7 @@ export const thunkUserRestaurants = () => async (dispatch) => {
 }
 
 export const thunkCreateRestaurant = (restaurant) => async (dispatch) => {
-    console.log("this is restaurant in thunk===>", restaurant)
+
     const response = await fetch('/api/restaurants/new', {
         method: "POST",
         // headers: { 'Content-Type': 'application/json' },
@@ -78,7 +78,7 @@ export const thunkCreateRestaurant = (restaurant) => async (dispatch) => {
 
 
 export const thunkEditRestaurant = (formData, restaurant) => async (dispatch) => {
-    // console.log("This is restaurant edit think======>", restaurant.get("id"))
+    //
     const response = await fetch(`/api/restaurants/${restaurant.id}/edit`, {
         method: "PUT",
         // headers: { 'Content-Type': 'application/json' },

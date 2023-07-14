@@ -22,15 +22,12 @@ const OrderHistory = () => {
 
     const restaurantsObj = useSelector(state => state.restaurant.allRestaurants)
     const restaurants = Object.values(restaurantsObj)
-    // console.log("This is old userOrders=====>", userOrders)
 
     const userOrderDishesObj = useSelector(state => state.orderDish.currentUserOrderDishes)
     const userOrderDishes = Object.values(userOrderDishesObj)
-    // console.log("OrderDishes==========>", userOrderDishes)
 
     const allDishesObj = useSelector(state => state.dish.allDishes)
     const allDishes = Object.values(allDishesObj)
-    // console.log('ALLDISHES========>', allDishes)
 
 
 

@@ -19,7 +19,6 @@ const OneDish = ({ dish, restaurantId }) => {
 
     }
 
-    console.log("this is onedish======>", dish)
     return (
         <div id="one-dish-modal">
             <div className="one-dish-header">

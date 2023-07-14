@@ -32,8 +32,7 @@ const Home = () => {
     const allRestaurants = Object.values(allRestaurantsObj)
     const allReviewsObj = useSelector(state => state.review.allReviews)
     const allReviews = Object.values(allReviewsObj)
-    console.log("this is all restaurants =====> ", allRestaurantsObj)
-    console.log("this is all reviews =====> ", allReviewsObj)
+
     const topRatedArr = []
 
     allRestaurants.forEach(restaurant => {
@@ -41,7 +40,6 @@ const Home = () => {
         const restaurantReviews = allReviews.filter(review => (review.restaurant_id === restaurant.id))
         restaurantReviews.forEach(review => {
             sum += review.rating
-            console.log("This is sum=====>", sum)
         })
         const averageRating = sum / restaurantReviews.length
         restaurant["averageRating"] = averageRating
@@ -49,17 +47,14 @@ const Home = () => {
         if (averageRating >= 4) {
             topRatedArr.push(restaurant)
         }
-        // console.log("This is sum2222=====>", sum / restaurantReviews.length)
     })
 
 
     const [cuisine, setCuisine] = useState("Top")
-    console.log("This is cuisine!===>", cuisine)
     const filteredRestaurants = cuisine
         ? allRestaurants.filter(restaurant => restaurant.cuisine_type === cuisine)
         : allRestaurants
 
-    console.log("this is all restaurants ======>", allRestaurants)
 
     useEffect(() => {
         dispatch(thunkAllRestaurants())

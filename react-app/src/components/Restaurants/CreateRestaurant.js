@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 const CreateRestaurant = () => {
     const user = useSelector(state => state.session.user)
 
-    console.log("this is user====> ", user)
+
 
     // useEffect(() => {
 
     // }, [dispatch])
-    // console.log(user)
+    //
 
     const restaurant = {
         "name": "",

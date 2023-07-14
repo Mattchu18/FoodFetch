@@ -22,7 +22,7 @@ function SignupFormModal() {
 				restaurant_owner, password));
 			if (data) {
 
-				console.log("this is data for errors! =====>", data)
+
 				setErrors(data);
 			} else {
 				closeModal();

@@ -8,7 +8,7 @@ const CreateReview = ({ restaurantId }) => {
         restaurant_id: restaurantId
     }
 
-    console.log("THis is restaurant Id====", restaurantId)
+
     return (
         <>
             <ReviewForm

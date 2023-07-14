@@ -110,7 +110,7 @@ const orderDishReducer = (state = initialState, action) => {
         case GET_USER_ORDER_DISHES: {
             const newState = {}
             const userOrderDishes = action.orderDishes
-            console.log("This user order dishes action ====> ",userOrderDishes)
+
             userOrderDishes.forEach(orderDish => {
                 newState[orderDish.id] = orderDish
             })
