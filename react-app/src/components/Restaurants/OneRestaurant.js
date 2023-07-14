@@ -27,7 +27,7 @@ const OneRestaurant = () => {
     const restaurantDishesObj = useSelector(state => state.dish.allRestaurantDishes)
     const restaurantDishes = Object.values(restaurantDishesObj)
 
-    console.log("THIS IS RESTAURANTOBJ====>", restaurantDishesObj)
+
 
     let sum = 0
     restaurantReviews.forEach(review => {

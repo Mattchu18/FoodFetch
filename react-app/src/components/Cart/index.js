@@ -7,7 +7,6 @@ const Cart = () => {
     const userOrderDishesObj = useSelector(state => state.orderDish.currentUserOrderDishes)
     const userOrderDish = Object.values(userOrderDishesObj)
 
-    console.log("this is userOrderDish!!! =======>", userOrderDish)
 
     useEffect(() => {
         dispatch(thunkUserOrderDishes())

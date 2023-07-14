@@ -10,7 +10,7 @@ const UserReviews = () => {
     const dispatch = useDispatch()
     const reviewsObj = useSelector(state => state.review.currentUserReviews)
     const reviews = Object.values(reviewsObj)
-    console.log("this is reviews!=====>", reviews)
+
 
     useEffect(() => {
         dispatch(thunkUserReviews())

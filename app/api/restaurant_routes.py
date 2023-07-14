@@ -11,6 +11,7 @@ from app.forms.review_form import ReviewForm
 from app.forms.restaurant_form import RestaurantForm
 from app.forms.order_form import OrderForm
 from datetime import datetime, timedelta, date
+from .AWS_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 
 # import restaurant form later
 restaurant_routes = Blueprint('restaurants', __name__, url_prefix='')
@@ -90,9 +91,19 @@ def post_restaurant():
     form = RestaurantForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        image = form.data["image"] or "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"
+        image = form.data["image"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print("this is upload!===>", upload)
+        print("this is image! ===>", image)
 
-        header_image = form.data["header_image"] or "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"
+        header_image = form.data["header_image"]
+        header_image.filename = get_unique_filename(header_image.filename)
+        upload2 = upload_file_to_s3(header_image)
+        print("this is upload2!===>", upload2)
+        print("this is header_image! ===>", header_image)
+
+
         new_restaurant = Restaurant(
             user_id = current_user.id,
             name = form.data['name'],
@@ -101,14 +112,18 @@ def post_restaurant():
             cuisine_type = form.data['cuisine_type'],
             opening_time = form.data['opening_time'],
             closing_time = form.data['closing_time'],
-            image = image,
-            header_image = header_image
+            image = upload["url"],
+            header_image = upload2["url"]
         )
 
         db.session.add(new_restaurant)
         db.session.commit()
-        return new_restaurant.to_dict()
+        # we will send this "resPost" to our thunkCreateRestaurant
+        return {"resPost": new_restaurant.to_dict()}
+        # return new_restaurant.to_dict()
 
+    if form.errors:
+        print(form.errors)
     return {"message": "Invalid form data"}
 
 
@@ -125,14 +140,23 @@ def edit_restaurant(id):
         return {"message": f"Restaurant {id} does not belong to you"}
 
     form = RestaurantForm()
+
+    image = form.data["image"]
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    header_image = form.data["header_image"]
+    header_image.filename = get_unique_filename(header_image.filename)
+    upload2 = upload_file_to_s3(header_image)
+
     selected_restaurant.name = form.data["name"]
     selected_restaurant.phone_number = form.data["phone_number"]
     selected_restaurant.opening_time = form.data["opening_time"]
     selected_restaurant.closing_time = form.data["closing_time"]
-    selected_restaurant.image = form.data["image"]
-    selected_restaurant.header_image = form.data["header_image"]
+    selected_restaurant.image = upload["url"]
+    selected_restaurant.header_image = upload2["url"]
     db.session.commit()
-    return selected_restaurant.to_dict()
+    return {"resPost": selected_restaurant.to_dict()}
 
 
 @restaurant_routes.route("/<int:id>/delete", methods=["DELETE"])
@@ -146,6 +170,11 @@ def delete_restaurant(id):
         return {"message": f"Restaurant {id} does not exist"}
     elif current_user.id != selected_restaurant.user_id:
         return {"message": f"Restaunt {id} does not belong to you"}
+
+    # calls the AWS_helpers to delete the images before deleting restaurant from DB
+    remove_file_from_s3(selected_restaurant.image)
+    remove_file_from_s3(selected_restaurant.header_image)
+
     db.session.delete(selected_restaurant)
     db.session.commit()
     return {"message": f"Restaurant {id} deleted"}

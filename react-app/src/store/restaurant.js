@@ -62,27 +62,31 @@ export const thunkUserRestaurants = () => async (dispatch) => {
 }
 
 export const thunkCreateRestaurant = (restaurant) => async (dispatch) => {
+
     const response = await fetch('/api/restaurants/new', {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(restaurant)
+        // headers: { 'Content-Type': 'application/json' },
+        // We do not JSON.stringify restaurant since the backend will not accept
+        body: restaurant
     })
     if (response.ok) {
-        const data = await response.json()
-        dispatch(createRestaurant(data))
+        // we picked up resPost from our Post Restaurant route
+        const {resPost} = await response.json()
+        dispatch(createRestaurant(resPost))
     }
 }
 
 
-export const thunkEditRestaurant = (restaurant) => async (dispatch) => {
+export const thunkEditRestaurant = (formData, restaurant) => async (dispatch) => {
+    //
     const response = await fetch(`/api/restaurants/${restaurant.id}/edit`, {
         method: "PUT",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(restaurant)
+        // headers: { 'Content-Type': 'application/json' },
+        body: formData
     })
     if (response.ok) {
-        const data = await response.json()
-        dispatch(editRestaurant(data))
+        const {resPost} = await response.json()
+        dispatch(editRestaurant(resPost))
     }
 }
 

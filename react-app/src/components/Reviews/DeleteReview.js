@@ -14,7 +14,7 @@ const DeleteReview = ({ review }) => {
         dispatch(thunkUserReviews())
         dispatch(thunkAllReviews())
         .then(closeModal)
-        console.log("DELETED!!")
+
     }
 
     return (

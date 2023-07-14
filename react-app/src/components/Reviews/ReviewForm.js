@@ -63,7 +63,7 @@ const ReviewForm = ({ review, formType, disabled }) => {
             review_text,
             rating
         }
-        // console.log("this is review text length====>", review_text.length)
+        //
         if (review_text.trim().length ===0) errors.review_text = "Review text cannot only be whitespace"
 
         if (review_text.length < 5 || !review_text) errors.review_text = "Review text needs to be at least 5 characters"

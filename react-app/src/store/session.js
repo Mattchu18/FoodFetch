@@ -82,7 +82,7 @@ export const signUp = (username, email, phone_number,
 				password
 			}),
 		});
-		console.log("response=====>", response)
+
 		if (response.ok) {
 			const data = await response.json();
 			dispatch(setUser(data));
