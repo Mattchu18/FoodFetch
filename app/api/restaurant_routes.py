@@ -11,6 +11,7 @@ from app.forms.review_form import ReviewForm
 from app.forms.restaurant_form import RestaurantForm
 from app.forms.order_form import OrderForm
 from datetime import datetime, timedelta, date
+from .AWS_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 
 # import restaurant form later
 restaurant_routes = Blueprint('restaurants', __name__, url_prefix='')
@@ -90,9 +91,19 @@ def post_restaurant():
     form = RestaurantForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        image = form.data["image"] or "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"
+        image = form.data["image"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print("this is upload!===>", upload)
+        print("this is image! ===>", image)
 
-        header_image = form.data["header_image"] or "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"
+        header_image = form.data["header_image"]
+        header_image.filename = get_unique_filename(header_image.filename)
+        upload2 = upload_file_to_s3(header_image)
+        print("this is upload2!===>", upload2)
+        print("this is header_image! ===>", header_image)
+
+
         new_restaurant = Restaurant(
             user_id = current_user.id,
             name = form.data['name'],
@@ -101,14 +112,18 @@ def post_restaurant():
             cuisine_type = form.data['cuisine_type'],
             opening_time = form.data['opening_time'],
             closing_time = form.data['closing_time'],
-            image = image,
-            header_image = header_image
+            image = upload["url"],
+            header_image = upload2["url"]
         )
 
         db.session.add(new_restaurant)
         db.session.commit()
-        return new_restaurant.to_dict()
+        # we will send this "resPost" to our thunkCreateRestaurant
+        return {"resPost": new_restaurant.to_dict()}
+        # return new_restaurant.to_dict()
 
+    if form.errors:
+        print(form.errors)
     return {"message": "Invalid form data"}
 
 

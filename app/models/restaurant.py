@@ -15,9 +15,9 @@ class Restaurant(db.Model):
     cuisine_type = db.Column(db.String(50), nullable = False)
     opening_time = db.Column(db.Time(), nullable = True)
     closing_time = db.Column(db.Time(), nullable = True)
-    created_at = db.Column(db.String(100), default = datetime.now)
-    image = db.Column(db.String(1000), default = "https://media.discordapp.net/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png?width=538&height=538")
-    header_image = db.Column(db.String(1000), default = "https://media.discordapp.net/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png?width=538&height=538")
+    created_at = db.Column(db.String(100), default = datetime.now())
+    image = db.Column(db.String(1000), nullable = False)
+    header_image = db.Column(db.String(1000), nullable = False)
 
     #relationships
     user = db.relationship("User", back_populates = "restaurant")
