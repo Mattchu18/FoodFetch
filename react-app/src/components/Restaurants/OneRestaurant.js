@@ -36,14 +36,8 @@ const OneRestaurant = () => {
     const averageRating = parseInt((sum / restaurantReviews.length).toFixed(1))
 
     const reviewed = restaurantReviews.find(review => review.user_id === currUser?.id)
-    /*
-    //maybe push to a 404 page in the future
-    if (!restaurant) {
-        history.push("/")
-    }
-    */
-    const responsive = {
 
+    const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
             items: 5
@@ -124,7 +118,7 @@ const OneRestaurant = () => {
                                 </div>
 
                                 <OpenModalButton
-                                    buttonText="Add"
+                                    buttonText="Details"
                                     modalComponent={<OneDish dish={dish} restaurantId={restaurantId} />}
 
                                 />

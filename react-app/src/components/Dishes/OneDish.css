@@ -1,0 +1,46 @@
+#one-dish-modal {
+    display: flex;
+    flex-direction: column;
+    max-width: 560px;
+    width: calc(100vw - 32px);
+}
+
+.one-dish-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.one-dish-header > h1 {
+    margin: 0px
+}
+
+.close-modal-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    border-radius: 5px;
+}
+
+.dish-price {
+    display: flex;
+
+}
+
+.dish-description {
+    padding: 12px 0;
+    color: #666;
+}
+
+.dish-image {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.dish-image img{
+    max-width: 350px;
+    border-radius: 10px;
+}

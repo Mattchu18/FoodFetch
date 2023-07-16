@@ -141,7 +141,7 @@ h5 {
 }
 
 
-#one-dish-modal {
+/* #one-dish-modal {
     display: flex;
     flex-direction: column;
     max-width: 560px;
@@ -164,7 +164,7 @@ h5 {
 
 .dish-image img{
     max-width: 250px;
-}
+} */
 
 #restaurant-reviews {
     display: flex;
