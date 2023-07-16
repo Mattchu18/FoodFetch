@@ -154,6 +154,29 @@ const OneRestaurant = () => {
                         modalComponent={<CreateReview restaurantId={restaurantId} />} />
                 </div>) : null}
 
+            </div>
+
+            <Carousel swipeable={false}
+                draggable={false}
+                showDots={false}
+                responsive={{
+                    desktop: {
+                        breakpoint: { max: 3000, min: 1024 },
+                        items: 3
+                    }
+                }}
+                ssr={true} // means to render carousel on server-side.
+                infinite={true}
+                autoPlay={false}
+                autoPlaySpeed={1000}
+                keyBoardControl={true}
+                customTransition="transform 400ms ease-in-out"
+                transitionDuration={1000}
+                slidesToSlide={1}
+                containerClass="carousel-container"
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+                dotListClass="custom-dot-list-style"
+                itemClass="carousel-item-padding-40-px">
 
 
                 <div className="review-container">
@@ -227,7 +250,10 @@ const OneRestaurant = () => {
                         ))
                     ) : null}
                 </div>
-            </div>
+            </Carousel>
+
+
+
         </div>
     )
 }
