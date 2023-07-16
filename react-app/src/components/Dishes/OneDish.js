@@ -26,7 +26,7 @@ const OneDish = ({ dish, restaurantId }) => {
                 <button onClick={closeModal} className="close-modal-btn"><strong>X</strong></button>
             </div>
             <div className="dish-price">
-                <h3>${dish.price}</h3>
+                <h3>${dish.price.toFixed(2)}</h3>
             </div>
             <div className="dish-description">
                 <span >{dish.description}</span>

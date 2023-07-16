@@ -76,7 +76,7 @@ const OneRestaurant = () => {
                 <div>
                     <h1>{restaurant.name}</h1>
                     {Number.isInteger(averageRating) ? (
-                        <h5>{restaurant.cuisine_type} • {averageRating.toFixed(1)} <i class="fa-solid fa-star"></i>  {restaurantReviews.length}+ ratings</h5>) : (<p>Be the first to review!</p>)}
+                        <h5>{restaurant.cuisine_type} • {averageRating} <i class="fa-solid fa-star"></i>  {restaurantReviews.length}+ ratings</h5>) : (<p>Be the first to review!</p>)}
 
                 </div>
                 <div>
@@ -125,7 +125,7 @@ const OneRestaurant = () => {
                                 <div className="featured-dish-name-price">
 
                                     <h4>{dish.name}</h4>
-                                    <span>${dish.price}</span>
+                                    <span>${dish.price.toFixed(2)}</span>
                                 </div>
                             </div>
 
@@ -144,7 +144,7 @@ const OneRestaurant = () => {
                 <div className="review-overall-rating">
                     {Number.isInteger(averageRating) ? (
                         <div>
-                            <strong>{averageRating.toFixed(1)} <i class="fa-solid fa-star"></i></strong> <span>{restaurantReviews.length ? (`${restaurantReviews.length}+ ratings`) : ("0 ratings")}</span>
+                            <strong>{averageRating} <i class="fa-solid fa-star"></i></strong> <span>{restaurantReviews.length ? (`${restaurantReviews.length}+ ratings`) : ("0 ratings")}</span>
                         </div>) : (<h4>Be the first to review!</h4>)}
                 </div>
 
@@ -154,29 +154,9 @@ const OneRestaurant = () => {
                         modalComponent={<CreateReview restaurantId={restaurantId} />} />
                 </div>) : null}
 
-            </div>
 
-            <Carousel swipeable={false}
-                draggable={false}
-                showDots={false}
-                responsive={{
-                    desktop: {
-                        breakpoint: { max: 3000, min: 1024 },
-                        items: 3
-                    }
-                }}
-                ssr={true} // means to render carousel on server-side.
-                infinite={true}
-                autoPlay={false}
-                autoPlaySpeed={1000}
-                keyBoardControl={true}
-                customTransition="transform 400ms ease-in-out"
-                transitionDuration={1000}
-                slidesToSlide={1}
-                containerClass="carousel-container"
-                removeArrowOnDeviceType={["tablet", "mobile"]}
-                dotListClass="custom-dot-list-style"
-                itemClass="carousel-item-padding-40-px">
+
+
 
 
                 <div className="review-container">
@@ -250,10 +230,7 @@ const OneRestaurant = () => {
                         ))
                     ) : null}
                 </div>
-            </Carousel>
-
-
-
+            </div>
         </div>
     )
 }
