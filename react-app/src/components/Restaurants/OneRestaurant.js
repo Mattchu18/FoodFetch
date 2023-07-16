@@ -76,7 +76,7 @@ const OneRestaurant = () => {
                 <div>
                     <h1>{restaurant.name}</h1>
                     {Number.isInteger(averageRating) ? (
-                        <h5>{restaurant.cuisine_type} • {averageRating} <i class="fa-solid fa-star"></i>  {restaurantReviews.length}+ ratings</h5>) : (<p>Be the first to review!</p>)}
+                        <h5>{restaurant.cuisine_type} • {averageRating.toFixed(1)} <i class="fa-solid fa-star"></i>  {restaurantReviews.length}+ ratings</h5>) : (<p>Be the first to review!</p>)}
 
                 </div>
                 <div>
@@ -144,7 +144,7 @@ const OneRestaurant = () => {
                 <div className="review-overall-rating">
                     {Number.isInteger(averageRating) ? (
                         <div>
-                            <strong>{averageRating} <i class="fa-solid fa-star"></i></strong> <span>{restaurantReviews.length ? (`${restaurantReviews.length}+ ratings`) : ("0 ratings")}</span>
+                            <strong>{averageRating.toFixed(1)} <i class="fa-solid fa-star"></i></strong> <span>{restaurantReviews.length ? (`${restaurantReviews.length}+ ratings`) : ("0 ratings")}</span>
                         </div>) : (<h4>Be the first to review!</h4>)}
                 </div>
 
