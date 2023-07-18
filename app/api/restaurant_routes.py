@@ -142,20 +142,23 @@ def edit_restaurant(id):
 
     form = RestaurantForm()
 
-    image = form.data["image"]
-    image.filename = get_unique_filename(image.filename)
-    upload = upload_file_to_s3(image)
+    if form.data["image"]:
+        image = form.data["image"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        selected_restaurant.image = upload["url"]
 
-    header_image = form.data["header_image"]
-    header_image.filename = get_unique_filename(header_image.filename)
-    upload2 = upload_file_to_s3(header_image)
+    if form.data["header_image"]:
+        header_image = form.data["header_image"]
+        header_image.filename = get_unique_filename(header_image.filename)
+        upload2 = upload_file_to_s3(header_image)
+        selected_restaurant.header_image = upload2["url"]
 
     selected_restaurant.name = form.data["name"]
     selected_restaurant.phone_number = form.data["phone_number"]
     selected_restaurant.opening_time = form.data["opening_time"]
     selected_restaurant.closing_time = form.data["closing_time"]
-    selected_restaurant.image = upload["url"]
-    selected_restaurant.header_image = upload2["url"]
+
     db.session.commit()
     return {"resPost": selected_restaurant.to_dict()}
 
@@ -243,16 +246,16 @@ def edit_dish(id, dish_id):
         return {"message": f"Dish {dish_id} does not exist"}
 
     form = DishForm()
-    dish_image = form.data["dish_image"]
-    dish_image.filename = get_unique_filename(dish_image.filename)
-    upload = upload_file_to_s3(dish_image)
+    if form.data["dish_image"]:
+        dish_image = form.data["dish_image"]
+        dish_image.filename = get_unique_filename(dish_image.filename)
+        upload = upload_file_to_s3(dish_image)
+        selected_dish.dish_image = upload["url"]
 
     selected_dish.name = form.data["name"]
     selected_dish.description = form.data["description"]
     selected_dish.price = form.data["price"]
 
-    if not upload:
-        selected_dish.dish_image = upload["url"]
     db.session.commit()
     return {"resPost": selected_dish.to_dict()}
 
