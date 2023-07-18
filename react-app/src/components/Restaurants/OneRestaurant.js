@@ -84,6 +84,14 @@ const OneRestaurant = () => {
                 </div>
             </div>
 
+            <div>
+                        <h3>Add dishes</h3>
+                        <OpenModalButton
+                        buttonText="Add Dishes"
+                        modalComponent={<CreateDish dish={dish} restaurantId={restaurantId} />}
+/>
+            </div>
+
             <div id="featured-items">
                 <div className="featured-header">
                     <h3>Featured Items</h3>
