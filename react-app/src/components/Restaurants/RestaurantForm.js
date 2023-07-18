@@ -207,7 +207,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                                 type="file"
                                 accept="image/*"
                                 // value={image}
-                                placeholder="Business Image (optional)"
+                                placeholder="* Business Image"
                                 onChange={e => setImage(e.target.files[0])} />
                         </div>
                         <h3>Business banner</h3>
@@ -217,7 +217,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                                 type="file"
                                 accept="image/*"
                                 // value={header_image}
-                                placeholder="Banner Image (optional)"
+                                placeholder="* Banner Image"
                                 onChange={e => setHeader_image(e.target.files[0])} />
                         </div>
                     </div>
