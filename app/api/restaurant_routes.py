@@ -9,6 +9,7 @@ from app.models import User
 from app.models.db import db
 from app.forms.review_form import ReviewForm
 from app.forms.restaurant_form import RestaurantForm
+from app.forms.dish_form import DishForm
 from app.forms.order_form import OrderForm
 from datetime import datetime, timedelta, date
 from .AWS_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
@@ -195,6 +196,34 @@ def get_restaurant_dishes(id):
         return all_restaurant_dishes
     return all_restaurant_dishes
 
+
+@restaurant_routes.route("/<int:id>/dishes", methods=["POST"])
+@login_required
+def post_dish():
+    '''
+    Post a dish for a restaurant
+    '''
+    form = DishForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        dish_image = form.data["dish_image"]
+        dish_image.filename = get_unique_filename(dish_image.filename)
+        upload = upload_file_to_s3(dish_image)
+        print("this is upload!===>", upload)
+        print("this is image! ===>", dish_image)
+
+        new_dish = Dish(
+            restaurant_id = id,
+            name = form.data['name'],
+            description = form.data['description'],
+            price = form.data['price'],
+            dish_image = upload["url"]
+        )
+
+        db.session.add(new_dish)
+        db.session.commit()
+        # we will send this "resPost" to our thunkCreateRestaurant
+        return {"resPost": new_dish.to_dict()}
 
 # @restaurant_routes.route("/<int:id>/orders", methods=["POST"])
 # def post_order(id):
