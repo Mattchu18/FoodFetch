@@ -58,10 +58,16 @@ export const thunkAllRestaurantDishes = (restaurantId) => async (dispatch) => {
 }
 
 // create a dish
-// export const thunkCreateDish = (dish) => async (dispatch) => {
-//     const response = await fetch()
-
-// }
+export const thunkCreateDish = (dish) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${restaurantId}/dishes`, {
+        method: "POST",
+        body: dish
+    })
+    if (response.ok) {
+        const {resPost} = await response.json()
+        dispatch(createDish(resPost))
+    }
+}
 
 
 const initialState = { allDishes: {}, allRestaurantDishes: {} }
@@ -87,6 +93,15 @@ const dishReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allRestaurantDishes: newState
+            }
+        }
+        case CREATE_DISH: {
+            const newState = {}
+            const newDish = action.dish
+            newState[newDish.id] = newDish
+            return {
+                ...state,
+                allDishes: { ...state.allDishes, ...newState}
             }
         }
         default: return state
