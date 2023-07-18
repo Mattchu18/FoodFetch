@@ -78,7 +78,6 @@ export const thunkCreateRestaurant = (restaurant) => async (dispatch) => {
 
 
 export const thunkEditRestaurant = (formData, restaurant) => async (dispatch) => {
-    //
     const response = await fetch(`/api/restaurants/${restaurant.id}/edit`, {
         method: "PUT",
         // headers: { 'Content-Type': 'application/json' },

@@ -225,6 +225,37 @@ def post_dish(id):
         # we will send this "resPost" to our thunkCreateRestaurant
         return {"resPost": new_dish.to_dict()}
 
+
+@restaurant_routes.route('/<int:id>/dishes/<int:dish_id>', methods=["PUT"])
+@login_required
+def edit_dish(id, dish_id):
+    '''
+    Edit a dish
+    '''
+    selected_restaurant = Restaurant.query.get(id)
+    if not selected_restaurant:
+        return {"message": f"Restaurant {id} does not exist"}
+    elif selected_restaurant.user_id != current_user.id:
+        return {"message": f"Restaurant {id} does not belong to you"}
+
+    selected_dish = Dish.query.get(dish_id)
+    if not selected_dish:
+        return {"message": f"Dish {dish_id} does not exist"}
+
+    form = DishForm()
+    dish_image = form.data["dish_image"]
+    dish_image.filename = get_unique_filename(dish_image.filename)
+    upload = upload_file_to_s3(dish_image)
+
+    selected_dish.name = form.data["name"]
+    selected_dish.description = form.data["description"]
+    selected_dish.price = form.data["price"]
+
+    if not upload:
+        selected_dish.dish_image = upload["url"]
+    db.session.commit()
+    return {"resPost": selected_dish.to_dict()}
+
 # @restaurant_routes.route("/<int:id>/orders", methods=["POST"])
 # def post_order(id):
 #     '''

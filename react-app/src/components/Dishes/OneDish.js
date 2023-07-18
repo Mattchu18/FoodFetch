@@ -20,7 +20,6 @@ const OneDish = ({ dish, restaurantId }) => {
     }, [dispatch])
 
 
-
     return (
         <div id="one-dish-modal">
             <div className="one-dish-header">
@@ -28,10 +27,11 @@ const OneDish = ({ dish, restaurantId }) => {
                 <button onClick={closeModal} className="close-modal-btn"><strong>X</strong></button>
 
                 <OpenModalButton
-                buttonText="Update your entree"
-                modalComponent={EditDish}
-                dish={dish}
-                restaurantId={restaurantId}
+                    buttonText="Update your entree"
+                    modalComponent={<EditDish
+                        dish={dish}
+                        restaurantId={restaurantId}
+                    />}
                 />
 
             </div>

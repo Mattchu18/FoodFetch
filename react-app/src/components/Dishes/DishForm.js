@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { thunkAllRestaurantDishes, thunkCreateDish } from "../../store/dish";
+import { thunkAllRestaurantDishes, thunkCreateDish, thunkEditDish } from "../../store/dish";
 import { useModal } from "../../context/Modal";
 
 const DishForm = ({ dish, restaurantId, formType }) => {
@@ -12,8 +12,11 @@ const DishForm = ({ dish, restaurantId, formType }) => {
     const [name, setName] = useState(dish?.name)
     const [description, setDescription] = useState(dish?.description)
     const [price, setPrice] = useState(dish?.price)
-    const [dish_image, setDish_Image] = useState(dish?.dish_image || "")
+    const [dish_image, setDish_Image] = useState(dish?.dish_image)
     const [validationErrors, setValidationErrors] = useState("")
+
+
+    console.log("this is dish22222=======>", restaurantId)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -38,11 +41,13 @@ const DishForm = ({ dish, restaurantId, formType }) => {
             dispatch(thunkAllRestaurantDishes(restaurantId))
                 .then(closeModal)
         }
-        // if (formType === "Edit Dish" && !Object.keys(errors).length) {
 
-        //     await dispatch(thunkEditDish(formData, dish))
-        //         .then(closeModal)
-        // }
+        if (formType === "Edit Dish" && !Object.keys(errors).length) {
+
+            await dispatch(thunkEditDish(dish, restaurantId, formData))
+            dispatch(thunkAllRestaurantDishes(restaurantId))
+                .then(closeModal)
+        }
 
         if (!!Object.keys(errors).length) return
     }

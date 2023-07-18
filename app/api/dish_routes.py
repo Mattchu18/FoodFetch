@@ -6,6 +6,8 @@ from app.models.order_dish import OrderDish
 from flask_login import login_required, current_user
 from app.models import User
 from app.models.db import db
+from app.forms.dish_form import DishForm
+
 from datetime import datetime, timedelta, date
 
 dish_routes = Blueprint('dishes', __name__, url_prefix='')
@@ -32,6 +34,22 @@ def get_all_dishes():
 
     print("this is ALL_DISHES=======> ", all_dishes)
     return all_dishes
+
+# @dish_routes.route('/<int:id>/', methods=["PUT"])
+# @login_required
+# def edit_dish(id):
+#     '''
+#     Edit a dish
+#     '''
+#     selected_dish = Dish.query.get(id)
+#     if not selected_dish:
+#         return {"message": f"Dish {id} does not exist"}
+
+#     form = DishForm()
+#     dish_image = form.data["dish_image"]
+#     dish_image = get_unique_filename(dish_image.filename)
+
+
 
 @dish_routes.route('/<int:id>/cart/add', methods=["POST"])
 @login_required
