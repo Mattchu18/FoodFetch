@@ -52,10 +52,10 @@ if (user?.restaurant_owner === false || !user) return "Please log in as a Restau
                                 <div className="business-link">
                                     <Link to={`/restaurants/${restaurant.id}`}>
                                         <h2>{restaurant.name}</h2>
-
+                                        <img className="business-img" src={restaurant.image}/>
                                     </Link>
                                     <div>
-                                        <p>Add Dishes! COMING SOON!</p>
+                                        <p>Go to restaurant page to add dishes!</p>
                                     </div>
                                 </div>
                                 <div className="business-details">
