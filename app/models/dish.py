@@ -12,7 +12,7 @@ class Dish(db.Model):
     restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), nullable = False)
     name = db.Column(db.String(200), nullable = False)
     description = db.Column(db.String(1000), nullable = False)
-    price = db.Column(db.Integer, nullable = False)
+    price = db.Column(db.Numeric(precision=10, scale=2), nullable = False)
     dish_image = db.Column(db.String(1000), nullable = False)
 
     #relationships

@@ -199,7 +199,7 @@ def get_restaurant_dishes(id):
 
 @restaurant_routes.route("/<int:id>/dishes", methods=["POST"])
 @login_required
-def post_dish():
+def post_dish(id):
     '''
     Post a dish for a restaurant
     '''

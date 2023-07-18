@@ -12,6 +12,7 @@ import OpenModalButton from "../OpenModalButton";
 import CreateReview from "../Reviews/CreateReview";
 import DeleteReview from "../Reviews/DeleteReview"
 import EditReview from "../Reviews/EditReview"
+import CreateDish from "../Dishes/CreateDish"
 import "./OneRestaurant.css"
 
 
@@ -88,7 +89,7 @@ const OneRestaurant = () => {
                         <h3>Add dishes</h3>
                         <OpenModalButton
                         buttonText="Add Dishes"
-                        modalComponent={<CreateDish dish={dish} restaurantId={restaurantId} />}
+                        modalComponent={<CreateDish restaurantId={restaurantId} />}
 />
             </div>
 
@@ -133,7 +134,7 @@ const OneRestaurant = () => {
                                 <div className="featured-dish-name-price">
 
                                     <h4>{dish.name}</h4>
-                                    <span>${dish.price.toFixed(2)}</span>
+                                    <span>${dish.price}</span>
                                 </div>
                             </div>
 

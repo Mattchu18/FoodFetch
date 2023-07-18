@@ -1,6 +1,7 @@
 import DishForm from "./DishForm"
+import { useSelector } from "react-redux";
 
-const CreateDish = () => {
+const CreateDish = ( {restaurantId} ) => {
     const user = useSelector(state => state.session.user)
 
     const dish = {
@@ -13,6 +14,7 @@ const CreateDish = () => {
     return (
         <DishForm
         dish={dish}
+        restaurantId={restaurantId}
         formType="Create Dish"
         />
     )

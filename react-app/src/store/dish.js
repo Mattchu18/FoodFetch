@@ -58,10 +58,10 @@ export const thunkAllRestaurantDishes = (restaurantId) => async (dispatch) => {
 }
 
 // create a dish
-export const thunkCreateDish = (dish) => async (dispatch) => {
-    const response = await fetch(`/api/restaurants/${dish.restaurant_id}/dishes`, {
+export const thunkCreateDish = (formData, restaurantId) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${restaurantId}/dishes`, {
         method: "POST",
-        body: dish
+        body: formData
     })
     if (response.ok) {
         const {resPost} = await response.json()

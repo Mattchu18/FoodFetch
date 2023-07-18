@@ -1,10 +1,10 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { thunkCreateDish } from "../../store/dish";
+import { thunkAllRestaurantDishes, thunkCreateDish } from "../../store/dish";
 import { useModal } from "../../context/Modal";
 
-const DishForm = ({ dish, formType, disabled }) => {
+const DishForm = ({ dish, restaurantId, formType }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const { closeModal } = useModal()
@@ -34,7 +34,8 @@ const DishForm = ({ dish, formType, disabled }) => {
         setValidationErrors(errors)
 
         if (formType === "Create Dish" && !Object.keys(errors).length) {
-            await dispatch(thunkCreateDish(formData))
+            await dispatch(thunkCreateDish(formData, restaurantId))
+            dispatch(thunkAllRestaurantDishes(restaurantId))
                 .then(closeModal)
         }
         // if (formType === "Edit Dish" && !Object.keys(errors).length) {
