@@ -85,17 +85,19 @@ const OneRestaurant = () => {
                 </div>
             </div>
 
-            <div>
-                        <h3>Add dishes</h3>
-                        <OpenModalButton
+            {restaurant.user_id === currUser?.id ?
+                (<div>
+                    <h3>Add Entrees</h3>
+                    <OpenModalButton
                         buttonText="Add Dishes"
                         modalComponent={<CreateDish restaurantId={restaurantId} />}
-/>
-            </div>
+                    />
+                </div>)
+                : null}
 
             <div id="featured-items">
                 <div className="featured-header">
-                    <h3>Featured Items</h3>
+                    <h3>Entrees</h3>
                 </div>
                 {/* <div id="featured-items-carousel"> */}
                 <Carousel swipeable={false}
@@ -117,13 +119,9 @@ const OneRestaurant = () => {
                     {restaurantDishes.length > 0 ?
                         restaurantDishes.map(dish => (
                             <div className="featured-dish">
-
-
-
                                 <div className="featured-dish-img">
                                     <img src={dish.dish_image}
                                         onError={e => { e.currentTarget.src = "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"; }} />
-
                                 </div>
 
                                 <OpenModalButton
@@ -140,9 +138,6 @@ const OneRestaurant = () => {
 
                         )) : <span>Dishes coming soon!</span>}
                 </Carousel>
-
-                {/* dishes display here */}
-                {/* </div> */}
             </div>
 
 

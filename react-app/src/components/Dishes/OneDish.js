@@ -2,7 +2,9 @@ import { useModal } from "../../context/Modal"
 import { useEffect, useState } from 'react'
 import { thunkUserOrders } from "../../store/order"
 import { useDispatch, useSelector } from "react-redux"
+import EditDish from "./EditDish"
 import './OneDish.css'
+import OpenModalButton from "../OpenModalButton"
 
 const OneDish = ({ dish, restaurantId }) => {
     const dispatch = useDispatch()
@@ -24,6 +26,14 @@ const OneDish = ({ dish, restaurantId }) => {
             <div className="one-dish-header">
                 <h1>{dish.name}</h1>
                 <button onClick={closeModal} className="close-modal-btn"><strong>X</strong></button>
+
+                <OpenModalButton
+                buttonText="Update your entree"
+                modalComponent={EditDish}
+                dish={dish}
+                restaurantId={restaurantId}
+                />
+
             </div>
             <div className="dish-price">
                 <h3>${dish.price}</h3>
