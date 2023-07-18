@@ -57,6 +57,12 @@ export const thunkAllRestaurantDishes = (restaurantId) => async (dispatch) => {
     }
 }
 
+// create a dish
+// export const thunkCreateDish = (dish) => async (dispatch) => {
+//     const response = await fetch()
+
+// }
+
 
 const initialState = { allDishes: {}, allRestaurantDishes: {} }
 const dishReducer = (state = initialState, action) => {
