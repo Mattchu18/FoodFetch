@@ -19,9 +19,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 25px;
-    width: 25px;
+    height: 35px;
+    width: 35px;
     border-radius: 5px;
+    background-color: transparent;
+    border: none;
+}
+
+.close-modal-btn > strong {
+    font-size: 24px;
 }
 
 .dish-price {

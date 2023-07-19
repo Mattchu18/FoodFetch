@@ -92,10 +92,10 @@ const OneRestaurant = () => {
                     <h3>Entrees </h3>
                     {restaurant.user_id === currUser?.id ?
                         (<OpenModalButton
-                                buttonText="Add Entrees"
-                                className="add-entrees-btn"
-                                modalComponent={<CreateDish restaurantId={restaurantId} />}
-                            />)
+                            buttonText="Add Entrees"
+                            className="add-entrees-btn"
+                            modalComponent={<CreateDish restaurantId={restaurantId} />}
+                        />)
                         : null}
                 </div>
                 {/* <div id="featured-items-carousel"> */}
@@ -253,7 +253,7 @@ const OneRestaurant = () => {
                             </div>
                         ))
                     ) : <h4>Be the first to review!</h4>}
-                    </Carousel>
+                </Carousel>
                 {/* </div> */}
             </div>
         </div>

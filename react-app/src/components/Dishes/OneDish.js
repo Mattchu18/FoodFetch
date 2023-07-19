@@ -25,7 +25,7 @@ const OneDish = ({ dish, restaurantId }) => {
         <div id="one-dish-modal">
             <div className="one-dish-header">
                 <h1>{dish.name}</h1>
-                <button onClick={closeModal} className="close-modal-btn"><strong>X</strong></button>
+
 
                 <OpenModalButton
                     buttonText="Update your entree"
@@ -41,6 +41,7 @@ const OneDish = ({ dish, restaurantId }) => {
                         restaurantId={restaurantId}
                     />}
                 />
+                <button onClick={closeModal} className="close-modal-btn"><strong>X</strong></button>
             </div>
             <div className="dish-price">
                 <h3>${dish.price}</h3>
