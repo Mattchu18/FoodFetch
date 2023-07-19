@@ -89,15 +89,15 @@ const OneRestaurant = () => {
 
             <div id="featured-items">
                 <div className="featured-header">
-                    <h3>Entrees {restaurant.user_id === currUser?.id ?
-                        (<div>
+                    <h3>Entrees </h3>
+                    {restaurant.user_id === currUser?.id ?
+                        (
                             <OpenModalButton
                                 buttonText="Add Entrees"
                                 modalComponent={<CreateDish restaurantId={restaurantId} />}
                             />
-                        </div>)
+                        )
                         : null}
-                    </h3>
                 </div>
                 {/* <div id="featured-items-carousel"> */}
                 <Carousel swipeable={false}
