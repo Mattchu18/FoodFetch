@@ -70,8 +70,8 @@ export const thunkCreateDish = (formData, restaurantId) => async (dispatch) => {
 }
 
 // delete a dish
-export const thunkDeleteDish = ( dish ) => async (dispatch) => {
-    const response = await fetch(`/api/restaurants/${restaurantId}/dishes/${dish.id}/`, {
+export const thunkDeleteDish = ( dish, restaurantId ) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${restaurantId}/dishes/${dish.id}`, {
         method: "DELETE"
     })
     if (response.ok) {

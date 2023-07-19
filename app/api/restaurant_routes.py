@@ -276,7 +276,7 @@ def delete_dish(id, dish_id):
     if not selected_dish:
         return {"message": f"Dish {dish_id} does not exist"}
 
-    remove_file_from_s3(selected_dish.image)
+    remove_file_from_s3(selected_dish.dish_image)
 
     db.session.delete(selected_dish)
     db.session.commit()
