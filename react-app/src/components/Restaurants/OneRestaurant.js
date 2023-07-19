@@ -148,7 +148,7 @@ const OneRestaurant = () => {
                     {Number.isInteger(averageRating) ? (
                         <div>
                             <strong>{averageRating.toFixed(1)} <i class="fa-solid fa-star"></i></strong> <span>{restaurantReviews.length ? (`${restaurantReviews.length}+ ratings`) : ("0 ratings")}</span>
-                        </div>) : (<h4>Be the first to review!</h4>)}
+                        </div>) : (null)}
                 </div>
 
                 {!reviewed && currUser ? (<div className="user-review-btn">
@@ -162,7 +162,28 @@ const OneRestaurant = () => {
 
 
 
-                <div className="review-container">
+                {/* <div className="review-container"> */}
+                <Carousel swipeable={false}
+                    draggable={false}
+                    showDots={false}
+                    responsive={{
+                        desktop: {
+                            breakpoint: { max: 3000, min: 1024 },
+                            items: 2.5
+                        }
+                    }}
+                    ssr={true} // means to render carousel on server-side.
+                    infinite={true}
+                    autoPlay={false}
+                    autoPlaySpeed={1000}
+                    keyBoardControl={true}
+                    customTransition="transform 400ms ease-in-out"
+                    transitionDuration={1000}
+                    slidesToSlide={1}
+                    containerClass="carousel-container"
+                    removeArrowOnDeviceType={["tablet", "mobile"]}
+                    dotListClass="custom-dot-list-style"
+                    itemClass="carousel-item-padding-40-px">
                     {restaurantReviews.length ? (
                         restaurantReviews.map(review => (
                             <div className="review--container">
@@ -231,8 +252,9 @@ const OneRestaurant = () => {
                                 </div>
                             </div>
                         ))
-                    ) : null}
-                </div>
+                    ) : <h4>Be the first to review!</h4>}
+                    </Carousel>
+                {/* </div> */}
             </div>
         </div>
     )
