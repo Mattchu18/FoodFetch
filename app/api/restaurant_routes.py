@@ -259,6 +259,28 @@ def edit_dish(id, dish_id):
     db.session.commit()
     return {"resPost": selected_dish.to_dict()}
 
+
+@restaurant_routes.route('/<int:id>/dishes/<int:dish_id>', methods=["DELETE"])
+@login_required
+def delete_dish(id, dish_id):
+    '''
+    Deletes a dish
+    '''
+    selected_restaurant = Restaurant.query.get(id)
+    if not selected_restaurant:
+        return {"message": f"Restaurant {id} does not exist"}
+    elif selected_restaurant.user_id != current_user.id:
+        return {"message": f"Restaurant {id} does not belong to you"}
+
+    selected_dish = Dish.query.get(dish_id)
+    if not selected_dish:
+        return {"message": f"Dish {dish_id} does not exist"}
+
+    remove_file_from_s3(selected_dish.image)
+
+    db.session.delete(selected_dish)
+    db.session.commit()
+    return {"message": f"Dish {dish_id} deleted"}
 # @restaurant_routes.route("/<int:id>/orders", methods=["POST"])
 # def post_order(id):
 #     '''

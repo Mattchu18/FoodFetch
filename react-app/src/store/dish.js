@@ -70,6 +70,15 @@ export const thunkCreateDish = (formData, restaurantId) => async (dispatch) => {
 }
 
 // delete a dish
+export const thunkDeleteDish = ( dish ) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${restaurantId}/dishes/${dish.id}/`, {
+        method: "DELETE"
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(deleteDish(data))
+    }
+}
 
 // update a dish
 export const thunkEditDish = ( dish, restaurantId, formData ) => async (dispatch) => {
@@ -124,8 +133,19 @@ const dishReducer = (state = initialState, action) => {
             const newDish = action.dish
             newState[newDish.id] = newDish
             return {
-                allDishes: { ...state.allDishes },
-                allRestaurantDishes: { ...state.allRestaurantDishes, ...newState}
+                allRestaurantDishes: { ...state.allRestaurantDishes, ...newState},
+                allDishes: { ...state.allDishes }
+            }
+        }
+        case DELETE_DISH: {
+            const newState = { ...state.allRestaurantDishes }
+            const newAllDishesState = { ...state.allDishes }
+            const dishId = action.dish.dishId
+            delete newState[dishId]
+            delete newAllDishesState[dishId]
+            return {
+                allRestaurantDishes: newState,
+                allDishes: newAllDishesState
             }
         }
         default: return state
