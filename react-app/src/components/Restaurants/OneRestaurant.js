@@ -91,12 +91,11 @@ const OneRestaurant = () => {
                 <div className="featured-header">
                     <h3>Entrees </h3>
                     {restaurant.user_id === currUser?.id ?
-                        (
-                            <OpenModalButton
+                        (<OpenModalButton
                                 buttonText="Add Entrees"
+                                className="add-entrees-btn"
                                 modalComponent={<CreateDish restaurantId={restaurantId} />}
-                            />
-                        )
+                            />)
                         : null}
                 </div>
                 {/* <div id="featured-items-carousel"> */}

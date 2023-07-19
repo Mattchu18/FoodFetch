@@ -50,13 +50,24 @@ h5 {
 .featured-header {
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
 }
 
 .featured-header>h3 {
     margin-bottom: 10px;
     margin-top: 20px;
 }
+
+.featured-header > button {
+    border-radius: 14px;
+    border: none;
+    height: 32px;
+    width: 100px;
+    background-color: red;
+    color: white
+}
+
+
 
 #featured-items-carousel {
     /* display: flex; */
