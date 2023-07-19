@@ -106,7 +106,7 @@ const Home = () => {
                                             </div>
                                             <div className="top-restaurant-name-rating">
                                                 <strong>{restaurant.name}</strong>
-                                                <p className="grey-text">{isNaN(restaurant.averageRating) ? null : restaurant.averageRating.toFixed(1).toFixed(1)} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
+                                                <p className="grey-text">{isNaN(restaurant.averageRating) ? null : restaurant.averageRating.toFixed(1)} <i class="fa-solid fa-star" />  ({restaurant.reviewCount}+ reviews)</p>
                                             </div>
                                         </Link>
                                     </div>
