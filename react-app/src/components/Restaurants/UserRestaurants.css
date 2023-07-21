@@ -13,9 +13,15 @@
     flex-direction: column;
 }
 
+.manage-business-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .business-manage-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     border: 1px solid #666;
     justify-content: space-between;
     border-radius: 5px;
@@ -27,6 +33,7 @@
     width: 150px;
     display: flex;
     flex-wrap: wrap;
+    padding-right: 16px;
 }
 
 .business-link>a {
@@ -38,10 +45,16 @@
 }
 
 .business-link>a>h2 {
-    margin: 0;
+    margin: 0 0 12px 0;
     color: white;
+
 }
 
+.business-img {
+    border-radius: 10px;
+    width:150px;
+    height: 150px;
+}
 
 .business-details {
     display: flex;

@@ -32,11 +32,8 @@ if (user?.restaurant_owner === false || !user) return "Please log in as a Restau
         <div id="user-business-page">
             <div className="center">
 
-                <div>
-                    <h1>Manage Businesses</h1>
-                </div>
-                <div >
-                    <Link to="/restaurants/new">Add a new Business</Link>
+                <div className="manage-business-header">
+                    <h1>Manage Businesses</h1> <Link to="/restaurants/new">Add a new Business</Link>
                 </div>
                 <div>
                     {userRestaurants?.length ? (<>
@@ -52,10 +49,10 @@ if (user?.restaurant_owner === false || !user) return "Please log in as a Restau
                                 <div className="business-link">
                                     <Link to={`/restaurants/${restaurant.id}`}>
                                         <h2>{restaurant.name}</h2>
-
+                                        <img className="business-img" src={restaurant.image}/>
                                     </Link>
                                     <div>
-                                        <p>Add Dishes! COMING SOON!</p>
+                                        <p>Visit your restaurant page to add entrees</p>
                                     </div>
                                 </div>
                                 <div className="business-details">

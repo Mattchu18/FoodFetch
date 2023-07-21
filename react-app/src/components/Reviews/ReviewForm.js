@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { thunkCreateReview, thunkEditReview,thunkUserReviews, thunkAllReviews } from "../../store/review";
+import { thunkCreateReview, thunkEditReview, thunkUserReviews, thunkAllReviews } from "../../store/review";
 import { useModal } from "../../context/Modal";
 import "./ReviewForm.css"
 
@@ -64,7 +64,7 @@ const ReviewForm = ({ review, formType, disabled }) => {
             rating
         }
         //
-        if (review_text.trim().length ===0) errors.review_text = "Review text cannot only be whitespace"
+        if (review_text.trim().length === 0) errors.review_text = "Review text cannot only be whitespace"
 
         if (review_text.length < 5 || !review_text) errors.review_text = "Review text needs to be at least 5 characters"
         if (review_text.length > 1000) errors.review_text = "Review text needs to be under 1000 characters"
@@ -82,7 +82,7 @@ const ReviewForm = ({ review, formType, disabled }) => {
             await dispatch(thunkEditReview(review))
             dispatch(thunkUserReviews())
             dispatch(thunkAllReviews())
-            .then(closeModal)
+                .then(closeModal)
         }
 
         if (!!Object.keys(errors).length) return
@@ -99,7 +99,7 @@ const ReviewForm = ({ review, formType, disabled }) => {
             </div>
             <div className="text-area-div">
 
-            {validationErrors.review_text ? (<p className="errors" >{validationErrors.review_text}</p>) : null}
+                {validationErrors.review_text ? (<p className="errors" >{validationErrors.review_text}</p>) : null}
                 <textarea
                     className="textInfo"
                     type="text"

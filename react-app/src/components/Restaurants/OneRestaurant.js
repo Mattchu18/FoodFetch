@@ -12,6 +12,7 @@ import OpenModalButton from "../OpenModalButton";
 import CreateReview from "../Reviews/CreateReview";
 import DeleteReview from "../Reviews/DeleteReview"
 import EditReview from "../Reviews/EditReview"
+import CreateDish from "../Dishes/CreateDish"
 import "./OneRestaurant.css"
 
 
@@ -36,14 +37,8 @@ const OneRestaurant = () => {
     const averageRating = parseInt((sum / restaurantReviews.length).toFixed(1))
 
     const reviewed = restaurantReviews.find(review => review.user_id === currUser?.id)
-    /*
-    //maybe push to a 404 page in the future
-    if (!restaurant) {
-        history.push("/")
-    }
-    */
-    const responsive = {
 
+    const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
             items: 5
@@ -82,7 +77,7 @@ const OneRestaurant = () => {
                 <div>
                     <h1>{restaurant.name}</h1>
                     {Number.isInteger(averageRating) ? (
-                        <h5>{restaurant.cuisine_type} • {averageRating} <i class="fa-solid fa-star"></i>  {restaurantReviews.length}+ ratings</h5>) : (<p>Be the first to review!</p>)}
+                        <h5>{restaurant.cuisine_type} • {averageRating.toFixed(1)} <i class="fa-solid fa-star"></i>  {restaurantReviews.length}+ ratings</h5>) : (<p>Be the first to review!</p>)}
 
                 </div>
                 <div>
@@ -90,9 +85,18 @@ const OneRestaurant = () => {
                 </div>
             </div>
 
+
+
             <div id="featured-items">
                 <div className="featured-header">
-                    <h3>Featured Items</h3>
+                    <h3>Entrees </h3>
+                    {restaurant.user_id === currUser?.id ?
+                        (<OpenModalButton
+                            buttonText="Add Entrees"
+                            className="add-entrees-btn"
+                            modalComponent={<CreateDish restaurantId={restaurantId} />}
+                        />)
+                        : null}
                 </div>
                 {/* <div id="featured-items-carousel"> */}
                 <Carousel swipeable={false}
@@ -114,17 +118,13 @@ const OneRestaurant = () => {
                     {restaurantDishes.length > 0 ?
                         restaurantDishes.map(dish => (
                             <div className="featured-dish">
-
-
-
                                 <div className="featured-dish-img">
                                     <img src={dish.dish_image}
                                         onError={e => { e.currentTarget.src = "https://cdn.discordapp.com/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png"; }} />
-
                                 </div>
 
                                 <OpenModalButton
-                                    buttonText="Add"
+                                    buttonText="Details"
                                     modalComponent={<OneDish dish={dish} restaurantId={restaurantId} />}
 
                                 />
@@ -137,9 +137,6 @@ const OneRestaurant = () => {
 
                         )) : <span>Dishes coming soon!</span>}
                 </Carousel>
-
-                {/* dishes display here */}
-                {/* </div> */}
             </div>
 
 
@@ -150,8 +147,8 @@ const OneRestaurant = () => {
                 <div className="review-overall-rating">
                     {Number.isInteger(averageRating) ? (
                         <div>
-                            <strong>{averageRating} <i class="fa-solid fa-star"></i></strong> <span>{restaurantReviews.length ? (`${restaurantReviews.length}+ ratings`) : ("0 ratings")}</span>
-                        </div>) : (<h4>Be the first to review!</h4>)}
+                            <strong>{averageRating.toFixed(1)} <i class="fa-solid fa-star"></i></strong> <span>{restaurantReviews.length ? (`${restaurantReviews.length}+ ratings`) : ("0 ratings")}</span>
+                        </div>) : (null)}
                 </div>
 
                 {!reviewed && currUser ? (<div className="user-review-btn">
@@ -162,7 +159,31 @@ const OneRestaurant = () => {
 
 
 
-                <div className="review-container">
+
+
+
+                {/* <div className="review-container"> */}
+                <Carousel swipeable={false}
+                    draggable={false}
+                    showDots={false}
+                    responsive={{
+                        desktop: {
+                            breakpoint: { max: 3000, min: 1024 },
+                            items: 2.5
+                        }
+                    }}
+                    ssr={true} // means to render carousel on server-side.
+                    infinite={true}
+                    autoPlay={false}
+                    autoPlaySpeed={1000}
+                    keyBoardControl={true}
+                    customTransition="transform 400ms ease-in-out"
+                    transitionDuration={1000}
+                    slidesToSlide={1}
+                    containerClass="carousel-container"
+                    removeArrowOnDeviceType={["tablet", "mobile"]}
+                    dotListClass="custom-dot-list-style"
+                    itemClass="carousel-item-padding-40-px">
                     {restaurantReviews.length ? (
                         restaurantReviews.map(review => (
                             <div className="review--container">
@@ -231,8 +252,9 @@ const OneRestaurant = () => {
                                 </div>
                             </div>
                         ))
-                    ) : null}
-                </div>
+                    ) : <h4>Be the first to review!</h4>}
+                </Carousel>
+                {/* </div> */}
             </div>
         </div>
     )

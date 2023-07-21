@@ -9,6 +9,7 @@ from app.models import User
 from app.models.db import db
 from app.forms.review_form import ReviewForm
 from app.forms.restaurant_form import RestaurantForm
+from app.forms.dish_form import DishForm
 from app.forms.order_form import OrderForm
 from datetime import datetime, timedelta, date
 from .AWS_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
@@ -141,20 +142,23 @@ def edit_restaurant(id):
 
     form = RestaurantForm()
 
-    image = form.data["image"]
-    image.filename = get_unique_filename(image.filename)
-    upload = upload_file_to_s3(image)
+    if form.data["image"]:
+        image = form.data["image"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        selected_restaurant.image = upload["url"]
 
-    header_image = form.data["header_image"]
-    header_image.filename = get_unique_filename(header_image.filename)
-    upload2 = upload_file_to_s3(header_image)
+    if form.data["header_image"]:
+        header_image = form.data["header_image"]
+        header_image.filename = get_unique_filename(header_image.filename)
+        upload2 = upload_file_to_s3(header_image)
+        selected_restaurant.header_image = upload2["url"]
 
     selected_restaurant.name = form.data["name"]
     selected_restaurant.phone_number = form.data["phone_number"]
     selected_restaurant.opening_time = form.data["opening_time"]
     selected_restaurant.closing_time = form.data["closing_time"]
-    selected_restaurant.image = upload["url"]
-    selected_restaurant.header_image = upload2["url"]
+
     db.session.commit()
     return {"resPost": selected_restaurant.to_dict()}
 
@@ -196,6 +200,87 @@ def get_restaurant_dishes(id):
     return all_restaurant_dishes
 
 
+@restaurant_routes.route("/<int:id>/dishes", methods=["POST"])
+@login_required
+def post_dish(id):
+    '''
+    Post a dish for a restaurant
+    '''
+    form = DishForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        dish_image = form.data["dish_image"]
+        dish_image.filename = get_unique_filename(dish_image.filename)
+        upload = upload_file_to_s3(dish_image)
+        print("this is upload!===>", upload)
+        print("this is image! ===>", dish_image)
+
+        new_dish = Dish(
+            restaurant_id = id,
+            name = form.data['name'],
+            description = form.data['description'],
+            price = form.data['price'],
+            dish_image = upload["url"]
+        )
+
+        db.session.add(new_dish)
+        db.session.commit()
+        # we will send this "resPost" to our thunkCreateRestaurant
+        return {"resPost": new_dish.to_dict()}
+
+
+@restaurant_routes.route('/<int:id>/dishes/<int:dish_id>', methods=["PUT"])
+@login_required
+def edit_dish(id, dish_id):
+    '''
+    Edit a dish
+    '''
+    selected_restaurant = Restaurant.query.get(id)
+    if not selected_restaurant:
+        return {"message": f"Restaurant {id} does not exist"}
+    elif selected_restaurant.user_id != current_user.id:
+        return {"message": f"Restaurant {id} does not belong to you"}
+
+    selected_dish = Dish.query.get(dish_id)
+    if not selected_dish:
+        return {"message": f"Dish {dish_id} does not exist"}
+
+    form = DishForm()
+    if form.data["dish_image"]:
+        dish_image = form.data["dish_image"]
+        dish_image.filename = get_unique_filename(dish_image.filename)
+        upload = upload_file_to_s3(dish_image)
+        selected_dish.dish_image = upload["url"]
+
+    selected_dish.name = form.data["name"]
+    selected_dish.description = form.data["description"]
+    selected_dish.price = form.data["price"]
+
+    db.session.commit()
+    return {"resPost": selected_dish.to_dict()}
+
+
+@restaurant_routes.route('/<int:id>/dishes/<int:dish_id>', methods=["DELETE"])
+@login_required
+def delete_dish(id, dish_id):
+    '''
+    Deletes a dish
+    '''
+    selected_restaurant = Restaurant.query.get(id)
+    if not selected_restaurant:
+        return {"message": f"Restaurant {id} does not exist"}
+    elif selected_restaurant.user_id != current_user.id:
+        return {"message": f"Restaurant {id} does not belong to you"}
+
+    selected_dish = Dish.query.get(dish_id)
+    if not selected_dish:
+        return {"message": f"Dish {dish_id} does not exist"}
+
+    remove_file_from_s3(selected_dish.dish_image)
+
+    db.session.delete(selected_dish)
+    db.session.commit()
+    return {"message": f"Dish {dish_id} deleted"}
 # @restaurant_routes.route("/<int:id>/orders", methods=["POST"])
 # def post_order(id):
 #     '''

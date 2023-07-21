@@ -1,19 +1,16 @@
 """empty message
 
-Revision ID: 2e070817d384
-Revises:
-Create Date: 2023-06-22 17:15:58.999508
+Revision ID: 0dcbc95cdbcc
+Revises: 
+Create Date: 2023-07-18 19:01:52.671999
 
 """
 from alembic import op
 import sqlalchemy as sa
 
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '2e070817d384'
+revision = '0dcbc95cdbcc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -42,8 +39,8 @@ def upgrade():
     sa.Column('opening_time', sa.Time(), nullable=True),
     sa.Column('closing_time', sa.Time(), nullable=True),
     sa.Column('created_at', sa.String(length=100), nullable=True),
-    sa.Column('image', sa.String(length=1000), nullable=True),
-    sa.Column('header_image', sa.String(length=1000), nullable=True),
+    sa.Column('image', sa.String(length=1000), nullable=False),
+    sa.Column('header_image', sa.String(length=1000), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -52,8 +49,8 @@ def upgrade():
     sa.Column('restaurant_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=200), nullable=False),
     sa.Column('description', sa.String(length=1000), nullable=False),
-    sa.Column('price', sa.Integer(), nullable=False),
-    sa.Column('dish_image', sa.String(length=1000), nullable=True),
+    sa.Column('price', sa.Numeric(precision=10, scale=2), nullable=False),
+    sa.Column('dish_image', sa.String(length=1000), nullable=False),
     sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -91,14 +88,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE restaurants SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE dishes SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE orders SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE order_dishes SET SCHEMA {SCHEMA};")
-
 
 
 def downgrade():

@@ -12,8 +12,8 @@ class Dish(db.Model):
     restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), nullable = False)
     name = db.Column(db.String(200), nullable = False)
     description = db.Column(db.String(1000), nullable = False)
-    price = db.Column(db.Integer, nullable = False)
-    dish_image = db.Column(db.String(1000), default = "https://media.discordapp.net/attachments/1119886170579550301/1119886247956054026/image-coming-soon.png?width=538&height=538")
+    price = db.Column(db.Numeric(precision=10, scale=2), nullable = False)
+    dish_image = db.Column(db.String(1000), nullable = False)
 
     #relationships
     restaurant = db.relationship("Restaurant", back_populates = "dish")
