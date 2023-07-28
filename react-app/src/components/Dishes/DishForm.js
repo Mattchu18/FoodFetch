@@ -16,8 +16,6 @@ const DishForm = ({ dish, restaurantId, formType }) => {
     const [validationErrors, setValidationErrors] = useState("")
 
 
-    console.log("this is dish22222=======>", restaurantId)
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 
