@@ -15,6 +15,21 @@
     margin: 0px
 }
 
+.entree-btn > button {
+    border-radius: 5px;
+    border: none;
+    height: 32px;
+    width: 120px;
+    background-color: red;
+    color: white;
+    margin-right: 16px
+}
+
+
+.entree-btn.delete > button {
+    background-color:#666
+}
+
 .close-modal-btn {
     display: flex;
     justify-content: center;
