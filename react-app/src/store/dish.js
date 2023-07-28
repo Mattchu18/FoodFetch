@@ -82,7 +82,6 @@ export const thunkDeleteDish = ( dish, restaurantId ) => async (dispatch) => {
 
 // update a dish
 export const thunkEditDish = ( dish, restaurantId, formData ) => async (dispatch) => {
-    // console.log("this is dish========>",dish)
     const response = await fetch(`/api/restaurants/${restaurantId}/dishes/${dish.id}`, {
         method: "PUT",
         body: formData
