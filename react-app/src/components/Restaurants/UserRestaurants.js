@@ -94,7 +94,7 @@ if (user?.restaurant_owner === false || !user) return "Please log in as a Restau
                                 </div>
                             </div>
                         ))}</>
-                    ) : null}
+                    ) : <h3>Start a business to manage</h3>}
                 </div>
 
 

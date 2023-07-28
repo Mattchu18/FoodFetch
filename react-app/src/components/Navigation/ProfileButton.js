@@ -35,7 +35,7 @@ function ProfileButton({ user }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout())
-    .then(closeMenu)
+      .then(closeMenu)
     history.push("/")
   };
 
@@ -49,7 +49,7 @@ function ProfileButton({ user }) {
       </button>
       <ul className={ulClassName} ref={ulRef}>
         <div className="x-button-div">
-        <button  onClick={closeMenu}>X</button>
+          <button onClick={closeMenu}>X</button>
         </div>
         {user ? (
           <>
@@ -60,29 +60,43 @@ function ProfileButton({ user }) {
               </div>
             </Link>
             {/* link to account */}
-            <Link className="menu-links" to="/">
-              <div className="menu-link-div">
+            <div className="menu-links " to="/">
+              <div className="menu-link-div account">
                 <i class="fa-regular fa-circle-user"></i>
-
-                  <span>Account</span>
-                  <br/>
+                <span>Account</span>
+                <div className="account-info">
+                  <strong>Username</strong>
                   <span>{user.username}</span>
+                  <br />
+                  <strong>Email</strong>
+                  <span>{user.email}</span>
+                  <br />
+                  <strong>Phone</strong>
+                  <span>{user.phone_number}</span>
+                </div>
 
               </div>
-            </Link>
-            <Link className="menu-links" to="/orders">
+            </div>
+            <div className="menu-links" to="/orders">
+              <div className="menu-link-div">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Orders</span> <span><strong>Coming soon!!</strong></span>
+
+              </div>
+            </div>
+            {/* <Link className="menu-links" to="/orders">
               <div className="menu-link-div">
                 <i class="fa-solid fa-receipt"></i>
                   <span>Orders</span>
 
               </div>
-            </Link>
+            </Link> */}
 
             {user.restaurant_owner === true ? (<Link className="menu-links" to="/restaurants/user">
               <div className="menu-link-div">
                 <i class="fa-regular fa-building"></i>
 
-                  <span>Your Businesses</span>
+                <span>Your Businesses</span>
 
 
               </div>
@@ -95,21 +109,21 @@ function ProfileButton({ user }) {
           </>
         ) : (
           <div className="login-signup-div">
-          <div className="dropdown-btn">
+            <div className="dropdown-btn">
 
-            <OpenModalButton
-              buttonText="Log In"
-              onButtonClick={closeMenu}
-              modalComponent={<LoginFormModal />}
+              <OpenModalButton
+                buttonText="Log In"
+                onButtonClick={closeMenu}
+                modalComponent={<LoginFormModal />}
               />
-              </div>
+            </div>
 
-              <div className="dropdown-btn">
-            <OpenModalButton
-              buttonText="Sign Up"
-              onButtonClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
+            <div className="dropdown-btn">
+              <OpenModalButton
+                buttonText="Sign Up"
+                onButtonClick={closeMenu}
+                modalComponent={<SignupFormModal />}
+              />
             </div>
           </div>
         )}

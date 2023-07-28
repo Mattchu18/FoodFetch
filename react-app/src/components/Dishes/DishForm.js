@@ -73,7 +73,7 @@ const DishForm = ({ dish, restaurantId, formType }) => {
                 </div>
                 <div>
                     <div>
-                        {validationErrors.description ? (<p className="errors">{validationErrors.desciption}</p>) : null}
+                        {validationErrors.description ? (<p className="errors">{validationErrors.description}</p>) : null}
                         {(<input type="textarea"
                             value={description}
                             placeholder="* Dish Description"

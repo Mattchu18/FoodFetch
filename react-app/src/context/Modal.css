@@ -18,12 +18,15 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+
 #modal-content {
   border-radius: 10px;
   display: flex;
   position: absolute;
   background-color:white;
-  height: fit-content;
   min-width: 300px;
   padding: 20px;
+  max-height: 90vh;
+  overflow-y:auto;
+
 }

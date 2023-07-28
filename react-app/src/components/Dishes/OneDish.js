@@ -26,21 +26,26 @@ const OneDish = ({ dish, restaurantId }) => {
             <div className="one-dish-header">
                 <h1>{dish.name}</h1>
 
+                <div className="entree-btn">
 
-                <OpenModalButton
-                    buttonText="Update your entree"
-                    modalComponent={<EditDish
-                        dish={dish}
-                        restaurantId={restaurantId}
-                    />}
-                />
-                <OpenModalButton
-                    buttonText="Delete your entree"
-                    modalComponent={<DeleteDish
-                        dish={dish}
-                        restaurantId={restaurantId}
-                    />}
-                />
+                    <OpenModalButton
+                        buttonText="Update entree"
+                        modalComponent={<EditDish
+                            dish={dish}
+                            restaurantId={restaurantId}
+                        />}
+                    />
+                </div>
+
+                <div className="entree-btn delete">
+                    <OpenModalButton
+                        buttonText="Delete entree"
+                        modalComponent={<DeleteDish
+                            dish={dish}
+                            restaurantId={restaurantId}
+                        />}
+                    />
+                </div>
                 <button onClick={closeModal} className="close-modal-btn"><strong>X</strong></button>
             </div>
             <div className="dish-price">
