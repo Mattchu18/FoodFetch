@@ -16,6 +16,7 @@ const SearchResults = () => {
     return (
         <div>
             <div>
+                {!restaurantResults?.length && (<h3>No results found</h3>)}
                 {restaurantResults.map(restaurant => (
                     <Link to={`/restaurants/${restaurant.id}`}>
                         <div>

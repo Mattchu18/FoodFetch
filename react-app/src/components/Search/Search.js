@@ -8,10 +8,14 @@ const Search = () => {
     const history = useHistory()
     const [query, setQuery] = useState("")
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await dispatch(thunkSearchRestaurant(query))
-        .then(history.push("/restaurants/results"))//send to results page
+        console.log("this is query.trim()====> ", query.trim().length)
+        if (query.trim().length > 0) {
+            await dispatch(thunkSearchRestaurant(query.trim()))
+                .then(history.push("/restaurants/results"))//send to results page
+        }
     }
 
     return (
@@ -19,7 +23,7 @@ const Search = () => {
 
         <form className='search-bar-container' onSubmit={handleSubmit}>
 
-            <input className="search-bar" type='text' value={query} onChange={e => setQuery(e.target.value)}/>
+            <input className="search-bar" type='text' value={query} onChange={e => setQuery(e.target.value)} />
             <button type="submit">Search</button>
 
         </form>

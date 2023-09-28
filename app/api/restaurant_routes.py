@@ -338,6 +338,7 @@ def search_restaurants():
     if not keyword:
         return {"message": f"Keyword: '{keyword}' does not exist"}
     restaurant_query_obj = Restaurant.query.filter((Restaurant.name.ilike(f"%{keyword}%"))).all()
+
     restaurant_query = [restaurant.to_dict() for restaurant in restaurant_query_obj]
 
     return restaurant_query
