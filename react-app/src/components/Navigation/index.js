@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import Search from "../Search/Search"
 import homeButtonImage from "../../imgs/homeButtonImage.png"
 import './Navigation.css';
 
@@ -24,9 +25,7 @@ function Navigation({ isLoaded }) {
 					</div>
 				</div>
 				<div className='nav-right'>
-					{/* <div className='search-bar'>
-							Search bar
-					</div> */}
+					<Search/>
 					{/* <div className='cart'>
 						Cart
 					</div> */}
