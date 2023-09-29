@@ -63,7 +63,10 @@ const DishForm = ({ dish, restaurantId, formType }) => {
                     <div>
 
                         {validationErrors.name ? (<p className="errors">{validationErrors.name}</p>) : null}
-                        <input type="text"
+                        <input
+                            className="form-input"
+
+                            type="text"
                             value={name}
                             placeholder="* Dish Name"
                             onChange={e => setName(e.target.value)}
@@ -74,7 +77,9 @@ const DishForm = ({ dish, restaurantId, formType }) => {
                 <div>
                     <div>
                         {validationErrors.description ? (<p className="errors">{validationErrors.description}</p>) : null}
-                        {(<input type="textarea"
+                        {(<input
+                            className="form-input"
+                            type="textarea"
                             value={description}
                             placeholder="* Dish Description"
                             onChange={e => setDescription(e.target.value)}
@@ -88,7 +93,9 @@ const DishForm = ({ dish, restaurantId, formType }) => {
                     <div className="input-phone">
                         {validationErrors.price ? (<p className="errors">{validationErrors.price}</p>) : null}
 
-                        <input type="number"
+                        <input
+                            className="form-input"
+                            type="number"
                             step="0.01"
                             min="0"
                             value={price}

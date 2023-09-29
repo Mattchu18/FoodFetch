@@ -4,14 +4,34 @@
     justify-content: space-evenly;
 }
 
-.loginButtons > button{
+.loginButtons>button {
     background-color: #ff3008;
     line-height: 40px;
     display: inline-block;
     padding: 0 25px;
     cursor: pointer;
     color: #fff;
-    font-family: roboto,arial,helvetica neue,sans-serif;
+    font-family: roboto, arial, helvetica neue, sans-serif;
     border-radius: 5px;
     border: none;
+}
+
+.login-input {
+    width: 95%;
+    padding: 9px 0;
+    margin-bottom: 32px;
+    border: none;
+    border-bottom: 1px solid #d1d1d1;
+    background-color: field;
+    font-weight: 500;
+    font-size: 16px;
+    color: #666;
+    outline: 0px;
+    flex-grow: 1;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* top-left and bottom-left rounded corners */
+    outline: none;
+    transition: border 0.3s;
 }

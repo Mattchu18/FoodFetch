@@ -102,7 +102,9 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                             <h2>What is your business' name? <span style={{ color: "red" }}>*</span></h2>
                         </div> */}
                         {validationErrors.name ? (<p className="errors">{validationErrors.name}</p>) : null}
-                        <input type="text"
+                        <input
+                            className="form-input"
+                            type="text"
                             value={name}
                             placeholder="* Business Name"
                             onChange={e => setName(e.target.value)}
@@ -118,7 +120,9 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                     <div>
                         {validationErrors.address ? (<p className="errors">{validationErrors.address}</p>) : null}
                         {formType === "Create Restaurant" ?
-                            (<input type="text"
+                            (<input
+                                className="form-input"
+                                type="text"
                                 value={address}
                                 placeholder="* Business Address"
                                 onChange={e => setAddress(e.target.value)}
@@ -135,7 +139,9 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                     <div className="input-phone">
                         {validationErrors.phone_number ? (<p className="errors">{validationErrors.phone_number}</p>) : null}
 
-                        <input type="tel"
+                        <input
+                            className="form-input"
+                            type="tel"
                             maxLength="12"
                             minLength="12"
                             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -179,6 +185,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                             <h3>* Opening time</h3>
                             {validationErrors.opening_time ? (<p className="errors">{validationErrors.opening_time}</p>) : null}
                             <input
+                                className="form-input"
                                 type="time"
                                 value={opening_time}
                                 onChange={e => setOpening_time(e.target.value)}
@@ -189,6 +196,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                             {validationErrors.closing_time ? (<p className="errors">{validationErrors.closing_time}</p>) : null}
 
                             <input
+                                className="form-input"
                                 type="time"
                                 value={closing_time}
                                 onChange={e => setClosing_time(e.target.value)}
@@ -204,6 +212,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
 
                             {/* <span>Business Image</span> */}
                             <input
+                                className="form-input"
                                 type="file"
                                 accept="image/*"
                                 // value={image}
@@ -214,6 +223,7 @@ const RestaurantForm = ({ restaurant, formType, disabled }) => {
                         <div>
                             {validationErrors.header_image ? (<p className="errors">{validationErrors.header_image}</p>) : null}
                             <input
+                                className="form-input"
                                 type="file"
                                 accept="image/*"
                                 // value={header_image}
