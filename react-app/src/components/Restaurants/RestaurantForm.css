@@ -37,7 +37,7 @@
     width: 70%;
 }
 
-input, select {
+.form-input, select {
     width: 100%;
     padding: 9px 0;
     margin-bottom: 32px;

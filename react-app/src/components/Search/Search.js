@@ -22,10 +22,15 @@ const Search = () => {
 
 
         <form className='search-bar-container' onSubmit={handleSubmit}>
-
-            <input className="search-bar" type='text' value={query} onChange={e => setQuery(e.target.value)} />
+            <input
+                className="search-bar"
+                type='text'
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                aria-label="Search for a restaurant"
+                placeholder="Enter restaurant name or cuisine type"
+            />
             <button type="submit">Search</button>
-
         </form>
     )
 }
