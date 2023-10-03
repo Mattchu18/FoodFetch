@@ -5,3 +5,21 @@ from app.models.restaurant import Restaurant
 from app.models import User
 from app.models.db import db
 favorite_routes = Blueprint('favorites', __name__, url_prefix='')
+
+@favorite_routes.route("/<int:id>", methods=["DELETE"])
+def unfavorite(id):
+    '''
+    Unfavorites by favorite id
+    '''
+    favorite = Favorite.query.get(id)
+    if not favorite:
+        return {"error": f"Favorite {id} does not exist"}
+    elif favorite.user_id is not current_user.id:
+        return {"error": f"Favorite {id} does not belong to you"}
+    else:
+        db.session.delete(favorite)
+        db.session.commit()
+        return {"message": f"Successfully deleted Favorite {id}"}
+
+
+# query for user's favorites here

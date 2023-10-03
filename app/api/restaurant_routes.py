@@ -312,8 +312,10 @@ def get_one_restaurants_favorites(id):
     '''
     Get all favorites from restaurant id
     '''
-    restaurant_favorites = Favorite.query.filter_by(id=id).all()
-    print(restaurant_favorites,"🔥🔥🔥🔥🔥🔥")
+    restaurant_favorites_obj = Favorite.query.filter_by(id=id).all()
+    restaurant_favorites = [favorite.to_dict() for favorite in restaurant_favorites_obj]
+    # print(restaurant_favorites,"🔥🔥🔥🔥🔥🔥")
+    return restaurant_favorites
 
 
 @restaurant_routes.route("/<int:id>/favorites", methods=["POST"])

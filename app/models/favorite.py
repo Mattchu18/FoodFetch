@@ -19,5 +19,5 @@ class Favorite(db.Model):
         return {
              "id": self.id,
              "user_id": self.user_id,
-             "restuarant_id": self.restuarant
+             "restaurant_id": self.restaurant.id
         }
