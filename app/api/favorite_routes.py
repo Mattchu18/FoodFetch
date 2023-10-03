@@ -23,3 +23,14 @@ def unfavorite(id):
 
 
 # query for user's favorites here
+@favorite_routes.route("/users/<int:id>")
+def usersFavorites(id):
+    '''
+    Gets user's favorites
+    '''
+    user_favorites_obj = Favorite.query.filter_by(user_id = current_user.id).all()
+    if not user_favorites_obj:
+        return {"error": f"User {id} does not have any favorites!"}
+    else:
+        user_favorites = [favorite.to_dict() for favorite in user_favorites_obj]
+        return user_favorites

@@ -29,7 +29,6 @@ const OneRestaurant = () => {
     const restaurantDishes = Object.values(restaurantDishesObj)
 
 
-
     let sum = 0
     restaurantReviews.forEach(review => {
         sum += review.rating
@@ -78,7 +77,7 @@ const OneRestaurant = () => {
                     <h1>{restaurant.name}</h1>
                     {Number.isInteger(averageRating) ? (
                         <h5>{restaurant.cuisine_type} • {averageRating.toFixed(1)} <i class="fa-solid fa-star"></i>  {restaurantReviews.length}+ ratings</h5>) : (<p>Be the first to review!</p>)}
-
+                    {/* add favorite component */}
                 </div>
                 <div>
                     <h5>  <i class="fa-regular fa-clock"></i> {restaurant.opening_time} - {restaurant.closing_time}</h5>
