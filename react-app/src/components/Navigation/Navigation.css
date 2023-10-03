@@ -148,8 +148,9 @@ font-weight: bold;
   align-items: center;
   padding: 10px;
   border-radius: 5px;
-  background-color: #f5f5f5; /* light gray background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  /* background-color: #f5f5f5; light gray background */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); subtle shadow */
+  width: 100%;
   max-width: 500px;
 }
 
@@ -176,6 +177,7 @@ font-weight: bold;
   border-radius: 0 5px 5px 0; /* top-right and bottom-right rounded corners */
   cursor: pointer;
   transition: background-color 0.3s;
+  height: 100%;
 }
 
 .search-bar-container button:hover {
