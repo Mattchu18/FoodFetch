@@ -6,6 +6,7 @@ import restaurantReducer from './restaurant'
 import dishReducer from './dish';
 import orderReducer from './order'
 import orderDishReducer from './order_dish';
+import favoriteReducer from './favorite';
 
 
 const rootReducer = combineReducers({
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   restaurant: restaurantReducer,
   dish: dishReducer,
   order: orderReducer,
-  orderDish: orderDishReducer
+  orderDish: orderDishReducer,
+  favorite: favoriteReducer
 });
 
 

@@ -4,6 +4,7 @@ from app.models.restaurant import Restaurant
 from app.models.review import Review
 from app.models.dish import Dish
 from app.models.order import Order
+from app.models.favorite import Favorite
 from app.models.order_dish import OrderDish
 from flask_login import login_required, current_user
 from app.models import User
@@ -304,6 +305,36 @@ def delete_dish(id, dish_id):
 #         db.session.commit()
 #         return new_order.to_dict()
 #     # return {"message": "Invalid data"}
+
+
+@restaurant_routes.route("/<int:id>/favorites")
+def get_one_restaurants_favorites(id):
+    '''
+    Get all favorites from restaurant id
+    '''
+    restaurant_favorites_obj = Favorite.query.filter_by(restaurant_id=id).all()
+    restaurant_favorites = [favorite.to_dict() for favorite in restaurant_favorites_obj]
+    # print(restaurant_favorites,"Restaurant favorites🔥🔥🔥🔥🔥🔥🔥🔥")
+    return restaurant_favorites
+
+
+@restaurant_routes.route("/<int:id>/favorites", methods=["POST"])
+def favorite_restaurant(id):
+    '''
+    Favorite a restaurant
+    '''
+    already_favorited = Favorite.query.filter_by(restaurant_id=id, user_id=current_user.id).first()
+    if not already_favorited:
+        new_favorite_restaurant = Favorite(
+            user_id = current_user.id,
+            restaurant_id = id
+        )
+        db.session.add(new_favorite_restaurant)
+        db.session.commit()
+        return new_favorite_restaurant.to_dict()
+    print(already_favorited,"🔥🔥🔥🔥🔥🔥🔥🔥")
+    if already_favorited:
+        return {"error": "User already favorited this restaurant!"}
 
 
 @restaurant_routes.route("/<int:id>/orders", methods=["POST"])

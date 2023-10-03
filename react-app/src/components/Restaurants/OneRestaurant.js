@@ -7,6 +7,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { thunkAllRestaurantDishes } from "../../store/dish";
 import { thunkAllReviews, thunkUserReviews } from "../../store/review";
+import { thunkRestaurantFavorites, thunkUserFavorites } from "../../store/favorite";
+import FavoriteButton from "../Favorites/Favorites";
 import OneDish from "../Dishes/OneDish";
 import OpenModalButton from "../OpenModalButton";
 import CreateReview from "../Reviews/CreateReview";
@@ -20,15 +22,18 @@ const OneRestaurant = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const { restaurantId } = useParams()
+    const currUser = useSelector(state => state.session.user)
     const restaurant = useSelector(state => state.restaurant.singleRestaurant[restaurantId])
     const reviewsObj = useSelector(state => state.review.allReviews)
+    const favoritesObj = useSelector(state => state.favorite.restaurantFavorites)
+    const favorites = Object.values(favoritesObj)
+    const [userFavorite] = favorites.filter(favorite => favorite.user_id === currUser.id)
     const reviews = Object.values(reviewsObj)
-    const currUser = useSelector(state => state.session.user)
     const restaurantReviews = reviews.filter(review => review.restaurant_id === parseInt(restaurantId))
     const restaurantDishesObj = useSelector(state => state.dish.allRestaurantDishes)
     const restaurantDishes = Object.values(restaurantDishesObj)
 
-
+    console.log("this is favorites!! ====>", favorites)
 
     let sum = 0
     restaurantReviews.forEach(review => {
@@ -48,9 +53,11 @@ const OneRestaurant = () => {
     useEffect(() => {
         dispatch(thunkOneRestaurant(restaurantId))
         dispatch(thunkAllRestaurantDishes(restaurantId))
+        dispatch(thunkRestaurantFavorites(restaurantId))
         dispatch(thunkAllReviews())
         dispatch(thunkUserReviews())
-    }, [dispatch])
+        dispatch(thunkUserFavorites(currUser?.id))
+    }, [dispatch, restaurantId, currUser])
 
 
 
@@ -76,8 +83,28 @@ const OneRestaurant = () => {
             <div className="restaurant-details">
                 <div>
                     <h1>{restaurant.name}</h1>
-                    {Number.isInteger(averageRating) ? (
-                        <h5>{restaurant.cuisine_type} • {averageRating.toFixed(1)} <i class="fa-solid fa-star"></i>  {restaurantReviews.length}+ ratings</h5>) : (<p>Be the first to review!</p>)}
+                    {Number.isInteger(averageRating) ?
+                        (<h5>{restaurant.cuisine_type} • {averageRating.toFixed(1)} <i class="fa-solid fa-star"></i> {restaurantReviews.length}+ ratings</h5>)
+                        :
+                        (<p>Be the first to review!</p>)}
+
+                    {favorites.length ?
+                        (<h5>{favorites.length} users favorited this business</h5>)
+                        :
+                        (<p>Be the first to favorite!</p>)
+                    }
+                    {/* add favorite component userFavorite.id*/}
+                    {userFavorite ?
+                    (<FavoriteButton
+                        favoriteId={userFavorite?.id}
+                        restaurantId={restaurantId}
+                        filled={true} />)
+                    :
+                    (<FavoriteButton
+                        favoriteId={userFavorite?.id}
+                        restaurantId={restaurantId}
+                        filled={false} />)
+                    }
 
                 </div>
                 <div>
