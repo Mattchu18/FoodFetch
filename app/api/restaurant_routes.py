@@ -312,9 +312,9 @@ def get_one_restaurants_favorites(id):
     '''
     Get all favorites from restaurant id
     '''
-    restaurant_favorites_obj = Favorite.query.filter_by(id=id).all()
+    restaurant_favorites_obj = Favorite.query.filter_by(restaurant_id=id).all()
     restaurant_favorites = [favorite.to_dict() for favorite in restaurant_favorites_obj]
-    # print(restaurant_favorites,"🔥🔥🔥🔥🔥🔥")
+    # print(restaurant_favorites,"Restaurant favorites🔥🔥🔥🔥🔥🔥🔥🔥")
     return restaurant_favorites
 
 
@@ -332,7 +332,8 @@ def favorite_restaurant(id):
         db.session.add(new_favorite_restaurant)
         db.session.commit()
         return new_favorite_restaurant.to_dict()
-    else:
+    print(already_favorited,"🔥🔥🔥🔥🔥🔥🔥🔥")
+    if already_favorited:
         return {"error": "User already favorited this restaurant!"}
 
 

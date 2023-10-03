@@ -39,7 +39,7 @@ export const thunkUserFavorites = (userId) => async (dispatch) => {
 }
 
 export const thunkRestaurantFavorites = (restaurantId) => async (dispatch) => {
-    const response = await fetch(`/api/restaurant/${restaurantId}/favorites`)
+    const response = await fetch(`/api/restaurants/${restaurantId}/favorites`)
     if (response.ok) {
         const data = await response.json()
         dispatch(getRestaurantFavorites(data))
@@ -47,7 +47,7 @@ export const thunkRestaurantFavorites = (restaurantId) => async (dispatch) => {
 }
 
 export const thunkCreateFavorite = (restaurantId) => async (dispatch) => {
-    const response = await fetch(`/api/restaurant/${restaurantId}/favorites`, {
+    const response = await fetch(`/api/restaurants/${restaurantId}/favorites`, {
         method: "POST"
     })
     if (response.ok) {
