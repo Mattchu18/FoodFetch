@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from sqlalchemy import or_
 from app.models.restaurant import Restaurant
 from app.models.review import Review
 from app.models.dish import Dish
@@ -328,6 +329,25 @@ def post_order(id):
         return new_order.to_dict()
     # return {"message": "Invalid data"}
 
+
+@restaurant_routes.route('/search')
+def search_restaurants():
+    '''
+    Search for restaurants by query
+    '''
+    keyword = request.args.get("keyword")
+    if not keyword:
+        return {"message": f"Keyword: '{keyword}' does not exist"}
+    restaurant_query_obj = Restaurant.query.filter(
+        or_(
+            Restaurant.name.ilike(f"%{keyword}%"),
+            Restaurant.cuisine_type.ilike(f"%{keyword}%")
+        )
+    ).distinct().all()
+
+    restaurant_query = [restaurant.to_dict() for restaurant in restaurant_query_obj]
+
+    return restaurant_query
 
 
 # @restaurant_routes.route('/<int:id>/cart/add', methods=["POST"])

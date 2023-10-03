@@ -4,7 +4,7 @@ const GET_USER_RESTAURANTS = "restaurant/userRestaurants"
 const CREATE_RESTAURANT = "restaurant/createRestaurant"
 const DELETE_RESTAURANT = "restaurant/deleteRestaurant"
 const EDIT_RESTAURANT = "restaurant/editRestaurant"
-
+const SEARCH_RESTAURANT = "restaurant/searchRestaurant"
 
 const getOneRestaurant = (restaurant) => ({
     type: GET_ONE_RESTAURANT,
@@ -35,6 +35,12 @@ const deleteRestaurant = (restaurant) => ({
     type: DELETE_RESTAURANT,
     restaurant
 })
+
+const searchRestaurant = (restaurants) => ({
+    type: SEARCH_RESTAURANT,
+    restaurants
+})
+
 
 export const thunkOneRestaurant = (restaurantId) => async (dispatch) => {
     const response = await fetch(`/api/restaurants/${restaurantId}`)
@@ -100,8 +106,15 @@ export const thunkDeleteRestaurant = (restaurant) => async (dispatch) => {
     }
 }
 
+export const thunkSearchRestaurant = (keyword) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/search?keyword=${keyword}`)
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(searchRestaurant(data))
+    }
+}
 
-const initialState = { currentUserRestaurants: {}, singleRestaurant: {}, allRestaurants: {} }
+const initialState = { currentUserRestaurants: {}, singleRestaurant: {}, allRestaurants: {}, searchRestaurants: {} }
 const restaurantReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ONE_RESTAURANT: {
@@ -167,6 +180,18 @@ const restaurantReducer = (state = initialState, action) => {
                 allRestaurants: { ...state.allRestaurants }
             }
         }
+        case SEARCH_RESTAURANT: {
+            const newState = {}
+            const searchRestaurants = action.restaurants
+            searchRestaurants.forEach(restaurant => {
+                newState[restaurant.id] = restaurant
+            })
+            return {
+                ...state,
+                searchRestaurants: newState
+            }
+        }
+
         default: return state
     }
 
