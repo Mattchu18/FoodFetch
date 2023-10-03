@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
     review = db.relationship("Review", back_populates = "user")
     order = db.relationship("Order", back_populates = "user")
 
-    favorite = db.relationship("Favorite", backpopulates = "user")
+    favorite = db.relationship("Favorite", back_populates = "user")
 
 
     @property

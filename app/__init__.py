@@ -11,6 +11,7 @@ from .api.review_routes import review_routes
 from .api.restaurant_routes import restaurant_routes
 from .api.dish_routes import dish_routes
 from .api.order_routes import order_routes
+from .api.favorite_routes import favorite_routes
 from .api.order_dish_routes import order_dish_routes
 
 from .seeds import seed_commands
@@ -36,10 +37,10 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(review_routes, url_prefix='/api/reviews')
 app.register_blueprint(restaurant_routes, url_prefix='/api/restaurants')
+app.register_blueprint(favorite_routes, url_prefix='/api/favorites')
 app.register_blueprint(dish_routes, url_prefix='/api/dishes')
 app.register_blueprint(order_routes, url_prefix='/api/orders')
 app.register_blueprint(order_dish_routes, url_prefix='/api/order_dishes')
-
 
 db.init_app(app)
 Migrate(app, db)

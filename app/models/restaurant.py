@@ -25,7 +25,7 @@ class Restaurant(db.Model):
     dish = db.relationship("Dish", back_populates = "restaurant", cascade = "all, delete")
     order = db.relationship("Order", back_populates = "restaurant", cascade = "all, delete")
 
-    favorite = db.relationship("Favorite", backpopulates = "restaurant", cascade = "all, delete")
+    favorite = db.relationship("Favorite", back_populates = "restaurant", cascade = "all, delete")
 
     def to_dict(self):
         return {
