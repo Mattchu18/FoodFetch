@@ -2,7 +2,7 @@ import { thunkCreateFavorite, thunkDeleteFavorite, thunkRestaurantFavorites, thu
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux"
 
-const FavoriteButton = ({favoriteId, restaurantId, filled}) => {
+const FavoriteButton = ({favoriteId, restaurantId, filled, currUser}) => {
     const dispatch = useDispatch()
     // const [favorited, setFavorited] = useState('')
 
@@ -24,13 +24,17 @@ const FavoriteButton = ({favoriteId, restaurantId, filled}) => {
     // }, [dispatch, favoriteId, restaurantId, filled])
 
     return (
-        <button onClick={handleClick}>
+        currUser ?
+            (<button onClick={handleClick}>
             {filled ?
                 (<i className="fa fa-heart filled" />)
                 :
                 (<i className="fa fa-heart empty" />)
             }
-        </button>
+            </button>)
+            :
+            (null)
+
     )
 }
 

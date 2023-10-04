@@ -27,7 +27,7 @@ const OneRestaurant = () => {
     const reviewsObj = useSelector(state => state.review.allReviews)
     const favoritesObj = useSelector(state => state.favorite.restaurantFavorites)
     const favorites = Object.values(favoritesObj)
-    const [userFavorite] = favorites.filter(favorite => favorite.user_id === currUser.id)
+    const [userFavorite] = favorites.filter(favorite => favorite.user_id === currUser?.id)
     const reviews = Object.values(reviewsObj)
     const restaurantReviews = reviews.filter(review => review.restaurant_id === parseInt(restaurantId))
     const restaurantDishesObj = useSelector(state => state.dish.allRestaurantDishes)
@@ -89,7 +89,7 @@ const OneRestaurant = () => {
                         (<p>Be the first to review!</p>)}
 
                     {favorites.length ?
-                        (<h5>{favorites.length} users favorited this business</h5>)
+                        (<h5>{favorites.length} users love us!</h5>)
                         :
                         (<p>Be the first to favorite!</p>)
                     }
@@ -98,12 +98,16 @@ const OneRestaurant = () => {
                     (<FavoriteButton
                         favoriteId={userFavorite?.id}
                         restaurantId={restaurantId}
-                        filled={true} />)
+                        filled={true}
+                        currUser={currUser}
+                        />)
                     :
                     (<FavoriteButton
                         favoriteId={userFavorite?.id}
                         restaurantId={restaurantId}
-                        filled={false} />)
+                        filled={false}
+                        currUser={currUser}
+                        />)
                     }
 
                 </div>
