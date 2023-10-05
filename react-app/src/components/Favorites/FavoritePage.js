@@ -32,7 +32,7 @@ const FavoritePage = () => {
 
 
     useEffect(() => {
-        dispatch(thunkUserFavorites(currUser.id))
+        dispatch(thunkUserFavorites(currUser?.id))
         dispatch(thunkAllRestaurants())
 
     }, [dispatch, currUser])
