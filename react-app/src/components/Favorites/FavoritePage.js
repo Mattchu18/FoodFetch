@@ -56,6 +56,7 @@ const FavoritePage = () => {
                     {/* make a modal that will confirm unfavorite! */}
 
 
+
                     <FavoriteButton
                         favoriteId={restaurant.favoriteId}
                         restaurantId={restaurant.id}
