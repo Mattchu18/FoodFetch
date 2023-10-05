@@ -21,7 +21,6 @@ const FavoriteButton = ({favoriteId, restaurantId, filled, currUser}) => {
 
     // useEffect(() => {
     //     dispatch(thunkRestaurantFavorites(restaurantId))
-
     // }, [dispatch, favoriteId, restaurantId, filled])
 
     return (
