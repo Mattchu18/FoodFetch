@@ -1,0 +1,38 @@
+/* Base styling for the button */
+.favorite-heart-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 10px;
+    transition: transform 0.2s;
+}
+
+.favorite-heart-button:hover {
+    transform: scale(1.1); /* Slightly enlarge the button when hovered */
+}
+
+/* Styling for the heart icons */
+.fa-heart {
+    font-size: 24px; /* Adjust as necessary */
+    transition: color 0.2s;
+}
+
+.filled {
+    color: red;
+}
+
+.empty {
+    color: #ccc; /* A light gray color for the unfilled heart */
+}
+
+/* If you want a little animation when the heart is filled */
+.favorite-heart-button .filled {
+    animation: pulse 0.3s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}

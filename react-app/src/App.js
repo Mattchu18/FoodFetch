@@ -15,7 +15,7 @@ import CreateRestaurant from "./components/Restaurants/CreateRestaurant"
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart";
-
+import FavoritePage  from "./components/Favorites/FavoritePage";
 import { authenticate, signUp } from "./store/session";
 import SearchResults from "./components/SearchResults/SearchResults";
 
@@ -44,6 +44,7 @@ function App() {
 
           <Route exact path="/restaurants/:restaurantId" component={OneRestaurant} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/favorites" component={FavoritePage} />
 
 
         </Switch>

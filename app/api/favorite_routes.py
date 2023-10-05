@@ -30,7 +30,7 @@ def usersFavorites(id):
     '''
     user_favorites_obj = Favorite.query.filter_by(user_id = current_user.id).all()
     if not user_favorites_obj:
-        return {"error": f"User {id} does not have any favorites!"}
+        return None
     else:
         user_favorites = [favorite.to_dict() for favorite in user_favorites_obj]
         return user_favorites
