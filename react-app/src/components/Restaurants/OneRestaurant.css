@@ -36,9 +36,22 @@
     transform: scale(1.05)
 }
 
+.restaurant-name-favorite-button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 16px;
+    align-items: center;
+}
+
+.favorite-details-button-container {
+    display: flex;
+    align-items: end;
+}
+
 h5 {
     color: grey;
 }
+
 
 #featured-items {
     display: flex;
@@ -59,12 +72,25 @@ h5 {
 }
 
 .featured-header > button {
-    border-radius: 14px;
+    border-radius: 24px;
     border: none;
     height: 32px;
-    width: 100px;
+    width: 115px;
     background-color: red;
-    color: white
+    color: white;
+    cursor: pointer; /* Changes the mouse cursor to a hand when over the button */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for background color and transform properties */
+    outline: none; /* Removes the default focus outline on some browsers */
+}
+
+/* Hover effect: Darkens the button a bit */
+.featured-header > button:hover {
+    background-color: #b30000; /* A darker shade of red */
+}
+
+/* Active effect: Slightly scales down the button when pressed */
+.featured-header > button:active {
+    transform: scale(0.55);
 }
 
 
@@ -261,31 +287,38 @@ strong>i {
 }
 
 
-.user-review-btn {
+.review-btns-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 8px;
+}
+
+/* .user-review-btn {
     display: flex;
     max-width: 150px;
     width: 100%;
     flex-direction: column;
     justify-content: space-between;
-}
+} */
 
 .user-review-btn>button {
-    background-color: red;
-    line-height: 40px;
-    display: inline-block;
-    padding: 0 25px;
-    cursor: pointer;
-    color: #fff;
-    font-family: roboto, arial, helvetica neue, sans-serif;
-    border-radius: 5px;
+    border-radius: 24px;
     border: none;
-    transform: scale(.80);
+    height: 24px;
+    width: 115px;
+    background-color: red;
+    color: white;
+    cursor: pointer; /* Changes the mouse cursor to a hand when over the button */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for background color and transform properties */
+    outline: none;
 }
 
+.user-review-btn>button:hover {
+    background-color: #b30000; /* A darker shade of red */
 
-.review-btns-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+}
 
+.user-review-btn>button:active {
+    transform: scale(0.55);
 }

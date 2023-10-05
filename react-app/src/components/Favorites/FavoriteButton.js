@@ -1,6 +1,7 @@
 import { thunkCreateFavorite, thunkDeleteFavorite, thunkRestaurantFavorites, thunkUserFavorites } from "../../store/favorite"
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux"
+import "./FavoriteButton.css"
 
 const FavoriteButton = ({favoriteId, restaurantId, filled, currUser}) => {
     const dispatch = useDispatch()
@@ -25,7 +26,7 @@ const FavoriteButton = ({favoriteId, restaurantId, filled, currUser}) => {
 
     return (
         currUser ?
-            (<button onClick={handleClick}>
+            (<button className="favorite-heart-button" onClick={handleClick}>
             {filled ?
                 (<i className="fa fa-heart filled" />)
                 :

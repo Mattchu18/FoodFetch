@@ -8,7 +8,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { thunkAllRestaurantDishes } from "../../store/dish";
 import { thunkAllReviews, thunkUserReviews } from "../../store/review";
 import { thunkRestaurantFavorites, thunkUserFavorites } from "../../store/favorite";
-import FavoriteButton from "../Favorites/Favorites";
+import FavoriteButton from "../Favorites/FavoriteButton";
 import OneDish from "../Dishes/OneDish";
 import OpenModalButton from "../OpenModalButton";
 import CreateReview from "../Reviews/CreateReview";
@@ -25,15 +25,15 @@ const OneRestaurant = () => {
     const currUser = useSelector(state => state.session.user)
     const restaurant = useSelector(state => state.restaurant.singleRestaurant[restaurantId])
     const reviewsObj = useSelector(state => state.review.allReviews)
-    const favoritesObj = useSelector(state => state.favorite.restaurantFavorites)
-    const favorites = Object.values(favoritesObj)
-    const [userFavorite] = favorites.filter(favorite => favorite.user_id === currUser?.id)
+    const restaurantFavoritesObj = useSelector(state => state.favorite.restaurantFavorites)
+    const restaurantFavorites = Object.values(restaurantFavoritesObj)
+    const [userFavorite] = restaurantFavorites.filter(favorite => favorite.user_id === currUser?.id)
     const reviews = Object.values(reviewsObj)
     const restaurantReviews = reviews.filter(review => review.restaurant_id === parseInt(restaurantId))
     const restaurantDishesObj = useSelector(state => state.dish.allRestaurantDishes)
     const restaurantDishes = Object.values(restaurantDishesObj)
 
-    console.log("this is favorites!! ====>", favorites)
+    console.log("this is favorites!! ====>", restaurantFavorites)
 
     let sum = 0
     restaurantReviews.forEach(review => {
@@ -81,34 +81,46 @@ const OneRestaurant = () => {
                 </div>
             </div>
             <div className="restaurant-details">
-                <div>
+                <div className="restaurant-name-favorite-button-container">
                     <h1>{restaurant.name}</h1>
+                    <div className="favorite-details-button-container">
+                        {userFavorite ?
+
+                            (<h5>Unfavorite this business</h5>)
+                            :
+                            (<h5>Favorite this business</h5>)
+                        }
+
+                        {userFavorite ?
+                            (<FavoriteButton
+                                favoriteId={userFavorite?.id}
+                                restaurantId={restaurantId}
+                                filled={true}
+                                currUser={currUser}
+                            />)
+                            :
+                            (<FavoriteButton
+                                favoriteId={userFavorite?.id}
+                                restaurantId={restaurantId}
+                                filled={false}
+                                currUser={currUser}
+                            />)
+                        }
+                    </div>
+                </div>
+                <div>
+
                     {Number.isInteger(averageRating) ?
                         (<h5>{restaurant.cuisine_type} • {averageRating.toFixed(1)} <i class="fa-solid fa-star"></i> {restaurantReviews.length}+ ratings</h5>)
                         :
                         (<p>Be the first to review!</p>)}
 
-                    {favorites.length ?
-                        (<h5>{favorites.length} users love us!</h5>)
+                    {restaurantFavorites.length ?
+                        (<p>{restaurantFavorites.length} users love us!</p>)
                         :
                         (<p>Be the first to favorite!</p>)
                     }
-                    {/* add favorite component userFavorite.id*/}
-                    {userFavorite ?
-                    (<FavoriteButton
-                        favoriteId={userFavorite?.id}
-                        restaurantId={restaurantId}
-                        filled={true}
-                        currUser={currUser}
-                        />)
-                    :
-                    (<FavoriteButton
-                        favoriteId={userFavorite?.id}
-                        restaurantId={restaurantId}
-                        filled={false}
-                        currUser={currUser}
-                        />)
-                    }
+
 
                 </div>
                 <div>
