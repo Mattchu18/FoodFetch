@@ -15,6 +15,7 @@ import CreateReview from "../Reviews/CreateReview";
 import DeleteReview from "../Reviews/DeleteReview"
 import EditReview from "../Reviews/EditReview"
 import CreateDish from "../Dishes/CreateDish"
+import Location from "../Location/Location";
 import "./OneRestaurant.css"
 
 
@@ -182,6 +183,8 @@ const OneRestaurant = () => {
                 </Carousel>
             </div>
 
+
+            <Location restaurant={restaurant} />
 
             <div id="restaurant-reviews">
                 <div>
